@@ -1,0 +1,13 @@
+export const GET_ERRORS = "GET_ERRORS";
+export const USER_LOADING = "USER_LOADING";
+export const USER_NOT_LOADING = "USER_NOT_LOADING";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const SHOW_ERROR ="SHOW_ERROR"
+export const GET_PROFILE = 'GET_PROFILE';
+export const GET_PROFILES = 'GET_PROFILES';
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+export const CLEAR_PROFILE = 'CLEAR_PROFILE';
+export const PROFILE_ERROR = 'PROFILE_ERROR';
+export const GET_EXPERIENCE = 'GET_EXPERIENCE';
+export const GET_EDUCATION = 'GET_EDUCATION';
+export const GET_SUBJECTS = 'GET_SUBJECTS';
