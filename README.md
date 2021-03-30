@@ -2,12 +2,12 @@
     Extend SwatKatz Eportfolio
 
 ## Project Overview:
-_
+_<br>
 This project is to test and further develop a web-based ePortfolio system built by students studying in COMP30022 capstone project in Semester 2, 2020. Our team selected the SwatKats ePortfolio as our development object. Since this project does not have clients, our supervisor will play the role of clients as well. In the following 3 months, we will try our best to expand some significant functions according to new project requirements, improve the user interface design and debug.<br>
   
 Our team will run the project based on the Agile development model. This Confluence space will document the information of project. Trello is used as the kanban board. Team communication is in Microsoft Team and WeChat. Source code is in our Github.<br>
   
-## Goals:
+## Goals:<br>
 _
 1. To test the basic functions of SwatKat e-portfolio website and fix the bugs.<br>
 2. To expand SwatKat by adding some functions and better meet the needs of the clients.<br>
