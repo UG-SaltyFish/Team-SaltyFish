@@ -85,7 +85,11 @@ class Reset extends Component {
 
     axios
       .post('/reset', newUser)
+<<<<<<< Updated upstream
       .then(res => {this.props.history.push("/login");})
+=======
+      .then(res => {this.props.history.push("/profile");})
+>>>>>>> Stashed changes
       .catch(err => this.setState({ errors: err.response.data }));
     
  
