@@ -26,10 +26,14 @@ mongoose.connect(
 require('./models/user.js');
 require('./models/profile.js');
 
+mongoose.set('useFindAndModify', false);
+
 const routes = require('./routes/router.js');
 const fileRoutes = require('./routes/file-upload.js');
+const userRoutes = require('./routes/user.js');
 app.use('/', routes);
 app.use('/', fileRoutes);
+app.use('/', userRoutes);
 
 app.use(express.static(__dirname + '/public'));
 app.use('/static', express.static(path.join(__dirname, 'client/build')));

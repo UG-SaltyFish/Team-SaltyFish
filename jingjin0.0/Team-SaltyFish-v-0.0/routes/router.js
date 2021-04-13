@@ -5,7 +5,6 @@ var controller = require('../controller.js');
 //Routes for all backend acccess
 
 router.post('/register', controller.createUser);
-router.post('/reset', controller.resetUser);
 router.post('/login', controller.loginUser);
 //profile1 is to send user data on login
 //profile2 is to look up users in search
@@ -27,16 +26,12 @@ router.put('/addtogallery/:user',controller.addGallery);
 router.put('/deletefromgallery/:user', controller.findGalleryPicAndDelete);
 
 router.put('/addweb/:user',controller.addweb);
-router.put('/namechange/:user',controller.changeName);
 
 router.put('/deleteedu/:user',controller.deleteEducation);
 router.put('/findanddeletsub/:user',controller.findSubjectsAndDelete);
 router.put('/findanddeletwork/:user',controller.findWorkAndDelete);
 router.put('/findanddeletproject/:user',controller.findProjectAndDelete);
 router.put('/findanddeletskill/:user',controller.findSkillAndDelete);
-
-
-
 
 // Find all users
 router.get('/users', controller.findAllUsers);
@@ -46,4 +41,5 @@ router.get('/users/id/:id', controller.findOneUser);
  
 //Find one user by name
 router.get('/users/name/:name', controller.FuzzySearchUserName);
+
 module.exports = router;

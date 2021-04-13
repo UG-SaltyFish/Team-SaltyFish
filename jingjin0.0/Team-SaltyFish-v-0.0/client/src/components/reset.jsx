@@ -5,7 +5,10 @@ import classnames from 'classnames';
 import { Button, Image, Row} from 'react-bootstrap';
 import icon from './registerImage.svg';
 
-
+import decode from 'jwt-decode';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Nav, Navbar, Dropdown} from 'react-bootstrap';
 import styled from 'styled-components';
@@ -48,16 +51,13 @@ const Styles = styled.div
   }
 `;
 
-
-
-//Jingjin Li
 class Reset extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      id:'',
       name: '',
       email: '',
-      image:null,
       password: '',
       password2: '',
       errors: ''
@@ -67,29 +67,54 @@ class Reset extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  //Get UserACC and set as default (display name and email only)
+  componentWillMount(){
+
+    const user = this.props.auth.user;
+    console.log(user);
+
+    axios
+      .get('/user/' + user)
+      .then(res=>{
+        this.setState({
+          user:res.data,
+          id:res.data.id,
+          name:res.data.name,
+          email:res.data.email
+        });
+      });
+
+  }
+
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-  
 
   onSubmit(e) {
+
     e.preventDefault();
 
-    const newUser = {
+    const id = this.props.auth.user;
+    const updatedUser = {
+      id: this.state.user._id,
       name: this.state.name,
       email: this.state.email,
-      image: this.state.image,
       password: this.state.password,
       password2: this.state.password2
     };
-
+    
     axios
-      .post('/reset', newUser)
+      .post('/user/' + id + '/update',updatedUser)
+      .then(res => {
+        this.setState({
+          email:res.data.email,
+          name:res.data.name
+        });
+      })
       .then(res => {this.props.history.push("/login");})
       .catch(err => this.setState({ errors: err.response.data }));
-    
+
   }
-  //end
 
   switchtoen = () => {
   
@@ -109,7 +134,6 @@ class Reset extends Component {
 
 
   render() {
-    
 
     return (
       <div className="reset">
@@ -166,7 +190,6 @@ class Reset extends Component {
                     <input
                       type="text"
                       className={classnames('form-control form-control-lg')}
-                      placeholder="New Name"
                       name="name"
                       value={this.state.name}
                       onChange={this.onChange}
@@ -177,7 +200,6 @@ class Reset extends Component {
                     <input
                       type="email"
                       className={classnames('form-control form-control-lg')}
-                      placeholder="New Email Address"
                       name="email"
                       value={this.state.email}
                       onChange={this.onChange}
@@ -254,6 +276,15 @@ class Reset extends Component {
     );
   }
 }
-//jingjin
-export default Reset;
-//end
+
+Reset.propTypes = {
+  auth: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+};
+        
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+  });
+        
+export default connect(mapStateToProps)(Reset);

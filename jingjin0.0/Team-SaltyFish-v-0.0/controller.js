@@ -7,7 +7,7 @@ const app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const bcrypt = require("bcryptjs");
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 var createUser = function(req, res) {
 
@@ -19,15 +19,9 @@ var createUser = function(req, res) {
 
     User.findOne({email:user.email}, function(err, user1) {
         if (user1) {
-           
             return res.status(401).json("Email already registered");
-           
-     
-            
         } else {
-           
             user.save(function (err, newUser) {
-                
                 if (!err) {
                     var profile =new Profile({
                         user: newUser,
@@ -45,8 +39,8 @@ var createUser = function(req, res) {
                         phone:'',
                         skills:[],
                         bio:'',
-                        date:''});
-                    
+                        date:''
+                    });
                     profile.save();
                     return res.send("User created");
                 } else {
@@ -57,51 +51,60 @@ var createUser = function(req, res) {
     });
 };
 
-//Jingjin
-
+// Reset UserAcc
 var resetUser = function(req, res) {
 
-    var user = new User({
-        "name":req.body.name,
-        "email":req.body.email,
-        "password":req.body.password
-    });
+    User.findOne({ email: req.body.email }).then((user) => {
+        if (user && (req.body.id != user.id)) {
 
-    User.findOne({email:user.email}, function(err, user1) {
-        if (user1) {
-           
-           user.save(function (err, newUser) {
-                
-                if (err) {
-                    var profile =new Profile({
-                        user: user1,
-                        name: user.name,
-                        profile_picture: "https://it-project-bucket-2020.s3-ap-southeast-1.amazonaws.com/blank-profile.png",
-                        transcript: "",
-                        website:'',
-                        gallery:[],
-                        education:[],
-                        subjects:[],
-                        projects:[],
-                        work:[],
-                        intro:"",
-                        email:user.email,
-                        phone:'',
-                        skills:[],
-                        bio:'',
-                        date:''});
-                    
-                    profile.save();
-                    return res.send("User reset completed");
-                } else {
-                    res.sendStatus(400);
-                }
-            });
+            console.log(req.body.id);
+            return res.status(409).json("Email already exists");
+        
+        } else {
+            if (req.body.password == '') {
+                User.findOneAndUpdate({ _id: req.body.id },
+                    {
+                        name: req.body.name,
+                        email: req.body.email
+                    },function (err, updatedUser) {
+                        console.log(updatedUser);
+                        if (err) {
+
+                            return res.status(409).json( "Wrong");
+
+                        } else {
+
+                            res.send(updatedUser);
+
+                        }
+                    }
+                );
+            } else if (req.body.password != req.body.password2) {
+
+                return res.status(409).json("Password doesn`t match");
+
+            } else {
+                User.findOneAndUpdate({_id: req.body.id },
+                    {
+                        name: req.body.name,
+                        email: req.body.email,
+                        password: req.body.password,
+                    },function (err, updatedUser2) {
+                        if (err) {
+
+                            return res.status(400).json("Wrong!");
+
+                        } else {
+
+                            res.send(updatedUser2);
+
+                        }
+                    }
+                );
+            }
         }
     });
 };
-//end
-
 
 // Find all users
 var findAllUsers = function(req, res) {
@@ -114,7 +117,7 @@ var findAllUsers = function(req, res) {
     });
 };
 
-// Find one user by id
+// Find one user by id/////////////////////没用到！！！！！！！！
 var findOneUser = function(req, res) {
     var userInx = req.params.id;
     Profile.findById(userInx, function(err, user) {
@@ -126,7 +129,7 @@ var findOneUser = function(req, res) {
     });
 };
 
-//Find one user by name
+//Find one user by name/////////////////////没用到！！！！！！！！
 var findUserByName = function(req, res) {
     var userName = req.params.name;
     
@@ -220,6 +223,8 @@ var loginUser = function(req, res) {
          });
   
 };
+
+//Get user`s profile
 var getProfile =function(req,res){
     
     var k=req.params.user;
@@ -234,29 +239,43 @@ var getProfile =function(req,res){
            res.send(k);
         }
     })
-
-    
-    
-
 };
 
-var changeName= function(req,res){
-    var user1=req.params.user;
-    
-    const name1= req.body.name;
+// GET one user`s account
+var getUserAccount = function (req, res) {
+    User.findById(req.params.id, function (err, user) {
+        console.log(user.id);
+        if (err) {
 
-    
-    Profile.findOneAndUpdate({user:user1},{$set:{name:name1}},{new: true},function(err,user2){
-        if(err){
+            return res.status(409).json("User not found");
+
+        } else {
+
+            res.send(user);
             
-            res.send("wrong");
-            
-        }else{
-          
-           res.send(user2);
         }
-    })
+    });
 };
+
+
+/////////////////////没用到！！！！！！！！
+// var changeName= function(req,res){
+//     var user1=req.params.user;
+    
+//     const name1= req.body.name;
+
+    
+//     Profile.findOneAndUpdate({user:user1},{$set:{name:name1}},{new: true},function(err,user2){
+//         if(err){
+            
+//             res.send("wrong");
+            
+//         }else{
+          
+//            res.send(user2);
+//         }
+//     })
+// };
 
 var addweb= function(req,res){
     var user1=req.params.user;
@@ -580,7 +599,7 @@ module.exports.addGallery=addGallery;
 
 module.exports.addWork=addWork;
 module.exports.addweb=addweb;
-module.exports.changeName=changeName;
+//module.exports.changeName=changeName;
 module.exports.addIntro=addIntro;
 module.exports.addPhone=addPhone;
 module.exports.addproject=addproject;
@@ -598,6 +617,7 @@ module.exports.addEducation=addEducation;
 module.exports.addSkills=addSkills;
 module.exports.addBio= addBio;
 module.exports.getProfile =getProfile;
+module.exports.getUserAccount =getUserAccount;
 module.exports.loginUser =loginUser;
 module.exports.createUser = createUser;
 module.exports.resetUser = resetUser;
