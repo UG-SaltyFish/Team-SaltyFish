@@ -34,6 +34,7 @@ export default{
     add_edu:"添加学历",
     add_projects:"添加个人项目",
     add_skills:"添加技能专长",
+    section:"管理模块",
     gallery:"相册",
     add_photodesc:"添加图片简介",
     add_photo:"上传图片",

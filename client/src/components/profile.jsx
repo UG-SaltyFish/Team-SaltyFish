@@ -28,6 +28,7 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      visible:'',
       intro:'',
       email: '',
       name: '',
@@ -332,6 +333,69 @@ onSubmitGalleryPhoto = (e) => {
       selectedFile: event.target.files[0]
     })
   }
+  hideEdu = ()=>{
+    var checkbox1 = document.getElementById("edusec");
+    var edusection = document.getElementById("educationsec");
+    if(checkbox1.checked == true){
+      edusection.style.display = "none";
+    }else{
+      edusection.style.display = "block";
+    }
+  }
+  hideWork = ()=>{
+    var checkbox1 = document.getElementById("worksec");
+    var worksection = document.getElementById("worksection");
+    if(checkbox1.checked == true){
+      worksection.style.display = "none";
+    }else{
+      worksection.style.display = "block";
+    }
+  }
+  hideProj = ()=>{
+    var checkbox1 = document.getElementById("projsec");
+    var projsection = document.getElementById("projectsection");
+    if(checkbox1.checked == true){
+      projsection.style.display = "none";
+    }else{
+      projsection.style.display = "block";
+    }
+  }
+  hideSkill = ()=>{
+    var checkbox1 = document.getElementById("skillsec");
+    var skisection = document.getElementById("skillsection");
+    if(checkbox1.checked == true){
+      skisection.style.display = "none";
+    }else{
+      skisection.style.display = "block";
+    }
+  }
+  hideSub = ()=>{
+    var checkbox1 = document.getElementById("subsec");
+    var subsection = document.getElementById("subjectsection");
+    if(checkbox1.checked == true){
+      subsection.style.display = "none";
+    }else{
+      subsection.style.display = "block";
+    }
+  }
+  hideGal = ()=>{
+    var checkbox1 = document.getElementById("galsec");
+    var galsection = document.getElementById("gallerysection");
+    if(checkbox1.checked == true){
+      galsection.style.display = "none";
+    }else{
+      galsection.style.display = "block";
+    }
+  }
+  SectionModal = () => {
+    var form1 = document.getElementById("modalhere");
+    if(form1.style.display=="none"){
+      form1.style.display="block";
+    }else{
+      form1.style.display="none";
+    }
+    
+  }
  
   pdfUploadHandler = () => {
     const fd = new FormData();
@@ -623,7 +687,23 @@ onSubmitGalleryPhoto = (e) => {
                   <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
                   <button onClick={this.pdfUploadHandler}><Translate content='upload_transcript'></Translate> </button>
                   <button><a href = {this.state.transcript} target = "_blank"  download = "transcript"><Translate content='download'></Translate></a></button>
-                  
+                  <form id = "modalhere" style={{display:"none"}}>
+                      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='section'></Translate> </h2>
+                        <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='education'></Translate> </h2>
+                        <input type="checkbox" id="edusec" onClick={this.hideEdu} ></input>
+                        <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='work1'></Translate> </h2>
+                        <input type="checkbox" id ="worksec" onClick={this.hideWork}></input>
+                        <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='projects'></Translate> </h2>
+                        <input type="checkbox" id ="projsec" onClick = {this.hideProj}></input>
+                        <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='skills'></Translate> </h2>
+                        <input type="checkbox" id ="skillsec" onClick = {this.hideSkill}></input>
+                        <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='subjects'></Translate> </h2>
+                        <input type="checkbox" id = "subsec" onClick = {this.hideSub} ></input>
+                        <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='gallery'></Translate> </h2>
+                        <input type="checkbox" id = "galsec" onClick = {this.hideGal}></input>
+                      </form>
+  
+                <button onClick={this.SectionModal}><Translate content='section'></Translate></button>
                   </p>
                </div>
             </div>
@@ -632,7 +712,8 @@ onSubmitGalleryPhoto = (e) => {
    </section>
 
    <section id="education">
-      <div style={{backgroundColor:'#fff'}}>
+   <div id = "educationsec" style={{backgroundColor:'#fff'}} >
+      
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='education'></Translate> </h2>
       <div>         
     <p   style= {{ fontSize: '20px'}}  >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.education.map( (item, index) =>
@@ -686,7 +767,7 @@ onSubmitGalleryPhoto = (e) => {
    </section>
 
    <section id="work" >
-   <div style={{backgroundColor:'#fff'}}>
+   <div id = "worksection" style={{backgroundColor:'#fff'}}>
     <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='work1'></Translate> </h2>
     <div>
     <p     >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.work).sort((a,b)=>b.from -a.from)).map( (item, index) =>
@@ -776,7 +857,7 @@ onSubmitGalleryPhoto = (e) => {
    </section>
 
    <section id='projects'>
-   <div style={{backgroundColor:'#fff'}}>
+   <div id = "projectsection" style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='projects'></Translate> </h2>
       <div>         
       <p > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.projects).map( (item, index) =>
@@ -852,7 +933,7 @@ onSubmitGalleryPhoto = (e) => {
 </section>
 
    <section id="skills">
-      <div style={{backgroundColor:'#fff'}}>
+   <div id = "skillsection" style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='skills'></Translate> </h2>
       <div>         
       <p style= {{ fontSize: '25px'}} >{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.skills.map( (item, index) =>
@@ -887,7 +968,7 @@ onSubmitGalleryPhoto = (e) => {
    </section>
 
    <section id="subjects">
-      <div style={{backgroundColor:'#fff'}}>
+   <div id = "subjectsection" style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='subjects'></Translate> </h2>
       <div>         
       <p > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.subjects).sort((a, b) => b.subjectyear - a.subjectyear)).map( (item, index) =>
@@ -965,7 +1046,7 @@ onSubmitGalleryPhoto = (e) => {
    </section>
 
    <section id = "gallery">
-   <div style={{backgroundColor:'#fff'}}>
+   <div id = "gallerysection" style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='gallery'></Translate></h2>
      
         <Carousel style={{backgroundColor:"grey", paddingBottom:"35px"}}>
