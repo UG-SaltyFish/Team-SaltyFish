@@ -34,7 +34,7 @@ export default{
     add_edu:"Add Education",
     add_projects:"Add Projects",
     add_skills:"Add Skills",
-    section:"Manage Sections",
+    section:"delete Sections",
     gallery:"Gallery",
     add_photodesc:"Add Photo Description",
     add_photo:"Upload Photo",
