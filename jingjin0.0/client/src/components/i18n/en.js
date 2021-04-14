@@ -20,6 +20,7 @@ export default{
     add_work:"Add Work Experience",
     welcome:"Welcome",
     login:"Login",
+    instruction:"Please input the item you want to change and don't input anything into the item you wish to remain the same",
     register:"Register",
     createdby:"Created By",
     Createacc:"Create Account",

@@ -20,6 +20,7 @@ export default{
   add_work:"職歴に追加",
   welcome:"ウエルカム",
   login:"ログイン",
+  instrction:"変更したい部分を入力してください。変更する必要のない部分は入力が不要です",
   register:"サインアップ", // more common to you "sign up" in japanese
   createdby:"作成者", //translates roughly to "creaters" rather than "created by"
   Createacc:"アカウントを作成する",

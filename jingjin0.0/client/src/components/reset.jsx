@@ -22,6 +22,8 @@ import cn from "./i18n/cn";
 import jp from "./i18n/jp";
 import "./Footer.css";
 
+import { Container, Col } from 'reactstrap';
+
 //Translation
 counterpart.registerTranslations('en',en);
 counterpart.registerTranslations('cn',cn);
@@ -134,6 +136,7 @@ class Reset extends Component {
 
 
   render() {
+    
 
     return (
       <div className="reset">
@@ -171,41 +174,50 @@ class Reset extends Component {
       </Navbar.Collapse>
     </Navbar>
   </Styles>
-        <div style={{backgroundColor:"#fff", padding:"10px"}}>
+
+<div style={{backgroundColor:"#fff", padding:"10px"}}>
           <div className = "row">
-            <h1 className="display-4 mx-auto mt-3"><Translate content='Resetacc'></Translate></h1>
+            <h1 className="display-1 mx-auto mt-1"><Translate content='Resetacc'></Translate></h1>
+          </div>
+          <div class="row">
+            <h1 className="display-5 mx-auto mt-5"> <Translate content='instruction'></Translate> </h1>
+          </div>
+
+          <div class="container h-50">
+          <div class="row h-100 justify-content-center align-items-center">
+              <h2 style={{color:'red', paddingBlock:'10px'}}>{this.state.errors}</h2>
             </div>
-            <div>
-              <h1>{this.state.errors}</h1>
-            </div>
-          <div className="row align-self-center nr-1">
-            <div className="col align-self-center d-none d-lg-block">
+          </div>
+     
+
+            <div class="container h-100">
             
-            </div>
-            <div className="col align-self-center nl-1">
-              <div className="col-md-12 m-auto">
-                
+            <div class="row h-100 justify-content-center align-items-center">
+  
+            <form class="col-5">
                 <form noValidate onSubmit={this.onSubmit}>
                  <div className="form-group">
                     <input
                       type="text"
                       className={classnames('form-control form-control-lg')}
+      
                       name="name"
                       value={this.state.name}
                       onChange={this.onChange}
                     />
           
                   </div>
+
                   <div className="form-group">
                     <input
                       type="email"
                       className={classnames('form-control form-control-lg')}
+                      
                       name="email"
                       value={this.state.email}
                       onChange={this.onChange}
                     />
                    
-
                   </div>
                   
                   <div className="form-group">
@@ -233,16 +245,16 @@ class Reset extends Component {
                   </div>
                   <Button variant="info" type="submit" size="lg" block>
                   <Translate content='submit'></Translate>
-                    </Button>
+                  </Button>
                     
                     
                   
                 </form>
-              </div>
-            </div>
+                </form>
+             </div>    
           </div>
-          
         </div>
+
         <div className = "main-footer">
     <div className = "container">
       <div className = "row">

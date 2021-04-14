@@ -20,6 +20,7 @@ export default{
     add_work:"添加工作经验",
     welcome:"欢迎回来",
     login:"登录",
+    instruction:"请输入想要改变的部分，不需要改动的部分则无需任何输入",
     register:"注册账号",
     createdby:"创造者",
     Createacc:"注册账号",
