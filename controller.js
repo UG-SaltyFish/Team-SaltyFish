@@ -61,7 +61,9 @@ var resetUser = function(req, res) {
             return res.status(409).json("Email already exists");
         
         } else {
+            //If password is not changed 
             if (req.body.password == '') {
+                //Update User name and email
                 User.findOneAndUpdate({ _id: req.body.id },
                     {
                         name: req.body.name,
@@ -70,9 +72,34 @@ var resetUser = function(req, res) {
                         console.log(updatedUser);
                         if (err) {
 
-                            return res.status(409).json( "Wrong");
+                            return res.status(409).json("Wrong");
 
                         } else {
+                            //Update Profile name and email
+                            Profile.findOne({user: req.body.id}).then((file1) => {
+                                if (!file1) {
+
+                                    return res.status(409).json("Profile not found");
+
+                                } else {
+                                    Profile.findOneAndUpdate({user: req.body.id},
+                                        {
+                                            name: req.body.name,
+                                            email: req.body.email
+                                        },{},function (err, updatedProfile) {
+                                            if (err) {
+
+                                                return res.status(400).json("Error: Can not update profile");
+
+                                            } else {
+
+                                                return null;
+                                                
+                                            }
+                                        }
+                                    );
+                                }
+                            });
 
                             res.send(updatedUser);
 
@@ -84,6 +111,8 @@ var resetUser = function(req, res) {
                 return res.status(409).json("Password doesn`t match");
 
             } else {
+                //If password is changed 
+                //Update User name and email
                 User.findOneAndUpdate({_id: req.body.id },
                     {
                         name: req.body.name,
@@ -95,6 +124,31 @@ var resetUser = function(req, res) {
                             return res.status(400).json("Wrong!");
 
                         } else {
+                            //Update Profile name and email
+                            Profile.findOne({user: req.body.id}).then((file2) => {
+                                if (!file2) {
+
+                                    return res.status(409).json("Profile not found");
+
+                                } else {
+                                    Profile.findOneAndUpdate({user: req.body.id},
+                                        {
+                                            name: req.body.name,
+                                            email: req.body.email
+                                        },{},function (err, updatedProfile2) {
+                                            if (err) {
+
+                                                return res.status(400).json("Error: Can not update profile");
+
+                                            } else {
+
+                                                return null;
+
+                                            }
+                                        }
+                                    );
+                                }
+                            });
 
                             res.send(updatedUser2);
 
