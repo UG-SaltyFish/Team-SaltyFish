@@ -41,6 +41,7 @@ export default{
     add_photo:"上传图片",
 
     intro:"自我介绍",
+    message:"您的密码已发送到您的邮箱，请查看邮箱获取密码并重新登录",
 
     landing1:"点击搜索用户",
     landing2:"您的理想职业就近在眼前！",

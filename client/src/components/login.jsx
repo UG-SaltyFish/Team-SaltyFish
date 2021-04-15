@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Button, Image, Col, Row} from 'react-bootstrap';
+import { Button, Image, Col, Row,Modal} from 'react-bootstrap';
 import icon from './loginImage.svg';
 
 import PropTypes from "prop-types";
@@ -57,8 +57,8 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      errors: ''
-      
+      errors: '',
+      showmessage:false,
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -118,6 +118,14 @@ onSubmit = (e) => {
   this.props.loginUser(userData);
   this.props.setUserLoading();
 };
+
+showmessageModal = () => {
+  this.setState({ showmessage: true });
+};
+hidemessageModal = () => {
+  this.setState({ showmessage: false });
+};
+
   render() {
    
     return (
@@ -165,6 +173,12 @@ onSubmit = (e) => {
           </div>
           <div className="row">
             <h1 className="display-4 mx-auto">{this.state.errors}</h1>
+          </div>
+
+          <div class="container h-50">
+          <div class="row h-100 justify-content-center align-items-center">
+              <h2 style={{color:'red', paddingBlock:'10px'}}>{this.state.message}</h2>
+            </div>
           </div>
 
           <div className="row mt-5 align-self-center">
@@ -218,16 +232,22 @@ onSubmit = (e) => {
                     </Row>
 
                     
-                    <Row>
-                      <a href="/login" className="small mx-auto mt-2">
+                    <Row >
+                      <a herf='/login' onClick={this.showmessageModal}  className="small mx-auto mt-2">
                       <Translate content='forgetpassword'></Translate>
+
                       </a>
+                      
                     </Row>
-                  </form>
+                    
+                      <Modal show={this.state.showmessage}>
+                       <Modal.Header closeButton onClick={this.hidemessageModal}></Modal.Header>
+                       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='message'></Translate> </h2>
+                      </Modal>
 
                   
-              </div>
-              
+              </form>
+              </div>          
             </div>
           </div>
           
