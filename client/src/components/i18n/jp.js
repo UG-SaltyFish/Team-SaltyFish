@@ -26,6 +26,7 @@ export default{
   Createacc:"アカウントを作成する",
   Resetacc:"アカウントをリセット",
   registerfa:"もうアカウントをもっていますか？",
+  forgetpassword:"パスワードを忘れましたか？",
   submit:"送信",
   edit_Bio:"伝記を編集",
   edit_phone:"電話番号を編集",

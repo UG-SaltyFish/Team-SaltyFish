@@ -26,6 +26,7 @@ export default{
     Createacc:"Create Account",
     Resetacc:"Reset Account",
     registerfa:"Already have an Account?",
+    forgetpassword:"Forget password？",
     submit:"Submit",
     edit_Bio:"Edit Bio",
     edit_phone:"Edit Phone",

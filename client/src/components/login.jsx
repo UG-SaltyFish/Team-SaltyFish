@@ -216,6 +216,13 @@ onSubmit = (e) => {
                       </Col>
                     
                     </Row>
+
+                    
+                    <Row>
+                      <a href="/login" className="small mx-auto mt-2">
+                      <Translate content='forgetpassword'></Translate>
+                      </a>
+                    </Row>
                   </form>
 
                   

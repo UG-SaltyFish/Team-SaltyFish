@@ -26,6 +26,7 @@ export default{
     Createacc:"注册账号",
     Resetacc:"重置账号",
     registerfa:"登录",
+    forgetpassword:"忘记密码？",
     submit:"提交",
     edit_Bio:"编辑自我简介",
     edit_phone:"编辑电话号码",
