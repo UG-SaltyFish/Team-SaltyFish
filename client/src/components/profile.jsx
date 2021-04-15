@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {Button, Modal} from 'react-bootstrap';
+import {Button, Modal,Navbar} from 'react-bootstrap';
 import { Link } from 'react-scroll';
 import PropTypes from 'prop-types';
 import {  logoutUser } from "./../actions/authActions";
@@ -10,6 +10,7 @@ import Footer from './Footer.js';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
 import logo from './logo.svg'
+import logo1 from './logo1.svg'
 import "./profile_pic.css";
 import "./css/default.css";
 import "./css/fonts.css";
@@ -19,11 +20,13 @@ import "./css/media-queries.css";
 import en from "./i18n/en";
 import cn from "./i18n/cn";
 import jp from "./i18n/jp";
+
 //Translation
 counterpart.registerTranslations('en',en);
 counterpart.registerTranslations('cn',cn);
 counterpart.registerTranslations('jp',jp);
 counterpart.setLocale('en');
+
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -549,11 +552,26 @@ onSubmitGalleryPhoto = (e) => {
         
     return (
 
-      <div className = "top" style={{backgroundColor:'grey'}}>    
-
+      <div className = "top" style={{backgroundColor:'grey'}}>  
         <header >
         <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
         <ul id="nav" className="nav">
+        <Navbar.Brand href="/">
+        <img
+          src={logo}
+          width="50"
+          height="50"
+          className="d-inline-block align-top"
+          alt=""
+        />
+        <img
+          src={logo1}
+          width="80"
+          height="80"
+          className="d-inline-block align-top"
+          alt=""
+        />
+      </Navbar.Brand> 
         <li className="current"><a href="/"><Translate content='home'></Translate> </a></li>
   
         <li><Link activeClass="active" to="top" spy={true} smooth={true} duration={1000} href="#" style = {{right:0}}><Translate content='intro'></Translate> </Link></li>
@@ -564,7 +582,7 @@ onSubmitGalleryPhoto = (e) => {
 
    <li><Link activeClass="active" to="subjects" spy={true} smooth={true} duration={1000} href="#"><Translate content='subjects'></Translate>  </Link></li>
   
-   <li><Link activeClass="active" to="gallery" spy={true} smooth={true} duration={1000} href="#"><Translate content='gallery'></Translate>  </Link></li>
+   <li><Link activeClass="active" to="gallery" spy={true} smooth={true} duration={1000} href="#"style={{paddingRight:"380px"}}><Translate content='gallery'></Translate>  </Link></li>
    <li><a className="smoothscroll" href="#" onClick={this.showLanguage}> <Translate content='language'></Translate> </a> </li>
    <Modal show={this.state.showlang} >
         <Modal.Header closeButton onClick={this.hideLanguage}></Modal.Header>
@@ -575,11 +593,12 @@ onSubmitGalleryPhoto = (e) => {
       
     </Modal>
     
-   <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}><Translate content='logout'></Translate> </a></li>
-   <li><a className="smoothscroll" href="" onClick={this.onResetClick}><Translate content='reset'></Translate> </a></li>
+   <li><a  className="smoothscroll" href=""  onClick={this.onLogoutClick}style={{textAlign: 'right'}}><Translate content='logout'></Translate> </a></li>
+   <li><a  className="smoothscroll" href="" onClick={this.onResetClick}><Translate content='reset'></Translate> </a></li>
 
 </ul>
 </nav>
+
         
         <div class="row banner">
          <div class="banner-text">
@@ -616,6 +635,7 @@ onSubmitGalleryPhoto = (e) => {
          </div>
       </div>
       </header>
+
       <section id="about"  >
       <div className="row" >
       <div className="three columns" >

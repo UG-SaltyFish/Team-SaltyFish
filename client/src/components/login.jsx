@@ -12,6 +12,7 @@ import classnames from "classnames";
 import { Nav, Navbar, Dropdown} from 'react-bootstrap';
 import styled from 'styled-components';
 import logo from './logo.svg';
+import logo1 from './logo1.svg';
 import NavigationBar from "./NavigationBar";
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
@@ -141,6 +142,13 @@ hidemessageModal = () => {
           className="d-inline-block align-top"
           alt=""
         />
+        <img
+          src={logo1}
+          width="125"
+          height="125"
+          className="d-inline-block align-top"
+          alt=""
+        />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav"/>
       <Navbar.Collapse id="basic-navbar-nav">
@@ -255,15 +263,13 @@ hidemessageModal = () => {
         <div className = "main-footer">
     <div className = "container">
       <div className = "row">
-        <div className = "col">
+        <div className = "col"style={{paddingRight:"300px"}}>
           <h4>Swat Kats</h4>
-          <p>
-          <Translate content='info'></Translate>
-          </p>
+          <h4>Salty Fish</h4>
         </div>
 
         <div className = "col">
-          <h4><Translate content='createdby'></Translate></h4>
+          <h4><Translate content='createdby'style={{paddingright:"400px"}}></Translate></h4>
           <ul className = "list-unstyled">
             <li>Aneesh Chattaraj</li>
             <li>Dylan Stewart</li>
@@ -272,11 +278,24 @@ hidemessageModal = () => {
             <li>Zhi Jie Siow</li>
           </ul>
         </div>
+        <div className = "col">
+          <h4><Translate content='extendedby'></Translate></h4>
+          <ul className = "list-unstyled">
+            <li>Jiaxin Mo</li>
+            <li>Jingjin Li</li>
+            <li>Xiaoyue Liu</li>
+            <li>Chengyu Zhang</li>
+            <li>Zihan Ye</li>
+          </ul>
+        </div>
+
+
+
       </div>
 
       <div className = "row">
         <p className = "col-sm">
-          &copy;{new Date().getFullYear()} Swat Kats | All rights reserved
+          &copy;{new Date().getFullYear()} Swat Kats | Salty Fish | All rights reserved
         </p>
       </div>
     </div>

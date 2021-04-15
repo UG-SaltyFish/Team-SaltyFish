@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { Link } from 'react-scroll';
 import Footer from './Footer.js';
 import logo from './logo.svg';
+import logo1 from './logo1.svg';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
 import "./profile_pic.css";
