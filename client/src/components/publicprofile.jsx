@@ -66,7 +66,8 @@ class PublicProfile extends Component {
       addprojectdescripition:'',
       addprojectlink:'',
       showphone:false,
-      lang:'en'
+      lang:'en',
+      filename:''
     };
   this.onChange =this.onChange.bind(this);
   
@@ -119,7 +120,11 @@ onChange = (e) => {
                          imgHash: Date.now()
                         });
           })
-    
+    if (this.state.transcript !== "") {
+      this.state.filename=this.state.transcript;
+    }else{
+      this.state.filename='';
+    }
 }
   
  
@@ -207,8 +212,8 @@ onChange = (e) => {
                </div>
                <div className="columns download">
                   <p>
-              
-                  <button><a href = {this.state.transcript} target = "_blank"  download = "transcript" style={{color:'white'}}><Translate content='download'></Translate></a></button>
+                  <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='transcript_file'></Translate> </h2>
+                  <p><a href = {this.state.transcript} target = "_blank"  download = "transcript" >{this.state.transcript}</a> </p>
                   </p>
                </div>
             </div>
