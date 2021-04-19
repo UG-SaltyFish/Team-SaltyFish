@@ -20,12 +20,15 @@ export default{
   add_work:"職歴に追加",
   welcome:"ウエルカム",
   login:"ログイン",
+  profile:"プロフィール",
   instrction:"変更したい部分を入力してください。変更する必要のない部分は入力が不要です",
   register:"サインアップ", // more common to you "sign up" in japanese
   createdby:"作成者", //translates roughly to "creaters" rather than "created by"
+  extendedby:"によって拡張",
   Createacc:"アカウントを作成する",
   Resetacc:"アカウントをリセット",
   registerfa:"もうアカウントをもっていますか？",
+  forgetpassword:"パスワードを忘れましたか？",
   submit:"送信",
   edit_Bio:"伝記を編集",
   edit_phone:"電話番号を編集",
@@ -40,11 +43,12 @@ export default{
   add_photo:"写真をアップロード",
 
   intro:"イントロダクション",
+  message:"パスワードがメールに送信されました。メールをチェックしてパスワードを取得し、再度ログインしてください",
 
-  landing1:"ユーザーをお探しですか？ここで検索",
+  landing1:"ユーザーを検索するための名前を入力してください",
     landing2:"夢の仕事に近づくために、自分自身を磨こう",
     landing3:"簡単に仕事を探す",
-    landing4:"Swat Kats は、あなたの学業成績やその他のスキルを通して、あなたのプロとしてのイメージを世界にアピールすることができます。雇用者もこのサイトを見ています。",
+    landing4:"Swat Kats&Salty Fish は、あなたの学業成績やその他のスキルを通して、あなたのプロとしてのイメージを世界にアピールすることができます。雇用者もこのサイトを見ています。",
     landing5:"あなたのイメージをパーソナル化する",
     landing6:"学校での成績だけではなく、あなたの全人的な成果をアピールしてください。あなたのギャラリーに画像をアップロードして、あなたの自由な時間に何をしているのかを私たちに見せてください。",
     landing7:"異なる言語のサポート",

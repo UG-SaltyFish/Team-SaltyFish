@@ -1,5 +1,6 @@
 import React from 'react';
 import "./Footer.css";
+import Translate from 'react-translate-component';
 
 export const Footer = () => (
   <div className = "main-footer">
@@ -7,14 +8,11 @@ export const Footer = () => (
       <div className = "row">
         <div className = "col">
           <h4>Swat Kats</h4>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Maecenas tristique est eu leo ultricies condimentum.
-          </p>
+          <h4>Salty Fish</h4>
         </div>
 
         <div className = "col">
-          <h4>Created by:</h4>
+          <h4><Translate content='createdby'style={{paddingright:"400px"}}></Translate></h4>
           <ul className = "list-unstyled">
             <li>Aneesh Chattaraj</li>
             <li>Dylan Stewart</li>
@@ -23,11 +21,21 @@ export const Footer = () => (
             <li>Zhi Jie Siow</li>
           </ul>
         </div>
-      </div>
+        <div className = "col">
+          <h4><Translate content='extendedby'></Translate></h4>
+          <ul className = "list-unstyled">
+            <li>Jiaxin Mo</li>
+            <li>Jingjin Li</li>
+            <li>Xiaoyue Liu</li>
+            <li>Chengyu Zhang</li>
+            <li>Zihan Ye</li>
+          </ul>
+        </div>
+        </div>
 
       <div className = "row">
         <p className = "col-sm">
-          &copy;{new Date().getFullYear()} Swat Kats | All rights reserved
+          &copy;{new Date().getFullYear()} Swat Kats | Salty Fish | All rights reserved
         </p>
       </div>
     </div>

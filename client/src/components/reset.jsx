@@ -13,6 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Nav, Navbar, Dropdown} from 'react-bootstrap';
 import styled from 'styled-components';
 import logo from './logo.svg';
+import logo1 from './logo1.svg';
 import NavigationBar from "./NavigationBar";
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
@@ -150,13 +151,20 @@ class Reset extends Component {
           className="d-inline-block align-top"
           alt=""
         />
+        <img
+          src={logo1}
+          width="125"
+          height="125"
+          className="d-inline-block align-top"
+          alt=""
+        />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav"/>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-        <Nav.Item style={{paddingRight:"4px"}}><Nav.Link href="/register" style={{borderStyle:"solid", borderRadius:"8px", borderWidth:"thin", color:"#17a2b8"}}><Translate content='register'></Translate></Nav.Link></Nav.Item>
+        
  
- <Nav.Item style={{paddingRight:"4px"}}><Nav.Link href="/login" style={{borderStyle:"solid", borderRadius:"8px", borderWidth:"thin", color:"#17a2b8"}}><Translate content='login'></Translate></Nav.Link></Nav.Item>
+ <Nav.Item style={{paddingRight:"4px"}}><Nav.Link href="/login" style={{borderStyle:"solid", borderRadius:"8px", borderWidth:"thin", color:"#17a2b8"}}><Translate content='profile'></Translate></Nav.Link></Nav.Item>
  <Nav.Item>
  <Dropdown style={{size:"50px"}}>
        <Dropdown.Toggle variant = "outline-info" id = "dropdown-basic"  style={{borderStyle:"solid", borderRadius:"8px", borderWidth:"thin", }}>
@@ -177,10 +185,10 @@ class Reset extends Component {
 
 <div style={{backgroundColor:"#fff", padding:"10px"}}>
           <div className = "row">
-            <h1 className="display-1 mx-auto mt-1"><Translate content='Resetacc'></Translate></h1>
+            <h1 className="display-1 mx-auto mt-1"><font color="#338DFF"><Translate content='Resetacc'></Translate></font></h1>
           </div>
           <div class="row">
-            <h1 className="display-5 mx-auto mt-5"> <Translate content='instruction'></Translate> </h1>
+            <h1 className="display-10 mx-auto mt-10"><font size="5.5" color="grey"> <Translate content='instruction'></Translate> </font></h1>
           </div>
 
           <div class="container h-50">
@@ -258,15 +266,13 @@ class Reset extends Component {
         <div className = "main-footer">
     <div className = "container">
       <div className = "row">
-        <div className = "col">
+        <div className = "col"style={{paddingRight:"300px"}}>
           <h4>Swat Kats</h4>
-          <p>
-          <Translate content='info'></Translate>
-          </p>
+          <h4>Salty Fish</h4>
         </div>
 
         <div className = "col">
-          <h4><Translate content='createdby'></Translate></h4>
+          <h4><Translate content='createdby'style={{paddingright:"400px"}}></Translate></h4>
           <ul className = "list-unstyled">
             <li>Aneesh Chattaraj</li>
             <li>Dylan Stewart</li>
@@ -275,11 +281,24 @@ class Reset extends Component {
             <li>Zhi Jie Siow</li>
           </ul>
         </div>
+        <div className = "col">
+          <h4><Translate content='extendedby'></Translate></h4>
+          <ul className = "list-unstyled">
+            <li>Jiaxin Mo</li>
+            <li>Jingjin Li</li>
+            <li>Xiaoyue Liu</li>
+            <li>Chengyu Zhang</li>
+            <li>Zihan Ye</li>
+          </ul>
+        </div>
+
+
+
       </div>
 
       <div className = "row">
         <p className = "col-sm">
-          &copy;{new Date().getFullYear()} Swat Kats | All rights reserved
+          &copy;{new Date().getFullYear()} Swat Kats | Salty Fish | All rights reserved
         </p>
       </div>
     </div>
