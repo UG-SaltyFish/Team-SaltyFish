@@ -207,7 +207,7 @@ onChange = (e) => {
                <div className="columns download">
                   <p>
               
-                  <button><a href = {this.state.transcript} target = "_blank"  download = "transcript"><Translate content='download'></Translate></a></button>
+                  <button><a href = {this.state.transcript} target = "_blank"  download = "transcript" style={{color:'white'}}><Translate content='download'></Translate></a></button>
                   </p>
                </div>
             </div>

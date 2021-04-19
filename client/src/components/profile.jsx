@@ -686,7 +686,7 @@ onSubmitGalleryPhoto = (e) => {
                   <p>
                   <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
                   <button onClick={this.pdfUploadHandler}><Translate content='upload_transcript'></Translate> </button>
-                  <button><a href = {this.state.transcript} target = "_blank"  download = "transcript"><Translate content='download'></Translate></a></button>
+                  <button><a href = {this.state.transcript} target = "_blank"  download = "transcript" style={{color:'white'}}><Translate content='download'></Translate></a></button>
                   <form id = "modalhere" style={{display:"none"}}>
                       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='section'></Translate> </h2>
                         <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='education'></Translate> </h2>
