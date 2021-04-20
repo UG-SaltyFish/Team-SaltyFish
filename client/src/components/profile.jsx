@@ -69,7 +69,8 @@ class Profile extends Component {
       addprojectdescripition:'',
       addprojectlink:'',
       showphone:false,
-      lang:'en'
+      lang:'en',
+      hastranscript:"There is no transcript!"
     };
   this.onLogoutClick=this.onLogoutClick.bind(this);
   this.onChange =this.onChange.bind(this);
@@ -405,15 +406,21 @@ onSubmitGalleryPhoto = (e) => {
     if (this.state.selectedFile == null) {
       return (Error);
     }
-    if (this.state.transcript !== "") {
-      axios.delete('/deletefile', {
-        params: {
-          url: this.state.transcript
-        }
-      }).then(res=> {
-        console.log(res);
-      })
-    }
+    if (this.state.transcript !== "") {
+            axios.delete('/deletefile', {
+              params: {
+                url: this.state.transcript
+              }
+            }).then(res=> {
+              console.log(res);
+            })
+         this.state.hastranscript ="There is a transcript!";//"There is a transcript!";
+        }else{
+          this.state.hastranscript ="There is no transcript!";
+        }
+
+
+
     fd.append('transcript', this.state.selectedFile);
       try {
         axios.post('/pdf-upload', fd).then((postResponse) => {
@@ -646,9 +653,11 @@ onSubmitGalleryPhoto = (e) => {
        
          <div className="nine columns main-col">
             <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='about_me'></Translate> </h2>
-            <div style={{columnWidth:"1000px"}}>
-            <p>{this.state.bio}</p>
+
+            <div class="bio">
+            <span style={{display:'inline-block',width:'800px',wordWrap:'break-word',whiteSpace:'normal'}} >{this.state.bio}</span>
             </div>
+            
             <Button  onClick={this.showbioModal}><Translate content='edit_Bio'></Translate></Button>
                 <Modal show={this.state.showbio}>
                 <Modal.Header closeButton onClick={this.hidebioModal}></Modal.Header>
@@ -668,6 +677,7 @@ onSubmitGalleryPhoto = (e) => {
                     />
                   
                   <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}><Translate content='submit'></Translate></button>
+                 
                   </form>
                 </Modal>
             <div className="row">
@@ -706,7 +716,14 @@ onSubmitGalleryPhoto = (e) => {
                   <p>
                   <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
                   <button onClick={this.pdfUploadHandler}><Translate content='upload_transcript'></Translate> </button>
-                  <button><a href = {this.state.transcript} target = "_blank"  download = "transcript" style={{color:'white'}}><Translate content='download'></Translate></a></button>
+
+                  <div class="container h-50">
+                   <div class="row h-100 justify-content-center align-items-center">
+                   <h2 style={{color:'red', paddingBlock:'10px'}}>{this.state.hastranscript}</h2>
+                   </div>
+                 </div>
+
+                  <button><a href = {this.state.transcript} target = "_blank"  download = "transcript" style={{color:'white'}} visible={this.state.hastranscript}><Translate content='download'></Translate></a></button>
                   <form id = "modalhere" style={{display:"none"}}>
                       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='section'></Translate> </h2>
                         <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='education'></Translate> </h2>

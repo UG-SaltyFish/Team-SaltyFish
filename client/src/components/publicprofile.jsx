@@ -144,6 +144,20 @@ onChange = (e) => {
         <header >
         <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
         <ul id="nav" className="nav">
+        <img
+          src={logo}
+          width="50"
+          height="50"
+          className="d-inline-block align-top"
+          alt=""
+        />
+        <img
+          src={logo1}
+          width="80"
+          height="80"
+          className="d-inline-block align-top"
+          alt=""
+        />
         <li className="current"><a href="/"><Translate content='home'></Translate> </a></li>
         <li><Link activeClass="active" to="top" spy={true} smooth={true} duration={1000} href="#" style = {{right:0}}><Translate content='intro'></Translate> </Link></li>
    <li ><Link activeClass="active" to="education" spy={true} smooth={true} duration={1000} href="#"><Translate content='education'></Translate> </Link></li>
