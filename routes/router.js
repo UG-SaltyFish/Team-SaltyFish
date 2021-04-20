@@ -33,6 +33,14 @@ router.put('/findanddeletwork/:user',controller.findWorkAndDelete);
 router.put('/findanddeletproject/:user',controller.findProjectAndDelete);
 router.put('/findanddeletskill/:user',controller.findSkillAndDelete);
 
+
+router.put('/hideE/:user',controller.deleE);
+router.put('/hideW/:user',controller.deleW);
+router.put('/hideP/:user',controller.deleP);
+router.put('/hideSk/:user',controller.deleSk);
+router.put('/hideSu/:user',controller.deleSu);
+router.put('/hideG/:user',controller.deleG);
+
 // Find all users
 router.get('/users', controller.findAllUsers);
  
