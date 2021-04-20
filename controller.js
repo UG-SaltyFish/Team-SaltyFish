@@ -39,13 +39,7 @@ var createUser = function(req, res) {
                         phone:'',
                         skills:[],
                         bio:'',
-                        date:'',
-                        sectionE:'block',
-                        sectionW:'block',
-                        sectionP:'block',
-                        sectionSk:'block',
-                        sectionSu:'block',
-                        sectionG:'block'
+                        date:''
                     });
                     profile.save();
                     return res.send("User created");
@@ -336,115 +330,6 @@ var getUserAccount = function (req, res) {
 //         }
 //     })
 // };
-
-
-
-var deleE= function(req, res){
-    var user1=req.params.user;
-    
-    const sec= req.body;
-
-    
-    Profile.findOneAndUpdate({user:user1},{$set: {sectionE:sec.sectionE}},{new: true},function(err,user2){
-        if(err){
-            
-            res.send("wrong");
-            
-        }else{
-        
-           res.send(user2);
-        }
-    });
-}
-
-var deleW= function(req, res){
-    var user1=req.params.user;
-    
-    const sec= req.body;
-
-    
-    Profile.findOneAndUpdate({user:user1},{$set: {sectionW:sec.sectionW}},{new: true},function(err,user2){
-        if(err){
-            
-            res.send("wrong");
-            
-        }else{
-        
-           res.send(user2);
-        }
-    });
-}
-
-var deleP= function(req, res){
-    var user1=req.params.user;
-    
-    const sec= req.body;
-
-    
-    Profile.findOneAndUpdate({user:user1},{$set: {sectionP:sec.sectionP}},{new: true},function(err,user2){
-        if(err){
-            
-            res.send("wrong");
-            
-        }else{
-        
-           res.send(user2);
-        }
-    })
-}
-var deleSk= function(req, res){
-    var user1=req.params.user;
-    
-    const sec= req.body;
-
-    
-    Profile.findOneAndUpdate({user:user1},{$set: {sectionSk:sec.sectionSk}},{new: true},function(err,user2){
-        if(err){
-            
-            res.send("wrong");
-            
-        }else{
-        
-           res.send(user2);
-        }
-    })
-}
-
-var deleSu= function(req, res){
-    var user1=req.params.user;
-    
-    const sec= req.body;
-
-    
-    Profile.findOneAndUpdate({user:user1},{$set: {sectionSu:sec.sectionSu}},{new: true},function(err,user2){
-        if(err){
-            
-            res.send("wrong");
-            
-        }else{
-        
-           res.send(user2);
-        }
-    })
-}
-
-var deleG= function(req, res){
-    var user1=req.params.user;
-    
-    const sec= req.body;
-
-    
-    Profile.findOneAndUpdate({user:user1},{$set: {sectionG:sec.sectionG}},{new: true},function(err,user2){
-        if(err){
-            
-            res.send("wrong");
-            
-        }else{
-        
-           res.send(user2);
-        }
-    })
-}
 
 var addweb= function(req,res){
     var user1=req.params.user;
@@ -794,9 +679,3 @@ module.exports.findAllUsers = findAllUsers;
 module.exports.findOneUser = findOneUser;
 module.exports.findUserByName = findUserByName;
 module.exports.deleteUserById = deleteUserById;
-module.exports.deleE = deleE;
-module.exports.deleW = deleW;
-module.exports.deleP = deleP;
-module.exports.deleSk = deleSk;
-module.exports.deleSu = deleSu;
-module.exports.deleG = deleG;

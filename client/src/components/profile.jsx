@@ -40,12 +40,6 @@ class Profile extends Component {
       projects:[],
       website: '',
       phone: '',
-      sectionE:'',
-      sectionW:'',
-      sectionP:'',
-      sectionSk:'',
-      sectionSu:'',
-      sectionG:'',
       selectedFile: null,
       profilePicture: '',
       transcript: '',
@@ -79,7 +73,6 @@ class Profile extends Component {
   this.onSubmitSubject =this.onSubmitSubject.bind(this);
   
 }
-
 switchtoen = () => {
   
   counterpart.setLocale('en')
@@ -327,20 +320,12 @@ onSubmitGalleryPhoto = (e) => {
                          education:res.data[0].education,
                          website:res.data[0].website,
                          phone:res.data[0].phone,
-                         sectionE:res.data[0].sectionE,
-                         sectionW:res.data[0].sectionW,
-                         sectionP:res.data[0].sectionP,
-                         sectionSk:res.data[0].sectionSk,
-                         sectionSu:res.data[0].sectionSu,
-                         sectionG:res.data[0].sectionG,
                          profilePicture: res.data[0].profile_picture,
                          transcript: res.data[0].transcript,
                          imgHash: Date.now()
                         });
           })
-
-
-
+    
 }
   fileSelectedHandler = event => {
     event.preventDefault();
@@ -348,87 +333,15 @@ onSubmitGalleryPhoto = (e) => {
       selectedFile: event.target.files[0]
     })
   }
-
-
-  /////////////////////////////////没卵用
-  // checkStatus = ()=>{
-  //      var checkEdu = document.getElementById("edusec");
-  //      var edusection = document.getElementById("educationsec");
-  //         if(this.state.sectionE=="none"){
-  //            checkEdu.checked = true;
-  //           edusection.style.display = "none";
-  //         }else{
-  //            edusection.style.display = "block";
-  //         }
-
-
-  //      var checkWork = document.getElementById("worksec");
-  //      var worksection = document.getElementById("worksection");
-  //         if(this.state.sectionW=="none"){
-  //           checkWork.checked = true;
-  //           worksection.style.display = "none";
-  //         }else{
-  //           worksection.style.display = "block";
-  //         }
-
-
-  //      var checkPro = document.getElementById("projsec");
-  //      var projsection = document.getElementById("projectsection");
-  //            if(this.state.sectionP=="none"){
-  //             checkPro.checked = true;
-  //             projsection.style.display = "none";
-  //            }else{
-  //             projsection.style.display = "block";
-  //            }
-
-
-  //      var checkSk = document.getElementById("skillsec");
-  //      var skisection = document.getElementById("skillsection");
-  //            if(this.state.sectionSk=="none"){
-  //             checkSk.checked = true;
-  //             skisection.style.display = "none";
-  //            }else{
-  //             skisection.style.display = "block";
-  //            }
-
-  //      var checkSub = document.getElementById("subsec");
-  //      var subsection = document.getElementById("subjectsection");
-  //            if(this.state.sectionSu=="none"){
-  //             checkSub.checked = true;
-  //             subsection.style.display = "none";
-  //            }else{
-  //             subsection.style.display = "block";
-  //            } 
-
-  //      var checkG = document.getElementById("galsec");
-  //      var galsection = document.getElementById("gallerysection");
-  //                  if(this.state.sectionG=="none"){
-  //                   checkG.checked = true;
-  //                   galsection.style.display = "none";
-  //                  }else{
-  //                   galsection.style.display = "block";
-  //                  }
-
-  // }
-
-  // hideEdu = ()=>{
-  //   var checkbox1 = document.getElementById("edusec");
-  //   var edusection = document.getElementById("educationsec");
-  //   if(checkbox1.checked == true){
-  //     edusection.style.display = "none";
-  //   }else{
-  //     edusection.style.display = "block";
-  //   }
-  //   const userData={
-  //     sectionE:edusection.style.display
-      
-  //   }
-    
-  //   axios.put('/hideE/'+this.props.auth.user,userData)
-  //   .then(res=> this.setState({sectionE:res.data.sectionE}))
-
-  // }/////////////////没卵用
-
+  hideEdu = ()=>{
+    var checkbox1 = document.getElementById("edusec");
+    var edusection = document.getElementById("educationsec");
+    if(checkbox1.checked == true){
+      edusection.style.display = "none";
+    }else{
+      edusection.style.display = "block";
+    }
+  }
   hideWork = ()=>{
     var checkbox1 = document.getElementById("worksec");
     var worksection = document.getElementById("worksection");
@@ -437,13 +350,7 @@ onSubmitGalleryPhoto = (e) => {
     }else{
       worksection.style.display = "block";
     }
-    const userData={
-      sectionW:worksection.style.display
-    }
-    axios.put('/hideW/'+this.props.auth.user,userData)
-    .then(res=> this.setState({sectionW:res.data.sectionW}))
   }
-
   hideProj = ()=>{
     var checkbox1 = document.getElementById("projsec");
     var projsection = document.getElementById("projectsection");
@@ -452,13 +359,7 @@ onSubmitGalleryPhoto = (e) => {
     }else{
       projsection.style.display = "block";
     }
-    const userData={
-      sectionP:projsection.style.display
-    }
-    axios.put('/hideP/'+this.props.auth.user,userData)
-    .then(res=> this.setState({sectionP:res.data.sectionP}))
   }
-
   hideSkill = ()=>{
     var checkbox1 = document.getElementById("skillsec");
     var skisection = document.getElementById("skillsection");
@@ -467,13 +368,7 @@ onSubmitGalleryPhoto = (e) => {
     }else{
       skisection.style.display = "block";
     }
-    const userData={
-      sectionSk:skisection.style.display
-    }
-    axios.put('/hideSk/'+this.props.auth.user,userData)
-    .then(res=> this.setState({sectionSk:res.data.sectionSk}))
   }
-
   hideSub = ()=>{
     var checkbox1 = document.getElementById("subsec");
     var subsection = document.getElementById("subjectsection");
@@ -482,13 +377,7 @@ onSubmitGalleryPhoto = (e) => {
     }else{
       subsection.style.display = "block";
     }
-    const userData={
-      sectionSu:subsection.style.display
-    }
-    axios.put('/hideSu/'+ this.props.auth.user,userData)
-    .then(res=> this.setState({sectionSu:res.data.sectionSu}))
   }
-
   hideGal = ()=>{
     var checkbox1 = document.getElementById("galsec");
     var galsection = document.getElementById("gallerysection");
@@ -497,14 +386,7 @@ onSubmitGalleryPhoto = (e) => {
     }else{
       galsection.style.display = "block";
     }
-    const userData={
-      sectionG:galsection.style.display
-    }
-    axios.put('/hideG/'+ this.props.auth.user,userData)
-    .then(res=> this.setState({sectionG:res.data.sectionG}))
   }
-
-
   SectionModal = () => {
     var form1 = document.getElementById("modalhere");
     if(form1.style.display=="none"){
@@ -571,7 +453,6 @@ onSubmitGalleryPhoto = (e) => {
         
       })
     }
-
     fd.append('image', this.state.selectedFile);
       try {
         axios.post('/img-upload', fd).then((postResponse) => {
@@ -806,21 +687,20 @@ onSubmitGalleryPhoto = (e) => {
                   <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
                   <button onClick={this.pdfUploadHandler}><Translate content='upload_transcript'></Translate> </button>
                   <button><a href = {this.state.transcript} target = "_blank"  download = "transcript"><Translate content='download'></Translate></a></button>
-                  <form id = "modalhere" style={{display:"none"}}> 
+                  <form id = "modalhere" style={{display:"none"}}>
                       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='section'></Translate> </h2>
                         <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='education'></Translate> </h2>
-                        <input type="checkbox" id="edusec" defaultChecked={this.state.sectionE=='none'} onClick={this.hideEdu} ></input>
+                        <input type="checkbox" id="edusec" onClick={this.hideEdu} ></input>
                         <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='work1'></Translate> </h2>
-                        <input type="checkbox" id ="worksec" defaultChecked={this.state.sectionW=='none'} onClick={this.hideWork}></input>
+                        <input type="checkbox" id ="worksec" onClick={this.hideWork}></input>
                         <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='projects'></Translate> </h2>
-                        <input type="checkbox" id ="projsec" defaultChecked={this.state.sectionP=='none'} onClick = {this.hideProj}></input>
+                        <input type="checkbox" id ="projsec" onClick = {this.hideProj}></input>
                         <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='skills'></Translate> </h2>
-                        <input type="checkbox" id ="skillsec" defaultChecked={this.state.sectionSk=='none'} onClick = {this.hideSkill}></input>
+                        <input type="checkbox" id ="skillsec" onClick = {this.hideSkill}></input>
                         <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='subjects'></Translate> </h2>
-                        <input type="checkbox" id = "subsec" defaultChecked={this.state.sectionSu=='none'}  onClick = {this.hideSub} ></input>
+                        <input type="checkbox" id = "subsec" onClick = {this.hideSub} ></input>
                         <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='gallery'></Translate> </h2>
-                        <input type="checkbox" id = "galsec" defaultChecked={this.state.sectionG=='none'} onClick = {this.hideGal}></input>
-                        
+                        <input type="checkbox" id = "galsec" onClick = {this.hideGal}></input>
                       </form>
   
                 <button onClick={this.SectionModal}><Translate content='section'></Translate></button>
@@ -831,7 +711,7 @@ onSubmitGalleryPhoto = (e) => {
       </div>
    </section>
 
-   <section id="education" style={{display:this.state.sectionE}}>
+   <section id="education">
    <div id = "educationsec" style={{backgroundColor:'#fff'}} >
       
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='education'></Translate> </h2>
@@ -886,7 +766,7 @@ onSubmitGalleryPhoto = (e) => {
       </div>
    </section>
 
-   <section id="work" style={{display:this.state.sectionW}}>
+   <section id="work" >
    <div id = "worksection" style={{backgroundColor:'#fff'}}>
     <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='work1'></Translate> </h2>
     <div>
@@ -976,7 +856,7 @@ onSubmitGalleryPhoto = (e) => {
     </div>
    </section>
 
-   <section id='projects' style={{display:this.state.sectionP}}>
+   <section id='projects'>
    <div id = "projectsection" style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='projects'></Translate> </h2>
       <div>         
@@ -1052,7 +932,7 @@ onSubmitGalleryPhoto = (e) => {
     </div>
 </section>
 
-   <section id="skills" style={{display:this.state.sectionSk}}>
+   <section id="skills">
    <div id = "skillsection" style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='skills'></Translate> </h2>
       <div>         
@@ -1087,7 +967,7 @@ onSubmitGalleryPhoto = (e) => {
       </div>
    </section>
 
-   <section id="subjects" style={{display:this.state.sectionSu}}>
+   <section id="subjects">
    <div id = "subjectsection" style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='subjects'></Translate> </h2>
       <div>         
@@ -1165,7 +1045,7 @@ onSubmitGalleryPhoto = (e) => {
       </div>
    </section>
 
-   <section id = "gallery" style={{display:this.state.sectionG}}>
+   <section id = "gallery">
    <div id = "gallerysection" style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='gallery'></Translate></h2>
      
@@ -1223,7 +1103,6 @@ onSubmitGalleryPhoto = (e) => {
     )
   }
 }
-
         
 Profile.propTypes = {
   logoutUser: PropTypes.func.isRequired,
