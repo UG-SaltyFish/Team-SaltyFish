@@ -414,7 +414,7 @@ onSubmitGalleryPhoto = (e) => {
   hideEdu = ()=>{
     var checkbox1 = document.getElementById("edusec");
     var edusection = document.getElementById("educationsec");
-    if(checkbox1.checked == true){
+    if(checkbox1.checked == false){
       edusection.style.display = "none";
     }else{
       edusection.style.display = "block";
@@ -432,7 +432,7 @@ onSubmitGalleryPhoto = (e) => {
   hideWork = ()=>{
     var checkbox1 = document.getElementById("worksec");
     var worksection = document.getElementById("worksection");
-    if(checkbox1.checked == true){
+    if(checkbox1.checked == false){
       worksection.style.display = "none";
     }else{
       worksection.style.display = "block";
@@ -447,7 +447,7 @@ onSubmitGalleryPhoto = (e) => {
   hideProj = ()=>{
     var checkbox1 = document.getElementById("projsec");
     var projsection = document.getElementById("projectsection");
-    if(checkbox1.checked == true){
+    if(checkbox1.checked == false){
       projsection.style.display = "none";
     }else{
       projsection.style.display = "block";
@@ -462,7 +462,7 @@ onSubmitGalleryPhoto = (e) => {
   hideSkill = ()=>{
     var checkbox1 = document.getElementById("skillsec");
     var skisection = document.getElementById("skillsection");
-    if(checkbox1.checked == true){
+    if(checkbox1.checked == false){
       skisection.style.display = "none";
     }else{
       skisection.style.display = "block";
@@ -477,7 +477,7 @@ onSubmitGalleryPhoto = (e) => {
   hideSub = ()=>{
     var checkbox1 = document.getElementById("subsec");
     var subsection = document.getElementById("subjectsection");
-    if(checkbox1.checked == true){
+    if(checkbox1.checked == false){
       subsection.style.display = "none";
     }else{
       subsection.style.display = "block";
@@ -492,7 +492,7 @@ onSubmitGalleryPhoto = (e) => {
   hideGal = ()=>{
     var checkbox1 = document.getElementById("galsec");
     var galsection = document.getElementById("gallerysection");
-    if(checkbox1.checked == true){
+    if(checkbox1.checked == false){
       galsection.style.display = "none";
     }else{
       galsection.style.display = "block";
@@ -809,17 +809,17 @@ onSubmitGalleryPhoto = (e) => {
                   <form id = "modalhere" style={{display:"none"}}> 
                       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='section'></Translate> </h2>
                         <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='education'></Translate> </h2>
-                        <input type="checkbox" id="edusec" defaultChecked={this.state.sectionE=='none'} onClick={this.hideEdu} ></input>
+                        <input type="checkbox" id="edusec" defaultChecked={this.state.sectionE!=='none'} onClick={this.hideEdu} ></input>
                         <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='work1'></Translate> </h2>
-                        <input type="checkbox" id ="worksec" defaultChecked={this.state.sectionW=='none'} onClick={this.hideWork}></input>
+                        <input type="checkbox" id ="worksec" defaultChecked={this.state.sectionW!=='none'} onClick={this.hideWork}></input>
                         <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='projects'></Translate> </h2>
-                        <input type="checkbox" id ="projsec" defaultChecked={this.state.sectionP=='none'} onClick = {this.hideProj}></input>
+                        <input type="checkbox" id ="projsec" defaultChecked={this.state.sectionP!=='none'} onClick = {this.hideProj}></input>
                         <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='skills'></Translate> </h2>
-                        <input type="checkbox" id ="skillsec" defaultChecked={this.state.sectionSk=='none'} onClick = {this.hideSkill}></input>
+                        <input type="checkbox" id ="skillsec" defaultChecked={this.state.sectionSk!=='none'} onClick = {this.hideSkill}></input>
                         <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='subjects'></Translate> </h2>
-                        <input type="checkbox" id = "subsec" defaultChecked={this.state.sectionSu=='none'}  onClick = {this.hideSub} ></input>
+                        <input type="checkbox" id = "subsec" defaultChecked={this.state.sectionSu!=='none'}  onClick = {this.hideSub} ></input>
                         <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='gallery'></Translate> </h2>
-                        <input type="checkbox" id = "galsec" defaultChecked={this.state.sectionG=='none'} onClick = {this.hideGal}></input>
+                        <input type="checkbox" id = "galsec" defaultChecked={this.state.sectionG!=='none'} onClick = {this.hideGal}></input>
                         
                       </form>
   

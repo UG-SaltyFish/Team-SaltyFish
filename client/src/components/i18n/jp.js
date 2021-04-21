@@ -35,7 +35,7 @@ export default{
   add_edu:"教育を追加",
   add_projects:"プロジェクトを追加",
   add_skills:"腕前を追加",
-  section:"モジュールを削除する",
+  section:"モジュールを選択",
   gallery:"ギャラリー",
   add_photodesc:"写真の説明を追加",
   add_photo:"写真をアップロード",
