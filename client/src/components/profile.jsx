@@ -409,25 +409,25 @@ onSubmitGalleryPhoto = (e) => {
   //                   galsection.style.display = "block";
   //                  }
 
-  // }
+  // } /////////////////没卵用
 
-  // hideEdu = ()=>{
-  //   var checkbox1 = document.getElementById("edusec");
-  //   var edusection = document.getElementById("educationsec");
-  //   if(checkbox1.checked == true){
-  //     edusection.style.display = "none";
-  //   }else{
-  //     edusection.style.display = "block";
-  //   }
-  //   const userData={
-  //     sectionE:edusection.style.display
+  hideEdu = ()=>{
+    var checkbox1 = document.getElementById("edusec");
+    var edusection = document.getElementById("educationsec");
+    if(checkbox1.checked == true){
+      edusection.style.display = "none";
+    }else{
+      edusection.style.display = "block";
+    }
+    const userData={
+      sectionE:edusection.style.display
       
-  //   }
+    }
     
-  //   axios.put('/hideE/'+this.props.auth.user,userData)
-  //   .then(res=> this.setState({sectionE:res.data.sectionE}))
+    axios.put('/hideE/'+this.props.auth.user,userData)
+    .then(res=> this.setState({sectionE:res.data.sectionE}))
 
-  // }/////////////////没卵用
+  }
 
   hideWork = ()=>{
     var checkbox1 = document.getElementById("worksec");
