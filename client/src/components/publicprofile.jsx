@@ -39,6 +39,12 @@ class PublicProfile extends Component {
       projects:[],
       website: '',
       phone: '',
+      sectionE:'',
+      sectionW:'',
+      sectionP:'',
+      sectionSk:'',
+      sectionSu:'',
+      sectionG:'',
       selectedFile: null,
       profilePicture: '',
       transcript: '',
@@ -113,6 +119,12 @@ onChange = (e) => {
                          education:res.data[0].education,
                          website:res.data[0].website,
                          phone:res.data[0].phone,
+                         sectionE:res.data[0].sectionE,
+                         sectionW:res.data[0].sectionW,
+                         sectionP:res.data[0].sectionP,
+                         sectionSk:res.data[0].sectionSk,
+                         sectionSu:res.data[0].sectionSu,
+                         sectionG:res.data[0].sectionG,
                          profilePicture: res.data[0].profile_picture,
                          transcript: res.data[0].transcript,
                          imgHash: Date.now()
@@ -215,7 +227,7 @@ onChange = (e) => {
       </div>
    </section>
 
-   <section id="education">
+   <section id="education" style={{display:this.state.sectionE}}>
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='education'></Translate> </h2>
       <div>         
@@ -233,7 +245,7 @@ onChange = (e) => {
       </div>
    </section>
 
-   <section id="work">
+   <section id="work" style={{display:this.state.sectionW}}>
    <div style={{backgroundColor:'#fff'}}>
     <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='work1'></Translate> </h2>
     <div>
@@ -263,7 +275,7 @@ onChange = (e) => {
 </div>
    </section>
 
-   <section id='projects'>
+   <section id='projects' style={{display:this.state.sectionP}}>
    <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='projects'></Translate> </h2>
       <div>         
@@ -294,7 +306,7 @@ onChange = (e) => {
 </section>
 
 
-   <section id="skills">
+   <section id="skills" style={{display:this.state.sectionSk}}>
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='skills'></Translate> </h2>
       <div>         
@@ -305,7 +317,7 @@ onChange = (e) => {
        </div>
    </section>
 
-   <section id="subjects">
+   <section id="subjects" style={{display:this.state.sectionSu}}>
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='subjects'></Translate> </h2>
       <div>         
@@ -338,7 +350,7 @@ onChange = (e) => {
       </div>
    </section>
 
-   <section id = "gallery">
+   <section id = "gallery" style={{display:this.state.sectionG}}>
    <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='gallery'></Translate> </h2>
      
