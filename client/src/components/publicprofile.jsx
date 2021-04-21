@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { Link } from 'react-scroll';
 import Footer from './Footer.js';
 import logo from './logo.svg';
+import logo1 from './logo1.svg';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
 import "./profile_pic.css";
@@ -71,7 +72,8 @@ class PublicProfile extends Component {
       addprojectdescripition:'',
       addprojectlink:'',
       showphone:false,
-      lang:'en'
+      lang:'en',
+      filename:''
     };
   this.onChange =this.onChange.bind(this);
   
@@ -130,7 +132,11 @@ onChange = (e) => {
                          imgHash: Date.now()
                         });
           })
-    
+    if (this.state.transcript !== "") {
+      this.state.filename=this.state.transcript;
+    }else{
+      this.state.filename='';
+    }
 }
   
  
@@ -155,6 +161,20 @@ onChange = (e) => {
         <header >
         <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
         <ul id="nav" className="nav">
+        <img
+          src={logo}
+          width="50"
+          height="50"
+          className="d-inline-block align-top"
+          alt=""
+        />
+        <img
+          src={logo1}
+          width="80"
+          height="80"
+          className="d-inline-block align-top"
+          alt=""
+        />
         <li className="current"><a href="/"><Translate content='home'></Translate> </a></li>
         <li><Link activeClass="active" to="top" spy={true} smooth={true} duration={1000} href="#" style = {{right:0}}><Translate content='intro'></Translate> </Link></li>
    <li ><Link activeClass="active" to="education" spy={true} smooth={true} duration={1000} href="#"><Translate content='education'></Translate> </Link></li>
@@ -218,8 +238,8 @@ onChange = (e) => {
                </div>
                <div className="columns download">
                   <p>
-              
-                  <button><a href = {this.state.transcript} target = "_blank"  download = "transcript"><Translate content='download'></Translate></a></button>
+                  <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='transcript_file'></Translate> </h2>
+                  <p><a href = {this.state.transcript} target = "_blank"  download = "transcript" >{this.state.transcript}</a> </p>
                   </p>
                </div>
             </div>
