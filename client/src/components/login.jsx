@@ -22,13 +22,21 @@ import cn from "./i18n/cn";
 import jp from "./i18n/jp";
 import "./Footer.css";
 
+//Import React-google-login
+import ReactDOM from 'react-dom';
+import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
+
+
+
 //Translation
 counterpart.registerTranslations('en',en);
 counterpart.registerTranslations('cn',cn);
 counterpart.registerTranslations('jp',jp);
 counterpart.setLocale('en');
 
-
+const clientId = '996695088450-8vihibptuoco1cqafe0mpsvqdmp48fhu.apps.googleusercontent.com';
+const appId = '277936307150836'
 const Styles = styled.div
 `
   .navbar { background-color: #365; }
@@ -81,6 +89,17 @@ class Login extends Component {
 
   };
 
+  onSuccess = (res) => {
+    console.log('[Login Success] currentUser:', res.profileObj);
+  };
+  onFailure = (res) => {
+    console.log('[Login failed] res:', res);
+  };
+
+  onClick = (res) => {
+    console.log('[Login Success] currentUser:', res.profileObj);
+  };
+
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
@@ -88,6 +107,9 @@ class Login extends Component {
         this.props.history.push("/profile");
     }
 }
+
+
+
 componentDidUpdate(prevProps) {
   if (this.props.auth.isAuthenticated) {
       this.props.history.push("/profile");
@@ -102,6 +124,7 @@ componentDidUpdate(prevProps) {
       this.props.auth.errors="";
   }
 }
+
 
 onChange = (e) => {
   this.setState({[e.target.name]: e.target.value});
@@ -127,11 +150,14 @@ hidemessageModal = () => {
   this.setState({ showmessage: false });
 };
 
+
   render() {
-   
+
+
     return (
-      
+
       <div className="login">
+
         <Styles>  
     <Navbar className = "color-nav" expand="lg" bg="light" variant="light">
       <Navbar.Brand href="/">
@@ -239,7 +265,29 @@ hidemessageModal = () => {
                     
                     </Row>
 
-                    
+                    <div>
+                      <GoogleLogin
+                          clientId={clientId}
+                          buttonText="Login with Google"
+                          onSuccess={this.onSuccess}
+                          onFailure={this.onFailure}
+                          cookiePolicy={'single_host_origin'}
+                          style={{ marginTop: '100px'}}
+                          isSignedIn={true}
+                      />
+                    </div>
+
+                    <div>
+                      <FacebookLogin
+                          appId={appId}
+                          buttonText="Facebook Login"
+                          callback={this.onClick}
+                          cookiePolicy={'single_host_origin'}
+
+
+                      />
+                    </div>
+
                     <Row >
                       <a herf='/login' onClick={this.showmessageModal}  className="small mx-auto mt-2">
                       <Translate content='forgetpassword'></Translate>
@@ -247,7 +295,9 @@ hidemessageModal = () => {
                       </a>
                       
                     </Row>
-                    
+
+
+
                       <Modal show={this.state.showmessage}>
                        <Modal.Header closeButton onClick={this.hidemessageModal}></Modal.Header>
                        <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='message'></Translate> </h2>
