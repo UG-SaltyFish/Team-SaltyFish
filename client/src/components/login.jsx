@@ -269,8 +269,13 @@ hidemessageModal = () => {
                       <GoogleLogin
                           clientId={clientId}
                           buttonText="Login with Google"
+                          buttonSize="lg"
                           onSuccess={this.onSuccess}
                           onFailure={this.onFailure}
+                          type={"submit"}
+                          theme={"dark"}
+                          uxMode={"redirect"}
+                          redirectUri={"http://localhost:3000"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
                           cookiePolicy={'single_host_origin'}
                           style={{ marginTop: '100px'}}
                           isSignedIn={true}
@@ -281,7 +286,9 @@ hidemessageModal = () => {
                       <FacebookLogin
                           appId={appId}
                           buttonText="Facebook Login"
-                          callback={this.onClick}
+                          type={"submit"}
+                          theme={"light"}
+                          onClick={this.onClick}
                           cookiePolicy={'single_host_origin'}
 
 
