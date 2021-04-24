@@ -12,7 +12,7 @@ import {
     USER_NOT_LOADING
 } from "./types"
 
-
+//Regular login
 export const loginUser = user => dispatch => {
     axios
     .post('/login', user)
@@ -33,7 +33,47 @@ export const loginUser = user => dispatch => {
     })
     );
   };
-  export const setCurrentUser = decoded => {
+
+//Google login
+export const gooLoginUser = user => dispatch => {
+    axios
+    .post('/goologin', user)
+      .then(res => {
+        const token=res.data;
+        console.log(token._id);
+        localStorage.setItem("jwtToken", token._id);
+        setAuthToken(token._id);
+        const decoded = token._id;
+        // Set the current user
+        dispatch(setCurrentUser(decoded));
+
+        
+      })
+      .catch(err => dispatch({
+        type: SHOW_ERROR,
+        payload: err.response.data
+    })
+    );
+  };
+  
+export const refreshTokenSetup = (res) =>{
+    //Timing to renew access token
+    let refreshTiming = (res.tokenObj.expires_in || 3600 - 5 * 60) * 1000;
+    
+    const refreshToken = async () => {
+        const newAuthRes = await res.reloadAuthResponse();
+        refreshTiming = (newAuthRes.expires_in || 3600 - 5 * 60) * 1000;
+        console.log('newAuthRes:', newAuthRes);
+        
+        console.log('new auth Token', newAuthRes.id_token);
+        //Setup the other timer after the first one
+        setTimeout(refreshToken, refreshTiming);
+    };
+    //Setup first refreshtimer
+    setTimeout(refreshToken, refreshTiming);
+};
+
+export const setCurrentUser = decoded => {
     return {
         type: SET_CURRENT_USER,
         payload: decoded

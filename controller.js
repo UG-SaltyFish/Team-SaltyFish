@@ -284,6 +284,73 @@ var loginUser = function(req, res) {
   
 };
 
+//Jiaxin
+var gooLoginUser = function(req, res) {
+    
+    const user = req.body;
+   
+    //Check for existing user to login
+    User.findOne({email:user.email,password:user.password}, function(err, user1) {
+        if (user1) {
+            const payload = {
+                _id: user1._id,
+                name: user1.name,
+                email: user1.email
+              }
+              let token = payload;
+              res.send(token);
+        }
+        else{
+            //Register for google login
+            var user = new User({
+                "name":req.body.name,
+                "email":req.body.email,
+                "password":req.body.password
+            });
+        
+            User.findOne({email:user.email}, function(err, user1) {
+                if (user1) {
+                    return res.status(401).json("Email already registered");
+                } else {
+                    user.save(function (err, newUser) {
+                        if (!err) {
+                            var profile =new Profile({
+                                user: newUser,
+                                name: user.name,
+                                profile_picture: "https://it-project-bucket-2020.s3-ap-southeast-1.amazonaws.com/blank-profile.png",
+                                transcript: "",
+                                website:'',
+                                gallery:[],
+                                education:[],
+                                subjects:[],
+                                projects:[],
+                                work:[],
+                                intro:"",
+                                email:user.email,
+                                phone:'',
+                                skills:[],
+                                bio:'',
+                                date:'',
+                                sectionE:'block',
+                                sectionW:'block',
+                                sectionP:'block',
+                                sectionSk:'block',
+                                sectionSu:'block',
+                                sectionG:'block'
+                            });
+                            profile.save();
+                            return res.send("User created");
+                        } else {
+                            res.sendStatus(400);
+                        }
+                    });
+                }
+            });
+        }
+    });
+};
+//end
+
 //Get user`s profile
 var getProfile =function(req,res){
     
@@ -788,6 +855,7 @@ module.exports.addBio= addBio;
 module.exports.getProfile =getProfile;
 module.exports.getUserAccount =getUserAccount;
 module.exports.loginUser =loginUser;
+module.exports.gooLoginUser =gooLoginUser;
 module.exports.createUser = createUser;
 module.exports.resetUser = resetUser;
 module.exports.findAllUsers = findAllUsers;

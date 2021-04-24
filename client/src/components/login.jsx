@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import {GoogleLogin } from 'react-google-login';
 
 import { Button, Image, Col, Row,Modal} from 'react-bootstrap';
 import icon from './loginImage.svg';
 
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { loginUser, setUserLoading, setUserNotLoading } from "../actions/authActions";
+import { loginUser, setUserLoading, setUserNotLoading, gooLoginUser, refreshTokenSetup } from "../actions/authActions";
 
 
 import classnames from "classnames";
@@ -28,6 +29,8 @@ counterpart.registerTranslations('cn',cn);
 counterpart.registerTranslations('jp',jp);
 counterpart.setLocale('en');
 
+//Google login 
+const googleClientId = '996695088450-8vihibptuoco1cqafe0mpsvqdmp48fhu.apps.googleusercontent.com';
 
 const Styles = styled.div
 `
@@ -80,6 +83,25 @@ class Login extends Component {
     counterpart.setLocale('jp')
 
   };
+  //Jiaxin
+  //Google Login
+  onSuccess = (res) => {
+    //console.log('[Login Success] currentUser:', res.profileObj);
+    const googleUser = {
+      name: res.profileObj.name,
+      email: res.profileObj.email,
+      password: res.profileObj.googleId
+    };
+  
+    this.props.gooLoginUser(googleUser);
+    this.props.setUserLoading();
+  
+    refreshTokenSetup(res);
+  };
+  onFailure = (res) => {
+    console.log('[Login failed] res:', res);
+  };
+  //end
 
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
@@ -87,45 +109,46 @@ class Login extends Component {
         
         this.props.history.push("/profile");
     }
-}
-componentDidUpdate(prevProps) {
-  if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/profile");
-      this.props.setUserNotLoading();
   }
 
-  if (this.props.auth.errors === "Incorrect Email or Password") {
+  componentDidUpdate(prevProps) {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/profile");
+      this.props.setUserNotLoading();
+    }
+
+    if (this.props.auth.errors === "Incorrect Email or Password") {
       console.log(this.props.auth.errors);
       this.setState({
           errors: this.props.auth.errors
       });
       this.props.auth.errors="";
+    }
   }
-}
 
-onChange = (e) => {
-  this.setState({[e.target.name]: e.target.value});
-}
+  onChange = (e) => {
+      this.setState({[e.target.name]: e.target.value});
+  }
 
-onSubmit = (e) => {
-  e.preventDefault();
+  onSubmit = (e) => {
+    e.preventDefault();
 
-  const userData = {
+    const userData = {
       email: this.state.email,
       password: this.state.password
-  };
+    };
   
-  // Redirect is handled by the redux action loginUser so we don't need to use this.props.history
-  this.props.loginUser(userData);
-  this.props.setUserLoading();
-};
+    // Redirect is handled by the redux action loginUser so we don't need to use this.props.history
+    this.props.loginUser(userData);
+    this.props.setUserLoading();
+  };
 
-showmessageModal = () => {
-  this.setState({ showmessage: true });
-};
-hidemessageModal = () => {
-  this.setState({ showmessage: false });
-};
+  showmessageModal = () => {
+    this.setState({ showmessage: true });
+  };
+  hidemessageModal = () => {
+    this.setState({ showmessage: false });
+  };
 
   render() {
    
@@ -239,7 +262,17 @@ hidemessageModal = () => {
                     
                     </Row>
 
-                    
+                    <div>
+                      <GoogleLogin
+                        clientId={googleClientId}
+                        buttonText="Login"
+                        onSuccess={this.onSuccess}
+                        onFailure={this.onFailure}
+                        cookiePolicy={'single_host_origin'}
+                        isSignedIn={false}
+                      />
+                    </div>
+
                     <Row >
                       <a herf='/login' onClick={this.showmessageModal}  className="small mx-auto mt-2">
                       <Translate content='forgetpassword'></Translate>
@@ -307,6 +340,8 @@ hidemessageModal = () => {
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
+  gooLoginUser: PropTypes.func.isRequired,//Jiaxin
+  refreshTokenSetup: PropTypes.func.isRequired,//Jiaxin
   setUserLoading: PropTypes.func.isRequired,
   setUserNotLoading: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
@@ -321,5 +356,5 @@ Login.propTypes = {
   
   export default connect(
   mapStateToProps,
-  { loginUser, setUserLoading, setUserNotLoading }
+  { loginUser, setUserLoading, setUserNotLoading, gooLoginUser, refreshTokenSetup }//Jiaxin
   )(Login);
