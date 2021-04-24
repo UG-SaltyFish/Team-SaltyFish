@@ -22,13 +22,16 @@ import cn from "./i18n/cn";
 import jp from "./i18n/jp";
 import "./Footer.css";
 
+import FacebookLogin from 'react-facebook-login';
+
+
 //Translation
 counterpart.registerTranslations('en',en);
 counterpart.registerTranslations('cn',cn);
 counterpart.registerTranslations('jp',jp);
 counterpart.setLocale('en');
 
-
+const appId = '277936307150836'
 const Styles = styled.div
 `
   .navbar { background-color: #365; }
@@ -79,6 +82,10 @@ class Login extends Component {
     
     counterpart.setLocale('jp')
 
+  };
+
+  onClick = (res) => {
+    console.log('[Login Success] currentUser:', res.profileObj);
   };
 
   componentDidMount() {
@@ -227,6 +234,17 @@ hidemessageModal = () => {
                       
                       
                     />
+
+                    <div>
+                      <FacebookLogin
+                          appId={appId}
+                          buttonText="Facebook Login"
+                          callback={this.onClick}
+                          cookiePolicy={'single_host_origin'}
+
+
+                      />
+                    </div>
 
                     
                   </div>
