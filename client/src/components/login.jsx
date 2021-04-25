@@ -313,6 +313,7 @@ hidemessageModal = () => {
                           //containerStyle={}
                           //buttonStyle={}
                           callback={this.callback}
+                          autoLoad={false}
                           uxMode={"redirect"}
                           redirectUri={"https://it-project-eportfolio.herokuapp.com/"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
                           cookiePolicy={'single_host_origin'}
