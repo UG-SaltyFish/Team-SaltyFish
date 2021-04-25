@@ -100,7 +100,7 @@ class Login extends Component {
     console.log('[Login failed] res:', res);
   };
   // onClick callback returns a FacebookUser object which provides access to all of the FacebookUser methods.
-  onClick = (res) => {
+  callback = (res) => {
     console.log('[Login Success] currentUser:', res.profileObj);
   };
 
@@ -308,10 +308,11 @@ hidemessageModal = () => {
                           size={"small"}
                           theme={"light"}
                           cssClass="kep-login-facebook"
+                          fields="name,email,picture"
                           //icon={}
                           //containerStyle={}
                           //buttonStyle={}
-                          onClick={this.onClick}
+                          callback={this.callback}
                           uxMode={"redirect"}
                           redirectUri={"http://localhost:3000"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
                           cookiePolicy={'single_host_origin'}
