@@ -354,7 +354,7 @@ var gooLoginUser = function(req, res) {
 
 
 var fbLoginUser = function(req, res) {
-    console.log("444");
+
     const user = req.body;
     
     //Check for existing user to login
@@ -376,16 +376,16 @@ var fbLoginUser = function(req, res) {
                 "password":req.body.password
             });
         
-            console.log("555");
+           
             User.findOne({email:user.email}, function(err, user1) {
                 if (user1) {
-                    console.log("999");
+                    
                     return res.status(401).json("Email already registered");
                 } else {
-                    console.log("666");
+                    
                     user.save(function (err, newUser) {
                         if (!err) {
-                            console.log("777");
+                            
                             var profile =new Profile({
                                 user: newUser,
                                 name: user.name,
@@ -410,9 +410,9 @@ var fbLoginUser = function(req, res) {
                                 sectionSu:'block',
                                 sectionG:'block'
                             });
-                            console.log("888");
+                            
                             profile.save();
-                            console.log("999");
+                           
                             return res.send("User created");
                         } else {
                             res.sendStatus(400);
