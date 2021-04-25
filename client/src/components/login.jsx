@@ -22,10 +22,11 @@ import cn from "./i18n/cn";
 import jp from "./i18n/jp";
 import "./Footer.css";
 
-//Import React-google-login
+//Import React-google-login and React-facebook-login
 import ReactDOM from 'react-dom';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
+
 
 
 
@@ -35,8 +36,9 @@ counterpart.registerTranslations('cn',cn);
 counterpart.registerTranslations('jp',jp);
 counterpart.setLocale('en');
 
+//clientId is for Google login; appId is for Facebook login.
 const clientId = '996695088450-8vihibptuoco1cqafe0mpsvqdmp48fhu.apps.googleusercontent.com';
-const appId = '277936307150836'
+const appId = '277936307150836' // appId for test: 204117638145334.
 const Styles = styled.div
 `
   .navbar { background-color: #365; }
@@ -89,13 +91,15 @@ class Login extends Component {
 
   };
 
+  // onSuccess callback returns a GoogleUser object which provides access to all of the GoogleUser methods.
   onSuccess = (res) => {
     console.log('[Login Success] currentUser:', res.profileObj);
   };
+  // onFailure callback is called when either initialization or a signin attempt of Google fails.
   onFailure = (res) => {
     console.log('[Login failed] res:', res);
   };
-
+  // onClick callback returns a FacebookUser object which provides access to all of the FacebookUser methods.
   onClick = (res) => {
     console.log('[Login Success] currentUser:', res.profileObj);
   };
@@ -266,32 +270,69 @@ hidemessageModal = () => {
                     </Row>
 
                     <div>
+                      {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+
                       <GoogleLogin
-                          clientId={clientId}
-                          buttonText="Login with Google"
-                          buttonSize="lg"
+                          clientId={clientId} // clientId of our application registered on Google developer platform
+                          // Following comments are about a customized Google login button
+                          /*
+                          render={renderProps => (
+                              <button onClick={renderProps.onClick} disabled={renderProps.disabled}>
+                                <img src="..src/Google-Logo.wine_gaitubao_23x15.png"></img>
+                                <span className="buttonText"> Login with Google</span>
+                                <span className="ButtonContent"> Login with Google</span>
+                              </button>
+                          )}
+                           */
+                          buttonText="GOOGLE LOGIN"
                           onSuccess={this.onSuccess}
                           onFailure={this.onFailure}
                           type={"submit"}
                           theme={"dark"}
+                          icon="true"
+                          size={"large"}
                           uxMode={"redirect"}
                           redirectUri={"http://localhost:3000"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
                           cookiePolicy={'single_host_origin'}
                           style={{ marginTop: '100px'}}
-                          isSignedIn={true}
+                          isSignedIn={false}
                       />
-                    </div>
 
-                    <div>
+                      {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+                      {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+
                       <FacebookLogin
-                          appId={appId}
-                          buttonText="Facebook Login"
-                          type={"submit"}
+                          appId={appId} // appId of our application registered on Facebook developer platform
+                          textButton="FACEBOOK LOGIN"
+                          typeButton={"button"}
+                          size={"small"}
                           theme={"light"}
+                          cssClass="kep-login-facebook"
+                          //icon={}
+                          //containerStyle={}
+                          //buttonStyle={}
                           onClick={this.onClick}
+                          uxMode={"redirect"}
+                          redirectUri={"http://localhost:3000"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
                           cookiePolicy={'single_host_origin'}
 
+                          // Following comments are about a customized Facebook login button
+                          /*
+                          render={renderProps => (
+                              <button onClick={renderProps.onClick} disabled={renderProps.disabled}>
 
+                                <img src="..src/Google-Logo.wine_gaitubao_23x15.png"></img>
+                                <span className="buttonText"> Login with Google</span>
+                              </button>
+                          )}
+                           */
+
+                          /*
+                          autoLoad={false}
+                          fields="name,email,picture"
+                          cssClass="kep-login-facebook"
+                          icon="fa-facebook"
+                           */
                       />
                     </div>
 
@@ -302,8 +343,6 @@ hidemessageModal = () => {
                       </a>
                       
                     </Row>
-
-
 
                       <Modal show={this.state.showmessage}>
                        <Modal.Header closeButton onClick={this.hidemessageModal}></Modal.Header>
