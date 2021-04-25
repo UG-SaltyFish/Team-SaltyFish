@@ -101,7 +101,7 @@ class Login extends Component {
   };
   // onClick callback returns a FacebookUser object which provides access to all of the FacebookUser methods.
   callback = (res) => {
-    console.log('[Login Success] currentUser:', res.profileObj);
+    console.log(res);
   };
 
   componentDidMount() {
@@ -314,7 +314,7 @@ hidemessageModal = () => {
                           //buttonStyle={}
                           callback={this.callback}
                           uxMode={"redirect"}
-                          redirectUri={"http://localhost:3000"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
+                          redirectUri={"https://it-project-eportfolio.herokuapp.com/"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
                           cookiePolicy={'single_host_origin'}
 
                           // Following comments are about a customized Facebook login button
