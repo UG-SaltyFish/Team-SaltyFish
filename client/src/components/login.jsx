@@ -120,6 +120,9 @@ class Login extends Component {
   
   //   refreshTokenSetup(res);
   // };
+
+
+  //////xiaoyue
   callback = (res) => {
     console.log(res);
     const fbUser = {
@@ -133,7 +136,7 @@ class Login extends Component {
       
         fbrefreshTokenSetup(res);
   };
-
+/////xiaoyue
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
@@ -281,7 +284,7 @@ class Login extends Component {
                       
                       
                     />
-
+///////zhangchengyu
                     <div>
                       <FacebookLogin
                           appId={appId} // appId of our application registered on Facebook developer platform
@@ -301,7 +304,7 @@ class Login extends Component {
                           cookiePolicy={'single_host_origin'}
                       />
                     </div>
-
+///////zhangchengyu
                     
                   </div>
                   <Row>
