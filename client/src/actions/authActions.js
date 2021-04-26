@@ -76,7 +76,7 @@ export const refreshTokenSetup = (res) =>{
 };
 
 
-  //fb login  /////xiaoyue
+  //fb login  
   export const fbLoginUser = user => dispatch => {
     console.log("000");
     axios
@@ -117,7 +117,7 @@ export const fbrefreshTokenSetup = (res) =>{
   console.log("222");
 };
 
-/////xiaoyue
+
 
 export const setCurrentUser = decoded => {
     return {
