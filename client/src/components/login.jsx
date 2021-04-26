@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {GoogleLogin } from 'react-google-login';
+import {GoogleLogin } from 'react-google-login';
 
 import { Button, Image, Col, Row,Modal} from 'react-bootstrap';
 import icon from './loginImage.svg';
@@ -25,7 +25,7 @@ import "./Footer.css";
 
 //Import React-google-login and React-facebook-login
 import ReactDOM from 'react-dom';
-import GoogleLogin from 'react-google-login';
+
 import FacebookLogin from 'react-facebook-login';
 
 
