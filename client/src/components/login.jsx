@@ -154,7 +154,13 @@ class Login extends Component {
           errors: this.props.auth.errors
       });
       this.props.auth.errors="";
-    }
+    }else if (this.props.auth.errors === "Email already registered"){
+      console.log(this.props.auth.errors);
+      this.setState({
+          errors: this.props.auth.errors
+      });
+      this.props.auth.errors="";
+    };
   }
 
   onChange = (e) => {
