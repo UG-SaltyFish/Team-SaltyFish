@@ -331,11 +331,27 @@ class Login extends Component {
                       </a>
                       
                     </Row>
+
+                    <Modal show={this.state.showmessage}>
+                    <Modal.Header closeButton onClick={this.hidemessageModal}></Modal.Header>
+                    <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='message'></Translate> </h2>
+                    <form onSubmit={this.onSubmitEmail}>
+                     <input onChange={this.onChange}
+                      value={this.state.email}
+                      type="text"
+                      className={("form-control")}
+                      placeholder="email address"
+                      name="email"
+                      style={{width: '200px',textAlign: 'center'}}
+                          
+                          required autoFocus 
+                    />
+                  
+                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
+                  </form>
+                </Modal>
                     
-                      <Modal show={this.state.showmessage}>
-                       <Modal.Header closeButton onClick={this.hidemessageModal}></Modal.Header>
-                       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='message'></Translate> </h2>
-                      </Modal>
+                      
 
                   
               </form>
