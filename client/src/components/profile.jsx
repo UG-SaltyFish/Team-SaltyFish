@@ -716,8 +716,8 @@ onSubmitGalleryPhoto = (e) => {
        
             <div className="nine columns main-col">
               <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='about_me'></Translate> </h2>
-              <div style={{columnWidth:"1000px"}}>
-                <p>{this.state.bio}</p>
+              <div style={{display:'inline-block', width:'100%', wordWrap:'break-word', whitespace:'normal'}}>
+              <p>{this.state.bio}</p>
               </div>
               <Button  onClick={this.showbioModal}><Translate content='edit_Bio'></Translate></Button>
               <Modal show={this.state.showbio}>
@@ -737,6 +737,9 @@ onSubmitGalleryPhoto = (e) => {
                   
                   <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}><Translate content='submit'></Translate></button>
                 </form>
+
+                
+
               </Modal>
               <div className="row">
                <div className="columns contact-details">
