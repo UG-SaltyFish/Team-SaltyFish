@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import {GoogleLogin } from 'react-google-login';
 
 import { Button, Image, Col, Row,Modal} from 'react-bootstrap';
 import icon from './loginImage.svg';
 
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { loginUser, setUserLoading, setUserNotLoading } from "../actions/authActions";
+import { loginUser, setUserLoading, setUserNotLoading, gooLoginUser, fbLoginUser, refreshTokenSetup,fbrefreshTokenSetup } from "../actions/authActions";
 
 
 import classnames from "classnames";
@@ -22,13 +23,23 @@ import cn from "./i18n/cn";
 import jp from "./i18n/jp";
 import "./Footer.css";
 
+//Import React-google-login and React-facebook-login
+import ReactDOM from 'react-dom';
+import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
+
+
+
+
 //Translation
 counterpart.registerTranslations('en',en);
 counterpart.registerTranslations('cn',cn);
 counterpart.registerTranslations('jp',jp);
 counterpart.setLocale('en');
 
-
+//clientId is for Google login; appId is for Facebook login.
+const clientId = '996695088450-8vihibptuoco1cqafe0mpsvqdmp48fhu.apps.googleusercontent.com';
+const appId = '277936307150836' // appId for test: 204117638145334.
 const Styles = styled.div
 `
   .navbar { background-color: #365; }
@@ -80,58 +91,98 @@ class Login extends Component {
     counterpart.setLocale('jp')
 
   };
+  //Jiaxin
+  //Google Login
+  onSuccess = (res) => {
+    //console.log('[Login Success] currentUser:', res.profileObj);
+    const googleUser = {
+      name: res.profileObj.name,
+      email: res.profileObj.email,
+      password: res.profileObj.googleId
+    };
+  
+    this.props.gooLoginUser(googleUser);
+    this.props.setUserLoading();
+  
+    refreshTokenSetup(res);
+  };
+  onFailure = (res) => {
+    console.log('[Login failed] res:', res);
+  };
+  //end
 
+  
+
+  //////xiaoyue
+  callback = (res) => {
+    console.log(res);
+    const fbUser = {
+          name: res.name, //res.profileObj.name
+          email: res.email, //res.profileObj.email
+          password: res.id,   //res.profileObj.googleId
+        };
+      
+        this.props.fbLoginUser(fbUser);
+        this.props.setUserLoading();
+      
+        fbrefreshTokenSetup(res);
+  };
+/////xiaoyue
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
         
         this.props.history.push("/profile");
     }
-}
-componentDidUpdate(prevProps) {
-  if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/profile");
-      this.props.setUserNotLoading();
   }
 
-  if (this.props.auth.errors === "Incorrect Email or Password") {
+  componentDidUpdate(prevProps) {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/profile");
+      this.props.setUserNotLoading();
+    }
+
+    if (this.props.auth.errors === "Incorrect Email or Password") {
       console.log(this.props.auth.errors);
       this.setState({
           errors: this.props.auth.errors
       });
       this.props.auth.errors="";
+    }
   }
-}
 
-onChange = (e) => {
-  this.setState({[e.target.name]: e.target.value});
-}
+  onChange = (e) => {
+      this.setState({[e.target.name]: e.target.value});
+  }
 
-onSubmit = (e) => {
-  e.preventDefault();
+  onSubmit = (e) => {
+    e.preventDefault();
 
-  const userData = {
+    const userData = {
       email: this.state.email,
       password: this.state.password
-  };
+    };
   
-  // Redirect is handled by the redux action loginUser so we don't need to use this.props.history
-  this.props.loginUser(userData);
-  this.props.setUserLoading();
-};
+    // Redirect is handled by the redux action loginUser so we don't need to use this.props.history
+    this.props.loginUser(userData);
+    this.props.setUserLoading();
+  };
 
-showmessageModal = () => {
-  this.setState({ showmessage: true });
-};
-hidemessageModal = () => {
-  this.setState({ showmessage: false });
-};
+  showmessageModal = () => {
+    this.setState({ showmessage: true });
+  };
+  hidemessageModal = () => {
+    this.setState({ showmessage: false });
+  };
+
 
   render() {
-   
+
+
     return (
-      
+
       <div className="login">
+
         <Styles>  
     <Navbar className = "color-nav" expand="lg" bg="light" variant="light">
       <Navbar.Brand href="/">
@@ -183,8 +234,8 @@ hidemessageModal = () => {
             <h1 className="display-4 mx-auto">{this.state.errors}</h1>
           </div>
 
-          <div class="container h-50">
-          <div class="row h-100 justify-content-center align-items-center">
+          <div className="container h-50">
+          <div className="row h-100 justify-content-center align-items-center">
               <h2 style={{color:'red', paddingBlock:'10px'}}>{this.state.message}</h2>
             </div>
           </div>
@@ -227,7 +278,6 @@ hidemessageModal = () => {
                       
                       
                     />
-
                     
                   </div>
                   <Row>
@@ -239,7 +289,75 @@ hidemessageModal = () => {
                     
                     </Row>
 
-                    
+                    <div>
+                      {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+
+                      <GoogleLogin
+                          clientId={clientId} // clientId of our application registered on Google developer platform
+                          // Following comments are about a customized Google login button
+                          /*
+                          render={renderProps => (
+                              <button onClick={renderProps.onClick} disabled={renderProps.disabled}>
+                                <img src="..src/Google-Logo.wine_gaitubao_23x15.png"></img>
+                                <span className="buttonText"> Login with Google</span>
+                                <span className="ButtonContent"> Login with Google</span>
+                              </button>
+                          )}
+                           */
+                          buttonText="GOOGLE LOGIN"
+                          onSuccess={this.onSuccess}
+                          onFailure={this.onFailure}
+                          type={"submit"}
+                          theme={"dark"}
+                          icon="true"
+                          size={"large"}
+                          uxMode={"redirect"}
+                          redirectUri={"http://localhost:3000"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
+                          cookiePolicy={'single_host_origin'}
+                          style={{ marginTop: '100px'}}
+                          isSignedIn={false}
+                      />
+
+                      {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+                      {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+
+                      <FacebookLogin
+                          appId={appId} // appId of our application registered on Facebook developer platform
+                          textButton="FACEBOOK LOGIN"
+                          typeButton={"button"}
+                          size={"small"}
+                          theme={"light"}
+                          cssClass="kep-login-facebook"
+                          fields="name,email,picture"
+                          //icon={}
+                          //containerStyle={}
+                          //buttonStyle={}
+                          callback={this.callback}
+                          autoLoad={false}
+                          uxMode={"redirect"}
+                          redirectUri={"https://it-project-eportfolio.herokuapp.com/"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
+                          cookiePolicy={'single_host_origin'}
+
+                          // Following comments are about a customized Facebook login button
+                          /*
+                          render={renderProps => (
+                              <button onClick={renderProps.onClick} disabled={renderProps.disabled}>
+
+                                <img src="..src/Google-Logo.wine_gaitubao_23x15.png"></img>
+                                <span className="buttonText"> Login with Google</span>
+                              </button>
+                          )}
+                           */
+
+                          /*
+                          autoLoad={false}
+                          fields="name,email,picture"
+                          cssClass="kep-login-facebook"
+                          icon="fa-facebook"
+                           */
+                      />
+                    </div>
+
                     <Row >
                       <a herf='/login' onClick={this.showmessageModal}  className="small mx-auto mt-2">
                       <Translate content='forgetpassword'></Translate>
@@ -247,7 +365,7 @@ hidemessageModal = () => {
                       </a>
                       
                     </Row>
-                    
+
                       <Modal show={this.state.showmessage}>
                        <Modal.Header closeButton onClick={this.hidemessageModal}></Modal.Header>
                        <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='message'></Translate> </h2>
@@ -307,6 +425,10 @@ hidemessageModal = () => {
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
+  gooLoginUser: PropTypes.func.isRequired,//Jiaxin
+  fbLoginUser: PropTypes.func.isRequired,
+  refreshTokenSetup: PropTypes.func.isRequired,//Jiaxin
+  fbrefreshTokenSetup: PropTypes.func.isRequired,
   setUserLoading: PropTypes.func.isRequired,
   setUserNotLoading: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
@@ -321,5 +443,5 @@ Login.propTypes = {
   
   export default connect(
   mapStateToProps,
-  { loginUser, setUserLoading, setUserNotLoading }
+  { loginUser, setUserLoading, setUserNotLoading, gooLoginUser, fbLoginUser, refreshTokenSetup, fbrefreshTokenSetup }//Jiaxin
   )(Login);
