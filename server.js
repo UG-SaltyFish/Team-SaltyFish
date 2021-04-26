@@ -5,7 +5,6 @@ const path = require('path')
 var app = express()
 const mongoose = require('mongoose')
 var port = process.env.PORT || 5000
-///////////////////////////xiaoyue
 
 var fs = require('fs')
 var key = fs.readFileSync('private.key');
@@ -21,7 +20,7 @@ https.createServer(options, app).listen(port, function() {
   console.log('Server is running on port: ' + port)
 }) 
 
-/////////////////////////////////xiaoyue
+
 
 app.use(bodyParser.json())
 app.use(cors())

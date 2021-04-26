@@ -87,7 +87,7 @@ class Login extends Component {
     counterpart.setLocale('jp')
 
   };
-  //Jiaxin
+  
   //Google Login
   onSuccess = (res) => {
     //console.log('[Login Success] currentUser:', res.profileObj);
@@ -105,21 +105,8 @@ class Login extends Component {
   onFailure = (res) => {
     console.log('[Login failed] res:', res);
   };
-  //end
+  
 
-  // onClick = (res) => {
-  //   console.log('[Login Success] currentUser:', res.profileObj);
-  //   const fbUser = {
-  //     name: "QQ", //res.profileObj.name
-  //     email: "QQ@gmail.com", //res.profileObj.email
-  //     password:"123",   //res.profileObj.googleId
-  //   };
-  
-  //   this.props.fbLoginUser(fbUser);
-  //   this.props.setUserLoading();
-  
-  //   refreshTokenSetup(res);
-  // };
   callback = (res) => {
     console.log(res);
     const fbUser = {
@@ -154,7 +141,13 @@ class Login extends Component {
           errors: this.props.auth.errors
       });
       this.props.auth.errors="";
-    }
+    }else if (this.props.auth.errors === "Email already registered"){
+      console.log(this.props.auth.errors);
+      this.setState({
+          errors: this.props.auth.errors
+      });
+      this.props.auth.errors="";
+    };
   }
 
   onChange = (e) => {
@@ -282,7 +275,34 @@ class Login extends Component {
                       
                     />
 
+                    
+
+                    
+                  </div>
+                  <Row>
+                      <Col>
+                        <Button variant="info" type="submit" size="lg" block>
+                        <Translate content='login'></Translate>
+                        </Button>  
+                      </Col>
+                    
+                    </Row>
+                    
                     <div>
+                    {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+                    <GoogleLogin
+                        clientId={googleClientId}
+                        buttonText="GOOGLE LOGIN"
+                        theme={"dark"}
+                        size={"large"}
+                        onSuccess={this.onSuccess}
+                        onFailure={this.onFailure}
+                        cookiePolicy={'single_host_origin'}
+                        isSignedIn={false}
+                      />
+
+{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+                      {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
                       <FacebookLogin
                           appId={appId} // appId of our application registered on Facebook developer platform
                           textButton="FACEBOOK LOGIN"
@@ -300,29 +320,24 @@ class Login extends Component {
                           redirectUri={"https://it-project-eportfolio.herokuapp.com/"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
                           cookiePolicy={'single_host_origin'}
                       />
+                    
+                    
+                    
+                      
                     </div>
 
                     
-                  </div>
-                  <Row>
-                      <Col>
-                        <Button variant="info" type="submit" size="lg" block>
-                        <Translate content='login'></Translate>
-                        </Button>  
-                      </Col>
-                    
-                    </Row>
 
-                    <div>
-                      <GoogleLogin
-                        clientId={googleClientId}
-                        buttonText="Login"
-                        onSuccess={this.onSuccess}
-                        onFailure={this.onFailure}
-                        cookiePolicy={'single_host_origin'}
-                        isSignedIn={false}
-                      />
-                    </div>
+
+
+                   
+
+
+
+
+
+
+
 
                     <Row >
                       <a herf='/login' onClick={this.showmessageModal}  className="small mx-auto mt-2">
@@ -331,11 +346,27 @@ class Login extends Component {
                       </a>
                       
                     </Row>
+
+                    <Modal show={this.state.showmessage}>
+                    <Modal.Header closeButton onClick={this.hidemessageModal}></Modal.Header>
+                    <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='message'></Translate> </h2>
+                    <form onSubmit={this.onSubmitEmail}>
+                     <input onChange={this.onChange}
+                      value={this.state.email}
+                      type="text"
+                      className={("form-control")}
+                      placeholder="email address"
+                      name="email"
+                      style={{width: '200px',textAlign: 'center'}}
+                          
+                          required autoFocus 
+                    />
+                  
+                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
+                  </form>
+                </Modal>
                     
-                      <Modal show={this.state.showmessage}>
-                       <Modal.Header closeButton onClick={this.hidemessageModal}></Modal.Header>
-                       <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='message'></Translate> </h2>
-                      </Modal>
+                      
 
                   
               </form>
@@ -391,9 +422,9 @@ class Login extends Component {
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
-  gooLoginUser: PropTypes.func.isRequired,//Jiaxin
+  gooLoginUser: PropTypes.func.isRequired,
   fbLoginUser: PropTypes.func.isRequired,
-  refreshTokenSetup: PropTypes.func.isRequired,//Jiaxin
+  refreshTokenSetup: PropTypes.func.isRequired,
   fbrefreshTokenSetup: PropTypes.func.isRequired,
   setUserLoading: PropTypes.func.isRequired,
   setUserNotLoading: PropTypes.func.isRequired,
@@ -409,5 +440,5 @@ Login.propTypes = {
   
   export default connect(
   mapStateToProps,
-  { loginUser, setUserLoading, setUserNotLoading, gooLoginUser, fbLoginUser, refreshTokenSetup, fbrefreshTokenSetup }//Jiaxin
+  { loginUser, setUserLoading, setUserNotLoading, gooLoginUser, fbLoginUser, refreshTokenSetup, fbrefreshTokenSetup }
   )(Login);

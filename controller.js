@@ -284,7 +284,7 @@ var loginUser = function(req, res) {
   
 };
 
-//Jiaxin
+
 var gooLoginUser = function(req, res) {
     
     const user = req.body;
@@ -349,10 +349,10 @@ var gooLoginUser = function(req, res) {
         }
     });
 };
-//end
 
 
-////xiaoyue
+
+
 var fbLoginUser = function(req, res) {
 
     const user = req.body;
@@ -423,9 +423,9 @@ var fbLoginUser = function(req, res) {
         }
     });
 };
-//end
 
-///xiaoyue
+
+
 
 //Get user`s profile
 var getProfile =function(req,res){
@@ -932,7 +932,7 @@ module.exports.getProfile =getProfile;
 module.exports.getUserAccount =getUserAccount;
 module.exports.loginUser =loginUser;
 module.exports.gooLoginUser =gooLoginUser;
-module.exports.fbLoginUser =fbLoginUser;////xiaoyue
+module.exports.fbLoginUser =fbLoginUser;
 module.exports.createUser = createUser;
 module.exports.resetUser = resetUser;
 module.exports.findAllUsers = findAllUsers;

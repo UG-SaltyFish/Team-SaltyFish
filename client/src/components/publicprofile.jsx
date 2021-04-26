@@ -222,7 +222,7 @@ onChange = (e) => {
        
          <div className="nine columns main-col">
             <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='about_me'></Translate> </h2>
-            <div style={{columnWidth:"1000px"}}>
+            <div style={{display:'inline-block', width:'100%', wordWrap:'break-word', whitespace:'normal'}}>
             <p>{this.state.bio}</p>
             </div>
             <div className="row">

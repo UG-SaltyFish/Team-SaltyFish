@@ -43,7 +43,7 @@ export default{
     add_photo:"Upload Photo",
 
     intro:"Intro",
-    message:"Your password has sent to your email. Please check your email box to get the password and login again",
+    message:"Submit your email and your password will be sent to your email. Please check your email box to get the password and login again",
 
     landing1:"Type a name to search a user",
     landing2:"Get yourself closer to your dream job!",
