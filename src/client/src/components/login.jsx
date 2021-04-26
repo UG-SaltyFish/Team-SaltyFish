@@ -289,7 +289,7 @@ class Login extends Component {
                     </Row>
                     
                     <div>
-                    {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+                    {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
                     <GoogleLogin
                         clientId={googleClientId}
                         buttonText="GOOGLE LOGIN"
@@ -301,7 +301,7 @@ class Login extends Component {
                         isSignedIn={false}
                       />
 
-{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+                      {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
                       {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
                       <FacebookLogin
                           appId={appId} // appId of our application registered on Facebook developer platform
