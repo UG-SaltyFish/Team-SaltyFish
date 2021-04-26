@@ -237,7 +237,7 @@ renderSuggestion = suggestion => (
     </Navbar>
   </Styles>
   <div className ="searchbar" style={{backgroundColor:"#99ceff"}}align="center">
-            <h2 className = "searchH2" ><font sizs="0.5" color="black">
+            <h2 className = "searchH2" ><font sizs="1" color="grey">
               <Translate content="landing1"></Translate>
            
             <Autosuggest
