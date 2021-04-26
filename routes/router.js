@@ -6,8 +6,6 @@ var controller = require('../controller.js');
 
 router.post('/register', controller.createUser);
 router.post('/login', controller.loginUser);
-router.post('/goologin', controller.gooLoginUser);
-router.post('/fblogin', controller.fbLoginUser); ////xiaoyue
 //profile1 is to send user data on login
 //profile2 is to look up users in search
 router.get('/profile1/:user',controller.getProfile);

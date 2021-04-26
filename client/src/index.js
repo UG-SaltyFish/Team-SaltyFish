@@ -21,7 +21,6 @@ import Login from './components/login';
 import Profile  from './components/profile';
 import Public from './components/publicprofile';
 
-
 // Check for token to keep the user logged in
 if (localStorage.jwtToken) {
     // Set auth header

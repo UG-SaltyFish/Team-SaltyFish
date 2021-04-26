@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {GoogleLogin } from 'react-google-login';
+import {GoogleLogin } from 'react-google-login';
 
 import { Button, Image, Col, Row,Modal} from 'react-bootstrap';
 import icon from './loginImage.svg';
@@ -23,12 +23,7 @@ import cn from "./i18n/cn";
 import jp from "./i18n/jp";
 import "./Footer.css";
 
-//Import React-google-login and React-facebook-login
-import ReactDOM from 'react-dom';
-
 import FacebookLogin from 'react-facebook-login';
-
-
 
 
 //Translation
@@ -37,9 +32,10 @@ counterpart.registerTranslations('cn',cn);
 counterpart.registerTranslations('jp',jp);
 counterpart.setLocale('en');
 
-//clientId is for Google login; appId is for Facebook login.
-const clientId = '996695088450-8vihibptuoco1cqafe0mpsvqdmp48fhu.apps.googleusercontent.com';
-const appId = '277936307150836' // appId for test: 204117638145334.
+//Google login 
+const googleClientId = '996695088450-8vihibptuoco1cqafe0mpsvqdmp48fhu.apps.googleusercontent.com';
+const appId = '277936307150836'
+
 const Styles = styled.div
 `
   .navbar { background-color: #365; }
@@ -111,9 +107,19 @@ class Login extends Component {
   };
   //end
 
+  // onClick = (res) => {
+  //   console.log('[Login Success] currentUser:', res.profileObj);
+  //   const fbUser = {
+  //     name: "QQ", //res.profileObj.name
+  //     email: "QQ@gmail.com", //res.profileObj.email
+  //     password:"123",   //res.profileObj.googleId
+  //   };
   
-
-  //////xiaoyue
+  //   this.props.fbLoginUser(fbUser);
+  //   this.props.setUserLoading();
+  
+  //   refreshTokenSetup(res);
+  // };
   callback = (res) => {
     console.log(res);
     const fbUser = {
@@ -127,7 +133,7 @@ class Login extends Component {
       
         fbrefreshTokenSetup(res);
   };
-/////xiaoyue
+
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
@@ -175,14 +181,11 @@ class Login extends Component {
     this.setState({ showmessage: false });
   };
 
-
   render() {
-
-
+   
     return (
-
+      
       <div className="login">
-
         <Styles>  
     <Navbar className = "color-nav" expand="lg" bg="light" variant="light">
       <Navbar.Brand href="/">
@@ -278,6 +281,27 @@ class Login extends Component {
                       
                       
                     />
+
+                    <div>
+                      <FacebookLogin
+                          appId={appId} // appId of our application registered on Facebook developer platform
+                          textButton="FACEBOOK LOGIN"
+                          typeButton={"button"}
+                          size={"small"}
+                          theme={"light"}
+                          cssClass="kep-login-facebook"
+                          fields="name,email,picture"
+                          autoLoad={false}
+                          //icon={}
+                          //containerStyle={}
+                          //buttonStyle={}
+                          callback={this.callback}
+                          uxMode={"redirect"}
+                          redirectUri={"https://it-project-eportfolio.herokuapp.com/"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
+                          cookiePolicy={'single_host_origin'}
+                      />
+                    </div>
+
                     
                   </div>
                   <Row>
@@ -290,73 +314,15 @@ class Login extends Component {
                     </Row>
 
                     <div>
-                      {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
-
-                      <GoogleLogin
-                          clientId={clientId} // clientId of our application registered on Google developer platform
-                          // Following comments are about a customized Google login button
-                          /*
-                          render={renderProps => (
-                              <button onClick={renderProps.onClick} disabled={renderProps.disabled}>
-                                <img src="..src/Google-Logo.wine_gaitubao_23x15.png"></img>
-                                <span className="buttonText"> Login with Google</span>
-                                <span className="ButtonContent"> Login with Google</span>
-                              </button>
-                          )}
-                           */
-                          buttonText="GOOGLE LOGIN"
-                          onSuccess={this.onSuccess}
-                          onFailure={this.onFailure}
-                          type={"submit"}
-                          theme={"dark"}
-                          icon="true"
-                          size={"large"}
-                          uxMode={"redirect"}
-                          redirectUri={"http://localhost:3000"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
-                          cookiePolicy={'single_host_origin'}
-                          style={{ marginTop: '100px'}}
-                          isSignedIn={false}
-                      />
-
-                      {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
-                      {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
-
-                      <FacebookLogin
-                          appId={appId} // appId of our application registered on Facebook developer platform
-                          textButton="FACEBOOK LOGIN"
-                          typeButton={"button"}
-                          size={"small"}
-                          theme={"light"}
-                          cssClass="kep-login-facebook"
-                          fields="name,email,picture"
-                          //icon={}
-                          //containerStyle={}
-                          //buttonStyle={}
-                          callback={this.callback}
-                          autoLoad={false}
-                          uxMode={"redirect"}
-                          redirectUri={"https://it-project-eportfolio.herokuapp.com/"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
-                          cookiePolicy={'single_host_origin'}
-
-                          // Following comments are about a customized Facebook login button
-                          /*
-                          render={renderProps => (
-                              <button onClick={renderProps.onClick} disabled={renderProps.disabled}>
-
-                                <img src="..src/Google-Logo.wine_gaitubao_23x15.png"></img>
-                                <span className="buttonText"> Login with Google</span>
-                              </button>
-                          )}
-                           */
-
-                          /*
-                          autoLoad={false}
-                          fields="name,email,picture"
-                          cssClass="kep-login-facebook"
-                          icon="fa-facebook"
-                           */
-                      />
-                    </div>
+                      <GoogleLogin
+                        clientId={googleClientId}
+                        buttonText="Login"
+                        onSuccess={this.onSuccess}
+                        onFailure={this.onFailure}
+                        cookiePolicy={'single_host_origin'}
+                        isSignedIn={false}
+                      />
+                    </div>
 
                     <Row >
                       <a herf='/login' onClick={this.showmessageModal}  className="small mx-auto mt-2">
@@ -365,7 +331,7 @@ class Login extends Component {
                       </a>
                       
                     </Row>
-
+                    
                       <Modal show={this.state.showmessage}>
                        <Modal.Header closeButton onClick={this.hidemessageModal}></Modal.Header>
                        <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='message'></Translate> </h2>
