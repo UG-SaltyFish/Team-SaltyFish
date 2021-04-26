@@ -291,10 +291,10 @@ hidemessageModal = () => {
                           theme={"dark"}
                           icon="true"
                           size={"large"}
-                          uxMode={"redirect"}
-                          redirectUri={"http://localhost:3000"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
+                          // uxMode={"redirect"}
+                          // redirectUri={"http://localhost:3000"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
                           cookiePolicy={'single_host_origin'}
-                          style={{ marginTop: '100px'}}
+                          // style={{ marginTop: '100px'}}
                           isSignedIn={false}
                       />
 
