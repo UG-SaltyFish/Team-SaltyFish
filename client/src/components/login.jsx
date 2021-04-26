@@ -154,7 +154,13 @@ class Login extends Component {
           errors: this.props.auth.errors
       });
       this.props.auth.errors="";
-    }
+    }else if (this.props.auth.errors === "Email already registered"){
+            console.log(this.props.auth.errors);
+            this.setState({
+                errors: this.props.auth.errors
+            });
+            this.props.auth.errors="";
+          };
   }
 
   onChange = (e) => {
@@ -314,15 +320,28 @@ class Login extends Component {
                     </Row>
 
                     <div>
-                      <GoogleLogin
-                        clientId={googleClientId}
-                        buttonText="Login"
-                        onSuccess={this.onSuccess}
-                        onFailure={this.onFailure}
-                        cookiePolicy={'single_host_origin'}
-                        isSignedIn={false}
-                      />
-                    </div>
+                      <GoogleLogin
+                        clientId={googleClientId}
+                        buttonText="Login"
+                        onSuccess={this.onSuccess}
+                        onFailure={this.onFailure}
+                        cookiePolicy={'single_host_origin'}
+                        isSignedIn={false}
+                      />
+                    </div>
+
+                    
+
+
+
+                   
+
+
+
+
+
+
+
 
                     <Row >
                       <a herf='/login' onClick={this.showmessageModal}  className="small mx-auto mt-2">
@@ -427,3 +446,4 @@ Login.propTypes = {
   mapStateToProps,
   { loginUser, setUserLoading, setUserNotLoading, gooLoginUser, fbLoginUser, refreshTokenSetup, fbrefreshTokenSetup }//Jiaxin
   )(Login);
+
