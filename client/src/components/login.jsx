@@ -275,7 +275,34 @@ class Login extends Component {
                       
                     />
 
+                    
+
+                    
+                  </div>
+                  <Row>
+                      <Col>
+                        <Button variant="info" type="submit" size="lg" block>
+                        <Translate content='login'></Translate>
+                        </Button>  
+                      </Col>
+                    
+                    </Row>
+                    
                     <div>
+                    {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+                    <GoogleLogin
+                        clientId={googleClientId}
+                        buttonText="GOOGLE LOGIN"
+                        theme={"dark"}
+                        size={"large"}
+                        onSuccess={this.onSuccess}
+                        onFailure={this.onFailure}
+                        cookiePolicy={'single_host_origin'}
+                        isSignedIn={false}
+                      />
+
+{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+                      {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
                       <FacebookLogin
                           appId={appId} // appId of our application registered on Facebook developer platform
                           textButton="FACEBOOK LOGIN"
@@ -293,28 +320,10 @@ class Login extends Component {
                           redirectUri={"https://it-project-eportfolio.herokuapp.com/"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
                           cookiePolicy={'single_host_origin'}
                       />
-                    </div>
-
                     
-                  </div>
-                  <Row>
-                      <Col>
-                        <Button variant="info" type="submit" size="lg" block>
-                        <Translate content='login'></Translate>
-                        </Button>  
-                      </Col>
                     
-                    </Row>
-
-                    <div>
-                      <GoogleLogin
-                        clientId={googleClientId}
-                        buttonText="Login"
-                        onSuccess={this.onSuccess}
-                        onFailure={this.onFailure}
-                        cookiePolicy={'single_host_origin'}
-                        isSignedIn={false}
-                      />
+                    
+                      
                     </div>
 
                     
