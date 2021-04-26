@@ -281,7 +281,7 @@ class Login extends Component {
                       
                       
                     />
-///////zhangchengyu
+
                     <div>
                       <FacebookLogin
                           appId={appId} // appId of our application registered on Facebook developer platform
