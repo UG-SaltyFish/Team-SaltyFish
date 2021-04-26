@@ -87,7 +87,7 @@ class Login extends Component {
     counterpart.setLocale('jp')
 
   };
-  //Jiaxin
+  
   //Google Login
   onSuccess = (res) => {
     //console.log('[Login Success] currentUser:', res.profileObj);
@@ -105,21 +105,8 @@ class Login extends Component {
   onFailure = (res) => {
     console.log('[Login failed] res:', res);
   };
-  //end
+  
 
-  // onClick = (res) => {
-  //   console.log('[Login Success] currentUser:', res.profileObj);
-  //   const fbUser = {
-  //     name: "QQ", //res.profileObj.name
-  //     email: "QQ@gmail.com", //res.profileObj.email
-  //     password:"123",   //res.profileObj.googleId
-  //   };
-  
-  //   this.props.fbLoginUser(fbUser);
-  //   this.props.setUserLoading();
-  
-  //   refreshTokenSetup(res);
-  // };
   callback = (res) => {
     console.log(res);
     const fbUser = {
@@ -397,9 +384,9 @@ class Login extends Component {
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
-  gooLoginUser: PropTypes.func.isRequired,//Jiaxin
+  gooLoginUser: PropTypes.func.isRequired,
   fbLoginUser: PropTypes.func.isRequired,
-  refreshTokenSetup: PropTypes.func.isRequired,//Jiaxin
+  refreshTokenSetup: PropTypes.func.isRequired,
   fbrefreshTokenSetup: PropTypes.func.isRequired,
   setUserLoading: PropTypes.func.isRequired,
   setUserNotLoading: PropTypes.func.isRequired,
@@ -415,5 +402,5 @@ Login.propTypes = {
   
   export default connect(
   mapStateToProps,
-  { loginUser, setUserLoading, setUserNotLoading, gooLoginUser, fbLoginUser, refreshTokenSetup, fbrefreshTokenSetup }//Jiaxin
+  { loginUser, setUserLoading, setUserNotLoading, gooLoginUser, fbLoginUser, refreshTokenSetup, fbrefreshTokenSetup }
   )(Login);
