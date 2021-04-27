@@ -12,18 +12,18 @@
     "dev": "concurrently \"npm start\" \"npm run client\""
   },
   "engines": {
-    "node": "12.16.2"
+    "node": "15.14.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/UG-SaltyFish/Team-SaltyFish/tree/Jiaxin.git"
+    "url": "git+https://github.com/UG-SaltyFish/Team-SaltyFish.git"
   },
   "author": "Joyce",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/UG-SaltyFish/Team-SaltyFish/issues"
   },
-  "homepage": "https://github.com/UG-SaltyFish/Team-SaltyFish/tree/Jiaxin#readme",
+  "homepage": "https://github.com/UG-SaltyFish/Team-SaltyFish#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
@@ -52,10 +52,10 @@
     "multer": "^1.4.2",
     "multer-s3": "^2.9.0",
     "openssl": "^1.1.0",
-    "react": "^17.0.2",
+    "react": "latest",
     "react-autosuggest": "^10.0.2",
     "react-bootstrap": "^1.3.0",
-    "react-dom": "^16.14.0",
+    "react-dom": "latest",
     "react-elastic-carousel": "^0.7.9",
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",
