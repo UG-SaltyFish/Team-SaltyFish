@@ -16,14 +16,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dylanste/IT-project.git"
+    "url": "git+https://github.com/UG-SaltyFish/Team-SaltyFish.git"
   },
-  "author": "Aneesh",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Dylanste/IT-project/issues"
-  },
-  "homepage": "https://github.com/Dylanste/IT-project#readme",
+  
+  "homepage": "https://github.com/UG-SaltyFish/Team-SaltyFish#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
