@@ -16,10 +16,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/UG-SaltyFish/Team-SaltyFish.git"
+    "url": "git+https://github.com/UG-SaltyFish/Team-SaltyFish/tree/Jiaxin.git"
   },
-  
-  "homepage": "https://github.com/UG-SaltyFish/Team-SaltyFish#readme",
+  "author": "Joyce",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UG-SaltyFish/Team-SaltyFish/issues"
+  },
+  "homepage": "https://github.com/UG-SaltyFish/Team-SaltyFish/tree/Jiaxin#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
