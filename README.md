@@ -1,7 +1,7 @@
 # Team-SaltyFish<br>
     Extend SwatKatz Eportfolio
-Documentation here: https://confluence.cis.unimelb.edu.au:8443/display/COMP900822021SM1UG/Group%3A+SaltyFish
-Heroku link:https://saltyfish2.herokuapp.com
+Documentation here: https://confluence.cis.unimelb.edu.au:8443/display/COMP900822021SM1UG/Group%3A+SaltyFish <br>
+Heroku link:https://saltyfish2.herokuapp.com <br>
 
 ## Project Overview:
 This project is to test and further develop a web-based ePortfolio system built by students studying in COMP30022 capstone project in Semester 2, 2020. Our team selected the SwatKats ePortfolio as our development object. Since this project does not have clients, our supervisor will play the role of clients as well. In the following 3 months, we will try our best to expand some significant functions according to new project requirements, improve the user interface design and debug.<br>
@@ -19,13 +19,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 To deploy this project in your local computer, you need to download [Node.js](https://nodejs.org/en/download/) firstly.<br>
 
 In the src/ directory, some available commands and scripts can be run in a cmd prompt:<br>
-```npm install``` <br>
+```
+npm install
+``` 
 Install Node.js dependencies.<br>
 
-```npm start``` <br>
+```
+npm start
+``` 
 It runs the server in the development mode at http://localhost:5000. The page will reload if you save changes of your code.<br>
 
-```npm run client``` <br>
+```
+npm run client
+``` 
 Open another cmd prompt and enter the command. It loads the client in your browser at http://localhost:3000. <br>
 
 **Now, your app is deployed!**<br>
@@ -71,7 +77,9 @@ In the package.json, it needs to install the package and some parameters.<br>
 }
 ```
 After you get a Heroku account, you can run the following commands in a cmd at src/ directory:<br>
-```heroku create saltyfish2 --buildpack mars/create-react-app```
+```
+heroku create saltyfish2 --buildpack mars/create-react-app
+```
 Login Heroku with your API key. It sets the app to use this buildpack. A new app will be created in your account.<br>
 
 ```
@@ -80,7 +88,9 @@ git push heroku master
 ```
 Deploy and push to the Heroku app from local repository.<br>
 
-```heroku open```
+```
+heroku open
+```
 The app loads in your browser at https://saltyfish2.herokuapp.com <br>
 
 ## Changelog:<br>
