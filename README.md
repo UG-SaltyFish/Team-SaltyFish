@@ -13,6 +13,11 @@ Our team will run the project based on the Agile development model. This Conflue
 * To expand SwatKat by adding some functions and better meet the needs of the clients.<br>
 * To improve the UI design of SwatKat for easily using and visually appealing.<br>
 
+## Tools:<br>
+<br>
+<br>
+<br>
+
 ## Deployment:<br>
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br>
 ### Local:<br>
@@ -93,15 +98,19 @@ heroku open
 ```
 The app loads in your browser at https://saltyfish2.herokuapp.com <br>
 
+## Logins and passwords:<br>
+<br>
+<br>
+
 ## Changelog:<br>
-  ### 26th March 2021:<br>
+### 26th March 2021:<br>
 * Add a new branch: former-version.<br>
 * Add a new tag: v-0.0.<br>
   v-0.0 contains codes and corresponding documents about project SwatKatz, the team would start Sprint 1 based on v-0.0.<br>        
-  ### 30th March 2021:<br>
+### 30th March 2021:<br>
 * Add docs to store documents of the project.<br>
 * Update README.md.<br>
-  ### 29th April 2021:<br>
+### 29th April 2021:<br>
 * User story 2: Facebook and Google login functions.<br>
 * User story 3: Section Management function.<br>
 * User Story 4: Reset page for resetting user name, email, password functions.<br>
