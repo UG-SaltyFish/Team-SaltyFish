@@ -1,0 +1,25 @@
+[{
+  "_id": {
+    "$oid": "606fc3130203008070bcd048"
+  },
+  "name": "你猜我弄好没",
+  "email": "66666666@qq.com",
+  "password": "123456",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "608699fe741066fa90b5890d"
+  },
+  "name": "Jiaxin Mo",
+  "email": "jimo@student.unimelb.edu.au",
+  "password": "111293056075264566622",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6086c23f39e6c2d5e0d97fe6"
+  },
+  "name": "Sherry Liu",
+  "email": "oreocat1999@gmail.com",
+  "password": "1161246087660943",
+  "__v": 0
+}]
