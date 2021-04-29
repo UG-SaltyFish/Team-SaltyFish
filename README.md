@@ -14,8 +14,10 @@ Our team will run the project based on the Agile development model. This Conflue
 * To improve the UI design of SwatKat for easily using and visually appealing.<br>
 
 ## Tools:<br>
-<br>
-<br>
+This project was developed with [Visual Studio Code](https://code.visualstudio.com).
+We use [Wechat](https://www.wechat.com/) for daily communication and use [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/log-in) to hold weekly meetings.
+[Trello](https://trello.com/) is used to organize and track our work.
+We push our code in [Github](https://github.com/), and record our documents in [confluence](https://www.atlassian.com/software/confluence).
 <br>
 
 ## Deployment:<br>
