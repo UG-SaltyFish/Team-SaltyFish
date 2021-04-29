@@ -16,8 +16,10 @@ Our team will run the project based on the Agile development model. This Conflue
 * To improve the UI design of SwatKat for easily using and visually appealing.<br>
 
 ## Tools:<br>
-This project is developed with [Visual Studio Code](https://code.visualstudio.com).
-<br> Below are the main plugins in our project 
+This project was developed with [Visual Studio Code](https://code.visualstudio.com).<br> 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br>
+Below are the main plugins in our project <br>
+To deploy this project in your local computer, you need to download [Node.js](https://nodejs.org/en/download/).<br>
 * React
 ```
 npm install react
@@ -40,10 +42,7 @@ import { Button, Image, Col, Row,Modal} from 'react-bootstrap';
 
 
 ## Deployment:<br>
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br>
 ### Local:<br>
-To deploy this project in your local computer, you need to download [Node.js](https://nodejs.org/en/download/) firstly.<br>
-
 In the src/ directory, some available commands and scripts can be run in a cmd prompt:<br>
 ```
 npm install
