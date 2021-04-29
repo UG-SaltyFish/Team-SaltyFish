@@ -26,7 +26,7 @@ npm install react
 ```
 npm install express
 ``` 
-<br> Libraries such as React, Component,Container,Login,Register effectively support the implementation.
+<br> Libraries such as **React, Component,Container,Login,Register** effectively support the implementation.
 <br>
 
 ## Deployment:<br>
