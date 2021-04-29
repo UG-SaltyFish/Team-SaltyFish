@@ -43,7 +43,7 @@ import { Button, Image, Col, Row,Modal} from 'react-bootstrap';
 
 ## Deployment:<br>
 ### Local:<br>
-In the src/ directory, some available commands and scripts can be run in a cmd prompt:<br>
+In a cmd prompt, some available commands and scripts can be run at src/ directory:<br>
 ```
 npm install
 ``` 
@@ -53,11 +53,11 @@ Install Node.js dependencies.<br>
 npm start
 ``` 
 It runs the server in the development mode at http://localhost:5000. The page will reload if you save changes of your code.<br>
-
+In another cmd terminal, enter the command:<br>
 ```
 npm run client
 ``` 
-Open another cmd prompt and enter the command. It loads the client in your browser at http://localhost:3000. <br>
+It loads the client in your browser at http://localhost:3000. <br>
 
 **Now, your app is deployed!**<br>
 
@@ -101,7 +101,7 @@ In the package.json, it needs to install the package and some parameters.<br>
   }
 }
 ```
-After you get a Heroku account, you can run the following commands in a cmd at src/ directory:<br>
+After you get a Heroku account, you can run the following commands in a cmd terminal at src/ directory:<br>
 ```
 heroku create saltyfish2 --buildpack mars/create-react-app
 ```
