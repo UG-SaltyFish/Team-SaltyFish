@@ -16,10 +16,13 @@ Our team will run the project based on the Agile development model. This Conflue
 * To improve the UI design of SwatKat for easily using and visually appealing.<br>
 
 ## Tools:<br>
-[Visual Studio Code](https://code.visualstudio.com) was used as the programming IDE for this project.<br> 
-Below are the main plugins in our project: <br>
+* [Visual Studio Code](https://code.visualstudio.com) was used as the programming IDE for this project.<br> 
+* [MangoDB](https://www.mongodb.com/) was used as the database for this project.
+* [AWS](https://aws.amazon.com/cn/) was used to store the URLs and pictures in the website.
+* [Heroku](https://id.heroku.com/login) was the platform we use to run our eportfolio.
 * This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br>
 * The back-end was developed using [Node.js](https://nodejs.org/en/download/).<br>
+Below are the main plugins in our project: <br>
 * React
 ```
 npm install react
@@ -28,16 +31,6 @@ npm install react
 ```
 npm install express
 ``` 
-<br> Libraries such as **React, Component,Container,Login,Register** effectively support the implementation.
-<br> Main Libraries used
-```
-import React, {Component} from 'react';
-import { Container, Row, Col } from 'reactstrap';
-import Register from './components/register';
-import Login from './components/login';
-import Landing from './components/landing';
-import { Button, Image, Col, Row,Modal} from 'react-bootstrap';
-```
 <br>
 
 
