@@ -128,5 +128,5 @@ The app loads in your browser at https://saltyfish2.herokuapp.com <br>
 * Add functional test of Sprint 1 in tests/.<br>
 * Add documents in doc/, data sample in datasample/, and images in ui/.<br>
 * Update README.md.<br>
-* Add a new tag: v-1.0.<br>
-  v-1.0 contains codes and corresponding documents for our project in Sprint 1, the team would start Sprint 2 based on v-1.0.<br>
+* Add a release tag: COMP90082_2021_RLSE_<UG>_<1.0>.<br>
+  COMP90082_2021_RLSE_<UG>_<1.0> contains codes and corresponding documents for our project in Sprint 1.<br>
