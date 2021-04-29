@@ -27,7 +27,17 @@ npm install react
 npm install express
 ``` 
 <br> Libraries such as **React, Component,Container,Login,Register** effectively support the implementation.
+<br> Main Libraries used
+```
+import React, {Component} from 'react';
+import { Container, Row, Col } from 'reactstrap';
+import Register from './components/register';
+import Login from './components/login';
+import Landing from './components/landing';
+import { Button, Image, Col, Row,Modal} from 'react-bootstrap';
+```
 <br>
+
 
 ## Deployment:<br>
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br>
