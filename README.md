@@ -1,7 +1,9 @@
 # Team-SaltyFish<br>
     Extend SwatKatz Eportfolio
-Documentation here: https://confluence.cis.unimelb.edu.au:8443/display/COMP900822021SM1UG/Group%3A+SaltyFish <br>
-Heroku link:https://saltyfish2.herokuapp.com <br>
+Documentation here:<br> 
+https://confluence.cis.unimelb.edu.au:8443/display/COMP900822021SM1UG/Group%3A+SaltyFish <br>
+Heroku link:<br> 
+https://saltyfish2.herokuapp.com <br>
 
 ## Project Overview:
 This project is to test and further develop a web-based ePortfolio system built by students studying in COMP30022 capstone project in Semester 2, 2020. Our team selected the SwatKats ePortfolio as our development object. Since this project does not have clients, our supervisor will play the role of clients as well. In the following 3 months, we will try our best to expand some significant functions according to new project requirements, improve the user interface design and debug.<br>
@@ -100,9 +102,6 @@ heroku open
 ```
 The app loads in your browser at https://saltyfish2.herokuapp.com <br>
 
-## Logins and passwords:<br>
-<br>
-<br>
 
 ## Changelog:<br>
 ### 26th March 2021:<br>
