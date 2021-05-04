@@ -607,6 +607,23 @@ onSubmitGalleryPhoto = (e) => {
     })
   }
 
+  deletetranscript = () => {
+    axios.delete('/deletefile', {
+      params: {
+        url: this.state.transcript
+      }
+    }).then(res=> {
+      console.log(res);
+      const transc = {transcript: ""};
+      axios
+        .put('/addtranscript/' + this.props.auth.user, transc)
+        .then(res => this.setState({transcript:res.data.transcript}))
+        .catch(err => {
+          console.log("delete error for transcript", err);
+        })
+    })
+  }
+
   scrollUp() {
     window.scroll(0,0);
   }
@@ -771,10 +788,10 @@ onSubmitGalleryPhoto = (e) => {
                   <p>
                     <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='transcript_file'></Translate> </h2>
                     <span><a href = {this.state.transcript} target = "_blank"  download = "transcript" >{this.state.transcript}</a> </span>
-                    <button><a href = {this.state.transcript} target = "_blank"  download = "transcript" style={{color:'white'}}><Translate content='delete'></Translate></a></button><br/>
+                    <Button  onClick={this.deletetranscript}><Translate content='delete'></Translate></Button><br/>
                   
                     <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
-                    <button onClick={this.pdfUploadHandler}><Translate content='upload_transcript'></Translate> </button>
+                    <Button onClick={this.pdfUploadHandler}><Translate content='upload_transcript'></Translate> </Button>
                   </p>
                 </div>
               </div>
