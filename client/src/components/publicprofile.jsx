@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import { Modal} from 'react-bootstrap';
+import { Button,Row, Modal} from 'react-bootstrap';
 import styled from 'styled-components';
 import { Link } from 'react-scroll';
 import Footer from './Footer.js';
@@ -72,6 +72,7 @@ class PublicProfile extends Component {
       addprojectdescripition:'',
       addprojectlink:'',
       showphone:false,
+      showcontact:false,
       lang:'en',
       filename:''
     };
@@ -104,6 +105,15 @@ onChange = (e) => {
   this.setState({[e.target.name]: e.target.value});
 }
    
+showcontactModal = () => {
+  this.setState({ showcontact: true });
+};
+hidecontactModal = () => {
+  this.setState({addinfo:''});
+  this.setState({ showcontact: false });
+};
+
+
   componentDidMount() {
     axios
         .get('/profile2/'+(this.props.match.params.user))
@@ -217,8 +227,44 @@ onChange = (e) => {
       <div className="row">
       <div className="three columns">
             <img className="profile-pic"  src={this.state.profilePicture} alt="Profile Pic" />
+
+            
+                    <div>
+                      <Button  onClick={this.showcontactModal}><Translate content='edit_contact'></Translate></Button>
+                      <Modal show={this.state.showcontact}>
+                        <Modal.Header closeButton onClick={this.hidecontactModal}></Modal.Header>
+                        <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_con'></Translate> </h2>
+                        <form onSubmit={this.onSubmitcontact}>
+                          <input onChange={this.onChange}
+
+
+
+                            value={this.state.addinfo}
+                            type="text"
+                            className={("form-control")}
+                            placeholder="Please remember to include your contact details in the message"
+                            name="addinfo"
+                            style={{height:'200px' }}
+                            maxLength="1000"
+                            required autoFocus 
+                          />
+                  
+                          <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
+                        </form>
+                      </Modal>
+             
+                    </div>
             
          </div>
+
+        
+
+
+         
+
+
+
+
        
          <div className="nine columns main-col">
             <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='about_me'></Translate> </h2>
@@ -235,7 +281,16 @@ onChange = (e) => {
       </div>
                      <span>{this.state.email}</span>
 					   </p>
+             
+
+
                </div>
+              
+
+               
+
+
+
                <div className="columns download">
                   <p>
                   <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='transcript_file'></Translate> </h2>

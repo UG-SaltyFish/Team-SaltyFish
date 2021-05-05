@@ -32,6 +32,8 @@ export default{
     submit:"Submit",
     edit_Bio:"Edit Bio",
     edit_phone:"Edit Phone",
+    edit_con:"Edit Message",
+    edit_contact:"Contact The Profile Owner",
     upload_transcript:"Upload Transcript",
     transcript_file:"Transcript File",
     add_edu:"Add Education",

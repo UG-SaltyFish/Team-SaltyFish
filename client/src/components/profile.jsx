@@ -764,7 +764,7 @@ onSubmitGalleryPhoto = (e) => {
                       <Button  onClick={this.showphoneModal}><Translate content='edit_phone'></Translate></Button>
                       <Modal show={this.state.showphone}>
                         <Modal.Header closeButton onClick={this.hidephoneModal}></Modal.Header>
-                        <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_Bio'></Translate> </h2>
+                        <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_Phone'></Translate> </h2>
                         <form onSubmit={this.onSubmitPhone}>
                           <input onChange={this.onChange}
                             value={this.state.addinfo}
