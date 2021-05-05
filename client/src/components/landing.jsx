@@ -18,6 +18,7 @@ import cn from "./i18n/cn";
 import jp from "./i18n/jp";
 import styled from 'styled-components';
 import logo from './logo.svg';
+import logo1 from './logo1.svg';
 //Translation
 counterpart.registerTranslations('en',en);
 counterpart.registerTranslations('cn',cn);
@@ -204,6 +205,13 @@ renderSuggestion = suggestion => (
           className="d-inline-block align-top"
           alt=""
         />
+        <img
+          src={logo1}
+          width="125"
+          height="125"
+          className="d-inline-block align-top"
+          alt=""
+        />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav"/>
       <Navbar.Collapse id="basic-navbar-nav">
@@ -228,8 +236,8 @@ renderSuggestion = suggestion => (
       </Navbar.Collapse>
     </Navbar>
   </Styles>
-  <div className ="searchbar" style={{backgroundColor:"#99ceff"}}>
-            <h2 className = "searchH2" >
+  <div className ="searchbar" style={{backgroundColor:"#99ceff"}}align="center">
+            <h2 className = "searchH2" ><font sizs="1" color="grey">
               <Translate content="landing1"></Translate>
            
             <Autosuggest
@@ -241,8 +249,9 @@ renderSuggestion = suggestion => (
             renderSuggestion={this.renderSuggestion}
             inputProps={inputProps}
           />
+          </font>
           </h2>
-          <h3  className = "searchH3">Directly hit via email:https://it-project-eportfolio.herokuapp.com/public/useremail</h3>
+          <h3  className = "searchH3" ><font sizs="1" color="grey">Or you can copy and paste this link to go to a profile via email: https://it-project-eportfolio.herokuapp.com/public/useremail</font></h3>
             
         </div>
       <div className = "page-wrapper">

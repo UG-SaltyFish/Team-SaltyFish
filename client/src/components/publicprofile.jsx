@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { Link } from 'react-scroll';
 import Footer from './Footer.js';
 import logo from './logo.svg';
+import logo1 from './logo1.svg';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
 import "./profile_pic.css";
@@ -39,6 +40,12 @@ class PublicProfile extends Component {
       projects:[],
       website: '',
       phone: '',
+      sectionE:'',
+      sectionW:'',
+      sectionP:'',
+      sectionSk:'',
+      sectionSu:'',
+      sectionG:'',
       selectedFile: null,
       profilePicture: '',
       transcript: '',
@@ -65,7 +72,8 @@ class PublicProfile extends Component {
       addprojectdescripition:'',
       addprojectlink:'',
       showphone:false,
-      lang:'en'
+      lang:'en',
+      filename:''
     };
   this.onChange =this.onChange.bind(this);
   
@@ -113,12 +121,22 @@ onChange = (e) => {
                          education:res.data[0].education,
                          website:res.data[0].website,
                          phone:res.data[0].phone,
+                         sectionE:res.data[0].sectionE,
+                         sectionW:res.data[0].sectionW,
+                         sectionP:res.data[0].sectionP,
+                         sectionSk:res.data[0].sectionSk,
+                         sectionSu:res.data[0].sectionSu,
+                         sectionG:res.data[0].sectionG,
                          profilePicture: res.data[0].profile_picture,
                          transcript: res.data[0].transcript,
                          imgHash: Date.now()
                         });
           })
-    
+    if (this.state.transcript !== "") {
+      this.state.filename=this.state.transcript;
+    }else{
+      this.state.filename='';
+    }
 }
   
  
@@ -143,6 +161,20 @@ onChange = (e) => {
         <header >
         <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
         <ul id="nav" className="nav">
+        <img
+          src={logo}
+          width="50"
+          height="50"
+          className="d-inline-block align-top"
+          alt=""
+        />
+        <img
+          src={logo1}
+          width="80"
+          height="80"
+          className="d-inline-block align-top"
+          alt=""
+        />
         <li className="current"><a href="/"><Translate content='home'></Translate> </a></li>
         <li><Link activeClass="active" to="top" spy={true} smooth={true} duration={1000} href="#" style = {{right:0}}><Translate content='intro'></Translate> </Link></li>
    <li ><Link activeClass="active" to="education" spy={true} smooth={true} duration={1000} href="#"><Translate content='education'></Translate> </Link></li>
@@ -190,7 +222,7 @@ onChange = (e) => {
        
          <div className="nine columns main-col">
             <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='about_me'></Translate> </h2>
-            <div style={{columnWidth:"1000px"}}>
+            <div style={{display:'inline-block', width:'100%', wordWrap:'break-word', whitespace:'normal'}}>
             <p>{this.state.bio}</p>
             </div>
             <div className="row">
@@ -206,8 +238,8 @@ onChange = (e) => {
                </div>
                <div className="columns download">
                   <p>
-              
-                  <button><a href = {this.state.transcript} target = "_blank"  download = "transcript"><Translate content='download'></Translate></a></button>
+                  <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='transcript_file'></Translate> </h2>
+                  <p><a href = {this.state.transcript} target = "_blank"  download = "transcript" >{this.state.transcript}</a> </p>
                   </p>
                </div>
             </div>
@@ -215,7 +247,7 @@ onChange = (e) => {
       </div>
    </section>
 
-   <section id="education">
+   <section id="education" style={{display:this.state.sectionE}}>
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='education'></Translate> </h2>
       <div>         
@@ -233,7 +265,7 @@ onChange = (e) => {
       </div>
    </section>
 
-   <section id="work">
+   <section id="work" style={{display:this.state.sectionW}}>
    <div style={{backgroundColor:'#fff'}}>
     <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='work1'></Translate> </h2>
     <div>
@@ -263,7 +295,7 @@ onChange = (e) => {
 </div>
    </section>
 
-   <section id='projects'>
+   <section id='projects' style={{display:this.state.sectionP}}>
    <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='projects'></Translate> </h2>
       <div>         
@@ -294,7 +326,7 @@ onChange = (e) => {
 </section>
 
 
-   <section id="skills">
+   <section id="skills" style={{display:this.state.sectionSk}}>
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='skills'></Translate> </h2>
       <div>         
@@ -305,7 +337,7 @@ onChange = (e) => {
        </div>
    </section>
 
-   <section id="subjects">
+   <section id="subjects" style={{display:this.state.sectionSu}}>
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='subjects'></Translate> </h2>
       <div>         
@@ -338,7 +370,7 @@ onChange = (e) => {
       </div>
    </section>
 
-   <section id = "gallery">
+   <section id = "gallery" style={{display:this.state.sectionG}}>
    <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='gallery'></Translate> </h2>
      

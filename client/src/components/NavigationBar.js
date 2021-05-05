@@ -2,6 +2,7 @@ import React from 'react';
 import { Nav, Navbar, Dropdown} from 'react-bootstrap';
 import styled from 'styled-components';
 import logo from './logo.svg';
+import logo1 from './logo1.svg';
 
 const Styles = styled.div
 `
@@ -34,6 +35,13 @@ export const NavigationBar = () => (
           src={logo}
           width="80"
           height="80"
+          className="d-inline-block align-top"
+          alt=""
+        />
+        <img
+          src={logo1}
+          width="125"
+          height="125"
           className="d-inline-block align-top"
           alt=""
         />

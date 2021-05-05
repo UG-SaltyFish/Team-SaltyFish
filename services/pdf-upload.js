@@ -10,7 +10,7 @@ const ACCESS_ID = process.env.S3_ACCESS_KEY;
 aws.config.update({
     secretAccessKey: ACCESS_KEY,
     accessKeyId: ACCESS_ID,
-    region: 'us-east-2'
+    region: 'ap-southeast-2'
 })
 const s3 = new aws.S3();
  
@@ -27,7 +27,7 @@ const pdf_upload = multer({
     fileFilter,
     storage: multerS3({
       s3: s3,
-      bucket: 'it-project-pdf-2020',
+      bucket: 'it-project-pdf-2021',
       metadata: function (req, file, cb) {
         cb(null, {fieldName: 'TESTING_PDF'});
       },

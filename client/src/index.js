@@ -13,12 +13,14 @@ import { Provider } from "react-redux";
 // Import our React components
 import App from './App';
 
-import Landing from './components/landing'
+import Landing from './components/landing';
 import store from "./store";
-import Register from './components/register'
-import Login from './components/login'
-import Profile  from './components/profile'
-import Public from './components/publicprofile'
+import Register from './components/register';
+import Reset from './components/reset';
+import Login from './components/login';
+import Profile  from './components/profile';
+import Public from './components/publicprofile';
+
 
 // Check for token to keep the user logged in
 if (localStorage.jwtToken) {
@@ -53,6 +55,7 @@ const routing = (
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/profile" component={Profile} />
+                    <Route exact path="/reset" component={Reset} />
                     <Route exact path="/public/:user" component={Public} />
                     {/* Generic component so that all undefined routes redirect to 404 page. If no other route is matched, then this one will be */}
                     

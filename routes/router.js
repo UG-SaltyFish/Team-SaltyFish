@@ -6,6 +6,8 @@ var controller = require('../controller.js');
 
 router.post('/register', controller.createUser);
 router.post('/login', controller.loginUser);
+router.post('/goologin', controller.gooLoginUser);
+router.post('/fblogin', controller.fbLoginUser); 
 //profile1 is to send user data on login
 //profile2 is to look up users in search
 router.get('/profile1/:user',controller.getProfile);
@@ -26,7 +28,6 @@ router.put('/addtogallery/:user',controller.addGallery);
 router.put('/deletefromgallery/:user', controller.findGalleryPicAndDelete);
 
 router.put('/addweb/:user',controller.addweb);
-router.put('/namechange/:user',controller.changeName);
 
 router.put('/deleteedu/:user',controller.deleteEducation);
 router.put('/findanddeletsub/:user',controller.findSubjectsAndDelete);
@@ -35,7 +36,12 @@ router.put('/findanddeletproject/:user',controller.findProjectAndDelete);
 router.put('/findanddeletskill/:user',controller.findSkillAndDelete);
 
 
-
+router.put('/hideE/:user',controller.deleE);
+router.put('/hideW/:user',controller.deleW);
+router.put('/hideP/:user',controller.deleP);
+router.put('/hideSk/:user',controller.deleSk);
+router.put('/hideSu/:user',controller.deleSu);
+router.put('/hideG/:user',controller.deleG);
 
 // Find all users
 router.get('/users', controller.findAllUsers);

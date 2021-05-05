@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {Button, Modal} from 'react-bootstrap';
+import {Button, Modal,Navbar} from 'react-bootstrap';
 import { Link } from 'react-scroll';
 import PropTypes from 'prop-types';
 import {  logoutUser } from "./../actions/authActions";
@@ -10,6 +10,7 @@ import Footer from './Footer.js';
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
 import logo from './logo.svg'
+import logo1 from './logo1.svg'
 import "./profile_pic.css";
 import "./css/default.css";
 import "./css/fonts.css";
@@ -40,6 +41,12 @@ class Profile extends Component {
       projects:[],
       website: '',
       phone: '',
+      sectionE:'',
+      sectionW:'',
+      sectionP:'',
+      sectionSk:'',
+      sectionSu:'',
+      sectionG:'',
       selectedFile: null,
       profilePicture: '',
       transcript: '',
@@ -66,7 +73,9 @@ class Profile extends Component {
       addprojectdescripition:'',
       addprojectlink:'',
       showphone:false,
-      lang:'en'
+      lang:'en',
+      hastranscript:'notranscript',
+      filename:''
     };
   this.onLogoutClick=this.onLogoutClick.bind(this);
   this.onChange =this.onChange.bind(this);
@@ -142,7 +151,6 @@ onChange = (e) => {
   
   this.setState({[e.target.name]: e.target.value});
 }
-
 onSubmitProject =(e) =>
 {
   e.preventDefault();
@@ -257,7 +265,6 @@ hideskillsModal = () => {
   this.setState({addinfo:''});
   this.setState({ showskills: false });
 };
-
 onSubmitSkills =(e) =>{
   e.preventDefault();
   const userData ={
@@ -304,6 +311,9 @@ onSubmitGalleryPhoto = (e) => {
       this.props.logoutUser();
       this.props.history.push('/login');
   };
+    onResetClick = (e) => {
+      this.props.history.push('/reset');
+  };
   componentDidMount() {
     axios
         .get('/profile1/'+(this.props.auth.user))
@@ -320,12 +330,25 @@ onSubmitGalleryPhoto = (e) => {
                          education:res.data[0].education,
                          website:res.data[0].website,
                          phone:res.data[0].phone,
+                         sectionE:res.data[0].sectionE,
+                         sectionW:res.data[0].sectionW,
+                         sectionP:res.data[0].sectionP,
+                         sectionSk:res.data[0].sectionSk,
+                         sectionSu:res.data[0].sectionSu,
+                         sectionG:res.data[0].sectionG,
                          profilePicture: res.data[0].profile_picture,
                          transcript: res.data[0].transcript,
                          imgHash: Date.now()
                         });
           })
-    
+
+    if (this.state.transcript !== "") {
+      this.state.hastranscript ='yestranscript';
+      this.state.filename=this.state.transcript;
+    }else{
+      this.state.hastranscript ='notranscript';
+      this.state.filename='';
+    }
 }
   fileSelectedHandler = event => {
     event.preventDefault();
@@ -333,60 +356,104 @@ onSubmitGalleryPhoto = (e) => {
       selectedFile: event.target.files[0]
     })
   }
+
+
+
+
   hideEdu = ()=>{
     var checkbox1 = document.getElementById("edusec");
     var edusection = document.getElementById("educationsec");
-    if(checkbox1.checked == true){
+    if(checkbox1.checked == false){
       edusection.style.display = "none";
     }else{
       edusection.style.display = "block";
     }
+    const userData={
+      sectionE:edusection.style.display
+      
+    }
+    
+    axios.put('/hideE/'+this.props.auth.user,userData)
+    .then(res=> this.setState({sectionE:res.data.sectionE}))
+
   }
+
   hideWork = ()=>{
     var checkbox1 = document.getElementById("worksec");
     var worksection = document.getElementById("worksection");
-    if(checkbox1.checked == true){
+    if(checkbox1.checked == false){
       worksection.style.display = "none";
     }else{
       worksection.style.display = "block";
     }
+    const userData={
+      sectionW:worksection.style.display
+    }
+    axios.put('/hideW/'+this.props.auth.user,userData)
+    .then(res=> this.setState({sectionW:res.data.sectionW}))
   }
+
   hideProj = ()=>{
     var checkbox1 = document.getElementById("projsec");
     var projsection = document.getElementById("projectsection");
-    if(checkbox1.checked == true){
+    if(checkbox1.checked == false){
       projsection.style.display = "none";
     }else{
       projsection.style.display = "block";
     }
+    const userData={
+      sectionP:projsection.style.display
+    }
+    axios.put('/hideP/'+this.props.auth.user,userData)
+    .then(res=> this.setState({sectionP:res.data.sectionP}))
   }
+
   hideSkill = ()=>{
     var checkbox1 = document.getElementById("skillsec");
     var skisection = document.getElementById("skillsection");
-    if(checkbox1.checked == true){
+    if(checkbox1.checked == false){
       skisection.style.display = "none";
     }else{
       skisection.style.display = "block";
     }
+    const userData={
+      sectionSk:skisection.style.display
+    }
+    axios.put('/hideSk/'+this.props.auth.user,userData)
+    .then(res=> this.setState({sectionSk:res.data.sectionSk}))
   }
+
   hideSub = ()=>{
     var checkbox1 = document.getElementById("subsec");
     var subsection = document.getElementById("subjectsection");
-    if(checkbox1.checked == true){
+    if(checkbox1.checked == false){
       subsection.style.display = "none";
     }else{
       subsection.style.display = "block";
     }
+    const userData={
+      sectionSu:subsection.style.display
+    }
+    axios.put('/hideSu/'+ this.props.auth.user,userData)
+    .then(res=> this.setState({sectionSu:res.data.sectionSu}))
   }
+
   hideGal = ()=>{
     var checkbox1 = document.getElementById("galsec");
     var galsection = document.getElementById("gallerysection");
-    if(checkbox1.checked == true){
+    if(checkbox1.checked == false){
       galsection.style.display = "none";
     }else{
       galsection.style.display = "block";
     }
+    const userData={
+      sectionG:galsection.style.display
+    }
+    axios.put('/hideG/'+ this.props.auth.user,userData)
+    .then(res=> this.setState({sectionG:res.data.sectionG}))
   }
+
+
   SectionModal = () => {
     var form1 = document.getElementById("modalhere");
     if(form1.style.display=="none"){
@@ -396,6 +463,7 @@ onSubmitGalleryPhoto = (e) => {
     }
     
   }
+ 
   pdfUploadHandler = () => {
     const fd = new FormData();
     if (this.state.selectedFile == null) {
@@ -409,7 +477,13 @@ onSubmitGalleryPhoto = (e) => {
       }).then(res=> {
         console.log(res);
       })
+      this.state.hastranscript ='yestranscript';
+      this.state.filename=this.state.transcript;
+    }else{
+      this.state.hastranscript ='notranscript';
+      this.state.filename='';
     }
+
     fd.append('transcript', this.state.selectedFile);
       try {
         axios.post('/pdf-upload', fd).then((postResponse) => {
@@ -530,9 +604,27 @@ onSubmitGalleryPhoto = (e) => {
     })
   }
 
+  deletetranscript = () => {
+    axios.delete('/deletefile', {
+      params: {
+        url: this.state.transcript
+      }
+    }).then(res=> {
+      console.log(res);
+      const transc = {transcript: ""};
+      axios
+        .put('/addtranscript/' + this.props.auth.user, transc)
+        .then(res => this.setState({transcript:res.data.transcript}))
+        .catch(err => {
+          console.log("delete error for transcript", err);
+        })
+    })
+  }
+
   scrollUp() {
     window.scroll(0,0);
   }
+  
   
   render() {
     
@@ -547,38 +639,52 @@ onSubmitGalleryPhoto = (e) => {
         
     return (
 
-      <div className = "top" style={{backgroundColor:'grey'}}>    
-
+      <div className = "top" style={{backgroundColor:'grey'}}>  
         <header >
-        <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
-        <ul id="nav" className="nav">
-        <li className="current"><a href="/"><Translate content='home'></Translate> </a></li>
+          <nav id="nav-wrap" style={{backgroundColor: 'grey'}}>
+            <ul id="nav" className="nav">
+              <Navbar.Brand href="/">
+                <img
+                  src={logo}
+                  width="50"
+                  height="50"
+                  className="d-inline-block align-top"
+                  alt=""
+                />
+                <img
+                  src={logo1}
+                  width="80"
+                  height="80"
+                  className="d-inline-block align-top"
+                  alt=""
+                />
+              </Navbar.Brand> 
+              <li className="current"><a href="/"><Translate content='home'></Translate> </a></li>
   
-        <li><Link activeClass="active" to="top" spy={true} smooth={true} duration={1000} href="#" style = {{right:0}}><Translate content='intro'></Translate> </Link></li>
-   <li ><Link activeClass="active" to="education" spy={true} smooth={true} duration={1000} href="#"><Translate content='education'></Translate> </Link></li>
-   <li><Link activeClass="active" to="work" spy={true} smooth={true} duration={1000} href="#"><Translate content='work'></Translate>  </Link></li>
-   <li><Link activeClass="active" to="projects" spy={true} smooth={true} duration={1000} href="#"><Translate content='projects'></Translate>  </Link></li>
-  <li><Link activeClass="active" to="skills" spy={true} smooth={true} duration={1000} href="#"><Translate content='skills'></Translate> </Link></li>
+              <li><Link activeClass="active" to="top" spy={true} smooth={true} duration={1000} href="#" style = {{right:0}}><Translate content='intro'></Translate> </Link></li>
+              <li ><Link activeClass="active" to="education" spy={true} smooth={true} duration={1000} href="#"><Translate content='education'></Translate> </Link></li>
+              <li><Link activeClass="active" to="work" spy={true} smooth={true} duration={1000} href="#"><Translate content='work'></Translate>  </Link></li>
+              <li><Link activeClass="active" to="projects" spy={true} smooth={true} duration={1000} href="#"><Translate content='projects'></Translate>  </Link></li>
+              <li><Link activeClass="active" to="skills" spy={true} smooth={true} duration={1000} href="#"><Translate content='skills'></Translate> </Link></li>
 
-   <li><Link activeClass="active" to="subjects" spy={true} smooth={true} duration={1000} href="#"><Translate content='subjects'></Translate>  </Link></li>
+              <li><Link activeClass="active" to="subjects" spy={true} smooth={true} duration={1000} href="#"><Translate content='subjects'></Translate>  </Link></li>
   
-   <li><Link activeClass="active" to="gallery" spy={true} smooth={true} duration={1000} href="#"><Translate content='gallery'></Translate>  </Link></li>
-   <li><a className="smoothscroll" href="#" onClick={this.showLanguage}> <Translate content='language'></Translate> </a> </li>
-   <Modal show={this.state.showlang} >
-        <Modal.Header closeButton onClick={this.hideLanguage}></Modal.Header>
-        <button type="button" class="block" onClick={this.switchtoen}>English</button> 
-        <button type="button" class="block" onClick={this.switchtocn}>Chinese</button> 
-        <button type="button" class="block"onClick={this.switchtojp}>Japanese</button> 
+              <li><Link activeClass="active" to="gallery" spy={true} smooth={true} duration={1000} href="#"style={{paddingRight:"380px"}}><Translate content='gallery'></Translate>  </Link></li>
+              <li><a className="smoothscroll" href="#" onClick={this.showLanguage}> <Translate content='language'></Translate> </a> </li>
+              <Modal show={this.state.showlang} >
+                <Modal.Header closeButton onClick={this.hideLanguage}></Modal.Header>
+                <button type="button" class="block" onClick={this.switchtoen}>English</button> 
+                <button type="button" class="block" onClick={this.switchtocn}>Chinese</button> 
+                <button type="button" class="block"onClick={this.switchtojp}>Japanese</button> 
       
-      
-    </Modal>
+              </Modal>
     
-   <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}><Translate content='logout'></Translate> </a></li>
+              <li><a  className="smoothscroll" href=""  onClick={this.onLogoutClick}style={{textAlign: 'right'}}><Translate content='logout'></Translate> </a></li>
+              <li><a  className="smoothscroll" href="" onClick={this.onResetClick}><Translate content='reset'></Translate> </a></li>
 
-</ul>
-</nav>
-        
-        <div class="row banner">
+            </ul>
+          </nav>
+          <div class="row banner">
          <div class="banner-text">
             
             <h1 className="responsive-headline"> <Translate content='Im'></Translate>  {this.state.name} </h1>
@@ -587,6 +693,7 @@ onSubmitGalleryPhoto = (e) => {
                 <h2 style={{color:'white', fontFamily:'Palatino Linotype'}}>  {this.state.intro}</h2>
                 <Button  onClick={this.showintroModal}><Translate content='edit_Intro'></Translate></Button>
                 <Modal show={this.state.showintro}>
+                <Modal.Header closeButton onClick={this.hideintroModal}></Modal.Header>
                 <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_Intro'></Translate> </h2>
                 <form onSubmit={this.onSubmitIntro}>
                   <input onChange={this.onChange}
@@ -611,334 +718,336 @@ onSubmitGalleryPhoto = (e) => {
             
          </div>
       </div>
-      </header>
-      <section id="about"  >
-      <div className="row" >
-      <div className="three columns" >
-            <img className="profile-pic"  src={this.state.profilePicture} alt="Profile Pic" />
-            <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
-<Button onClick={this.imgUploadHandler}><Translate content='upload'></Translate> </Button>
-         </div>
-       
-         <div className="nine columns main-col">
-            <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='about_me'></Translate> </h2>
-            <div style={{columnWidth:"1000px"}}>
-            <p>{this.state.bio}</p>
-            </div>
-            <Button  onClick={this.showbioModal}><Translate content='edit_Bio'></Translate></Button>
+        </header>
 
-                <Modal show={this.state.showbio}>
+        <section id="about"  >
+          <div className="row" >
+            <div className="three columns" >
+              <img className="profile-pic"  src={this.state.profilePicture} alt="Profile Pic" />
+              <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
+              <Button onClick={this.imgUploadHandler}><Translate content='upload'></Translate> </Button>
+            </div>
+       
+            <div className="nine columns main-col">
+              <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='about_me'></Translate> </h2>
+              <div style={{display:'inline-block', width:'100%', wordWrap:'break-word', whitespace:'normal'}}>
+                <p>{this.state.bio}</p>
+              </div>
+              <Button  onClick={this.showbioModal}><Translate content='edit_Bio'></Translate></Button>
+              <Modal show={this.state.showbio}>
                 <Modal.Header closeButton onClick={this.hidebioModal}></Modal.Header>
                 <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_Bio'></Translate> </h2>
                 <form onSubmit={this.onSubmitBio}>
                   <input onChange={this.onChange}
-                      value={this.state.addinfo}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Bio, max length 1000 characters"
-                      name="addinfo"
-                      style={{height:'200px' }}
-                      maxLength="1000"
-                          
-                          required autoFocus 
-                    />
+                    value={this.state.addinfo}
+                    type="text"
+                    className={("form-control")}
+                    placeholder="Add Bio, max length 1000 characters"
+                    name="addinfo"
+                    style={{height:'200px' }}
+                    maxLength="1000"
+                    required autoFocus 
+                  />
                   
                   <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}><Translate content='submit'></Translate></button>
-                  </form>
-                </Modal>
-
-            <div className="row">
+                </form>
+              </Modal>
+              <div className="row">
                <div className="columns contact-details">
                   <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='contact_details'></Translate> </h2>
                   <p className="address">
-						   <span>{this.state.phone}</span><br />
-               <div>
-               <Button  onClick={this.showphoneModal}><Translate content='edit_phone'></Translate></Button>
-                <Modal show={this.state.showphone}>
-                <Modal.Header closeButton onClick={this.hidephoneModal}></Modal.Header>
-                <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_Bio'></Translate> </h2>
-                <form onSubmit={this.onSubmitPhone}>
-                  <input onChange={this.onChange}
-                      value={this.state.addinfo}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Phone"
-                      name="addinfo"
-              
-                      maxLength="20"
-                          
-                          required autoFocus 
-                    />
+						        <span>{this.state.phone}</span><br />
+                    <div>
+                      <Button  onClick={this.showphoneModal}><Translate content='edit_phone'></Translate></Button>
+                      <Modal show={this.state.showphone}>
+                        <Modal.Header closeButton onClick={this.hidephoneModal}></Modal.Header>
+                        <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_Bio'></Translate> </h2>
+                        <form onSubmit={this.onSubmitPhone}>
+                          <input onChange={this.onChange}
+                            value={this.state.addinfo}
+                            type="text"
+                            className={("form-control")}
+                            placeholder="Add Phone"
+                            name="addinfo"
+                            maxLength="20"
+                            required autoFocus 
+                          />
                   
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
-                  </form>
-                </Modal>
+                          <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
+                        </form>
+                      </Modal>
              
-      </div>
-                     <span>{this.state.email}</span>
-					   </p>
-               </div>
-               <div className="columns download">
+                    </div>
+                    <span>{this.state.email}</span>
+					        </p>
+                </div>
+                <div className="columns download">
                   <p>
-                  <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
-                  <button onClick={this.pdfUploadHandler}><Translate content='upload_transcript'></Translate> </button>
-                  <button><a href = {this.state.transcript} target = "_blank"  download = "transcript"><Translate content='download'></Translate></a></button>
-                      <form id = "modalhere" style={{display:"none"}}>
-                      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='section'></Translate> </h2>
-                        <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='education'></Translate> </h2>
-                        <input type="checkbox" id="edusec" onClick={this.hideEdu} ></input>
-                        <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='work1'></Translate> </h2>
-                        <input type="checkbox" id ="worksec" onClick={this.hideWork}></input>
-                        <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='projects'></Translate> </h2>
-                        <input type="checkbox" id ="projsec" onClick = {this.hideProj}></input>
-                        <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='skills'></Translate> </h2>
-                        <input type="checkbox" id ="skillsec" onClick = {this.hideSkill}></input>
-                        <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='subjects'></Translate> </h2>
-                        <input type="checkbox" id = "subsec" onClick = {this.hideSub} ></input>
-                        <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='gallery'></Translate> </h2>
-                        <input type="checkbox" id = "galsec" onClick = {this.hideGal}></input>
-                      </form>
-  
-                <button onClick={this.SectionModal}><Translate content='section'></Translate></button>
+                    <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='transcript_file'></Translate> </h2>
+                    <span><a href = {this.state.transcript} target = "_blank"  download = "transcript" >{this.state.transcript}</a> </span>
+                    <Button  onClick={this.deletetranscript}><Translate content='delete'></Translate></Button><br/>
                   
-                  
+                    <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
+                    <Button onClick={this.pdfUploadHandler}><Translate content='upload_transcript'></Translate> </Button>
                   </p>
-               </div>
+                </div>
+              </div>
             </div>
-         </div>
-      </div>
-   </section>
+            <div className="three columns" >
+              <button onClick={this.SectionModal}><Translate content='section'></Translate></button>
+              <form id = "modalhere" style={{display:"none" }}>
+                <div className="row">
+                  <input type="checkbox" id="edusec" defaultChecked={this.state.sectionE!=='none'} onClick={this.hideEdu} ></input>
+                  <h2 style={{textAlign: 'right',fontSize:'10px',fontFamily:'Times New Roman'}}><Translate content='education'></Translate> </h2>
+                </div>
+                <div className="row">
+                  <input type="checkbox" id ="worksec" defaultChecked={this.state.sectionW!=='none'} onClick={this.hideWork}></input>
+                  <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='work1'></Translate> </h2>
+                </div>
+                <div className="row">
+                  <input type="checkbox" id ="projsec" defaultChecked={this.state.sectionP!=='none'} onClick = {this.hideProj}></input>
+                  <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='projects'></Translate> </h2>
+                </div>
+                <div className="row">
+                  <input type="checkbox" id ="skillsec" defaultChecked={this.state.sectionSk!=='none'} onClick = {this.hideSkill}></input>
+                  <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='skills'></Translate> </h2>
+                </div>
+                <div className="row">
+                  <input type="checkbox" id = "subsec" defaultChecked={this.state.sectionSu!=='none'} onClick = {this.hideSub} ></input>
+                  <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='subjects'></Translate> </h2>
+                </div>
+                <div className="row">
+                  <input type="checkbox" id = "galsec" defaultChecked={this.state.sectionG!=='none'} onClick = {this.hideGal}></input>
+                  <h2 style={{textAlign: 'left',fontSize:'8px',fontFamily:'Times New Roman'}}><Translate content='gallery'></Translate> </h2>
+                </div>         
+              </form>
+            </div> 
+          </div>      
+         
+        </section>
 
-   <section id="education">
-      <div id = "educationsec" style={{backgroundColor:'#fff'}} >
-      <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='education'></Translate> </h2>
-      <div>         
-    <p   style= {{ fontSize: '20px'}}  >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.education.map( (item, index) =>
-<li key = {index} > 
-        <p style={{color:'black', fontFamily:'bookman', fontSize:'25px',  letterSpacing:'1px'}}>{item.school} </p>    
-        <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'20px',  letterSpacing:'1px'}}>{item.qual}</p>
-        <Button onClick={()=>{this.deleteedu((this.state.education)[index],this.props.auth.user)}}><Translate content='delete'></Translate></Button>
-        <hr />
-      </li>
-  )} <button style={{alignItems:'center'}} onClick={this.showEduModal}><Translate content='add_edu'></Translate> </button></ul>} </p>
+   <section id="education" style={{display:this.state.sectionE}}>
+   <div id = "educationsec" style={{backgroundColor:'#fff'}} >
       
-      </div>
+            <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='education'></Translate> </h2>
+            <div>         
+              <p   style= {{ fontSize: '20px'}}  >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.education.map( (item, index) =>
+                <li key = {index} > 
+                  <p style={{color:'black', fontFamily:'bookman', fontSize:'25px',  letterSpacing:'1px'}}>{item.school} </p>    
+                  <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'20px',  letterSpacing:'1px'}}>{item.qual}</p>
+                  <Button onClick={()=>{this.deleteedu((this.state.education)[index],this.props.auth.user)}}><Translate content='delete'></Translate></Button>
+                  <hr />
+                </li>
+                )} <button style={{alignItems:'center'}} onClick={this.showEduModal}><Translate content='add_edu'></Translate> </button></ul>} </p>
       
-      <Modal show={this.state.showedu} >
-        <Modal.Header closeButton onClick={this.hideEduModal}></Modal.Header>
-      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='add_edu'></Translate> </h2>
-      <form onSubmit={this.onSubmitEdu}>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addschoolname}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add School Name"
-                      name="addschoolname"
+            </div>
+      
+            <Modal show={this.state.showedu} >
+              <Modal.Header closeButton onClick={this.hideEduModal}></Modal.Header>
+              <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='add_edu'></Translate> </h2>
+              <form onSubmit={this.onSubmitEdu}>
+                <div className="form-group">
+                  <input onChange={this.onChange}
+                    value={this.state.addschoolname}
+                    type="text"
+                    className={("form-control")}
+                    placeholder="Add School Name"
+                    name="addschoolname"
+                    required autoFocus 
+                  />
+                </div>
+                <div className="form-group">
+                  <input onChange={this.onChange}
+                    value={this.state.addqual}
+                    type="text"
+                    className={("form-control")}
+                    placeholder="Add Qualification"
+                    name="addqual"
                           
-                          required autoFocus 
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addqual}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Qualification"
-                      name="addqual"
-                          
-                          required autoFocus 
-                    />
-                  </div>
+                    required autoFocus 
+                  />
+                </div>
                  
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}><Translate content='submit'></Translate></button>
-                  </form>
+                <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}><Translate content='submit'></Translate></button>
+              </form>
       
-        </Modal>
+            </Modal>
      
-            
-      
-      </div>
-   </section>
+          </div>
+        </section>
 
-   <section id="work" >
-   <div id = "worksection" style={{backgroundColor:'#fff'}}>
-    <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='work1'></Translate> </h2>
-    <div>
-    <p     >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.work).sort((a,b)=>b.from -a.from)).map( (item, index) =>
-<li key = {index} > 
-<div className="row education">
-         <div style={{width:"40%", float:"right"}}>
-            <h3 ><span style={{fontFamily:'librebaskerville-italic' ,borderBottom: 'solid #11ABB0', letterSpacing:'1px'}}>{item.workplace}   </span></h3>
-         </div>
-         <div style={{width:"60%", float:"left"}}>
-            <div className="row item">
-               <div className="twelve columns">
-                 <div>
-        <p style={{color:'black', fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.position} </p>
-        </div>
-        <div>
-        <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.from}-{item.to}</p>
-        </div>
-               </div>
-               <Button onClick={()=>{this.deletework((this.state.work)[index],this.props.auth.user)}}><Translate content='delete'></Translate></Button>
-            </div>
+        <section id="work" style={{display:this.state.sectionW}} >
+          <div id = "worksection" style={{backgroundColor:'#fff'}}>
+            <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='work1'></Translate> </h2>
+            <div>
+              <p>{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.work).sort((a,b)=>b.from -a.from)).map( (item, index) =>
+                <li key = {index} > 
+                  <div className="row education">
+                    <div style={{width:"40%", float:"right"}}>
+                      <h3 ><span style={{fontFamily:'librebaskerville-italic' ,borderBottom: 'solid #11ABB0', letterSpacing:'1px'}}>{item.workplace}   </span></h3>
+                    </div>
+                    <div style={{width:"60%", float:"left"}}>
+                      <div className="row item">
+                        <div className="twelve columns">
+                          <div>
+                            <p style={{color:'black', fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.position} </p>
+                          </div>
+                          <div>
+                            <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.from}-{item.to}</p>
+                          </div>
+                        </div>
+                        <Button onClick={()=>{this.deletework((this.state.work)[index],this.props.auth.user)}}><Translate content='delete'></Translate></Button>
+                      </div>
             
-         </div>
+                    </div>
       
-         </div>
+                  </div>
         
-      </li>
-  )}  <button style={{alignItems:'center', marginLeft:'auto'}} onClick={this.showWorkModal}><Translate content='add_work'></Translate> </button></ul>} </p>
-    </div>
-   
-      <Modal show={this.state.showwork} >
-        <Modal.Header closeButton onClick={this.hideWorkModal}></Modal.Header>
-      <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='add_work'></Translate> </h2>
-      <form onSubmit={this.onSubmitWork}>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addworkplace}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Business Name"
-                      name="addworkplace"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addposition}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Position/Role"
-                      name="addposition"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addfrom}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Start Date"
-                      name="addfrom"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addto}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add End Date"
-                      name="addto"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
-                  </form>
-      
-        </Modal>
-    </div>
-   </section>
-
-   <section id='projects'>
-   <div id = "projectsection" style={{backgroundColor:'#fff'}}>
-      <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='projects'></Translate> </h2>
-      <div>         
-      <p > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.projects).map( (item, index) =>
-   
-  <li key = {index} >
-    <div className="row education">
-         <div style={{width:"40%", float:"right"}}>
-            <h3 ><span style={{fontFamily:'librebaskerville-italic' ,borderBottom: 'solid #11ABB0', letterSpacing:'1px'}}>{item.projectname}   </span></h3>
-         </div>
-         <div style={{width:"60%", float:"left"}}>
-            <div className="row item">
-               <div className="twelve columns">
-                 <div>
-        <p style={{color:'black', fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.projectdescription} </p>
-        </div>
-        <div>
-        <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.projectlink}</p>
-        </div>
-               </div>
-               <Button onClick={()=>{this.deleteproject((this.state.projects)[index],this.props.auth.user)}}><Translate content='delete'></Translate></Button>
+                </li>
+                )}  <button style={{alignItems:'center', marginLeft:'auto'}} onClick={this.showWorkModal}><Translate content='add_work'></Translate> </button></ul>} </p>
             </div>
-         </div>
+   
+            <Modal show={this.state.showwork} >
+              <Modal.Header closeButton onClick={this.hideWorkModal}></Modal.Header>
+              <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='add_work'></Translate> </h2>
+              <form onSubmit={this.onSubmitWork}>
+                <div className="form-group">
+                  <input onChange={this.onChange}
+                    value={this.state.addworkplace}
+                    type="text"
+                    className={("form-control")}
+                    placeholder="Add Business Name"
+                    name="addworkplace"
+                    required autoFocus 
+                  />
+                </div>
+                <div className="form-group">
+                  <input onChange={this.onChange}
+                    value={this.state.addposition}
+                      
+                    type="text"
+                    className={("form-control")}
+                    placeholder="Add Position/Role"
+                    name="addposition"
+                    required autoFocus 
+                  />
+                </div>
+                <div className="form-group">
+                  <input onChange={this.onChange}
+                    value={this.state.addfrom}
+                      
+                    type="text"
+                    className={("form-control")}
+                    placeholder="Add Start Date"
+                    name="addfrom"
+                          
+                    required autoFocus 
+                  />
+                </div>
+                <div className="form-group">
+                  <input onChange={this.onChange}
+                    value={this.state.addto}
+                      
+                    type="text"
+                    className={("form-control")}
+                    placeholder="Add End Date"
+                    name="addto"
+                          
+                    required autoFocus 
+                  />
+                </div>
+                <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
+              </form>
       
-         </div></li>
-    )} <button style={{alignItems:'center'}} onClick={this.showProjectModal}><Translate content='add_projects'></Translate> </button></ul> } </p>
-    </div>
-    
-      <Modal show={this.state.showproject} >
-        <Modal.Header closeButton onClick={this.hideProjectModal}></Modal.Header>
-      <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='add_projects'></Translate> </h2>
-      <form onSubmit={this.onSubmitProject}>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addprojectname}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Project Name"
-                      name="addprojectname"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addprojectdescripition}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Project Description"
-                      name="addprojectdescripition"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <div className="form-group">
-                    <input onChange={this.onChange}
-                      value={this.state.addorijectlink}
-                      
-                      type="text"
-                      className={("form-control")}
-                      placeholder="Add Project Link"
-                      name="addprojectlink"
-                          
-                          required autoFocus 
-                    />
-                  </div>
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
-                  </form>
-      
-        </Modal>
-    </div>
-</section>
+            </Modal>
+          </div>
+        </section>
 
-   <section id="skills">
-      <div id = "skillsection" style={{backgroundColor:'#fff'}}>
+        <section id='projects' style={{display:this.state.sectionP}}>
+          <div id = "projectsection" style={{backgroundColor:'#fff'}}>
+            <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='projects'></Translate> </h2>
+            <div>         
+              <p > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.projects).map( (item, index) =>
+                <li key = {index} >
+                  <div className="row education">
+                    <div style={{width:"40%", float:"right"}}>
+                      <h3 ><span style={{fontFamily:'librebaskerville-italic' ,borderBottom: 'solid #11ABB0', letterSpacing:'1px'}}>{item.projectname}   </span></h3>
+                    </div>
+                    <div style={{width:"60%", float:"left"}}>
+                      <div className="row item">
+                        <div className="twelve columns">
+                          <div>
+                            <p style={{color:'black', fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.projectdescription} </p>
+                          </div>
+                          <div>
+                            <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px'}}>{item.projectlink}</p>
+                          </div>
+                        </div>
+                        <Button onClick={()=>{this.deleteproject((this.state.projects)[index],this.props.auth.user)}}><Translate content='delete'></Translate></Button>
+                      </div>
+                    </div>
+      
+                  </div>
+                </li>
+                )} <button style={{alignItems:'center'}} onClick={this.showProjectModal}><Translate content='add_projects'></Translate> </button></ul> } </p>
+            </div>
+    
+            <Modal show={this.state.showproject} >
+              <Modal.Header closeButton onClick={this.hideProjectModal}></Modal.Header>
+              <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='add_projects'></Translate> </h2>
+              <form onSubmit={this.onSubmitProject}>
+                <div className="form-group">
+                  <input onChange={this.onChange}
+                    value={this.state.addprojectname}
+                    
+                    type="text"
+                    className={("form-control")}
+                    placeholder="Add Project Name"
+                    name="addprojectname"
+                        
+                        required autoFocus 
+                  />
+                </div>
+                <div className="form-group">
+                  <input onChange={this.onChange}
+                    value={this.state.addprojectdescripition}
+                      
+                    type="text"
+                    className={("form-control")}
+                    placeholder="Add Project Description"
+                    name="addprojectdescripition"
+                        
+                        required autoFocus 
+                  />
+                </div>
+                <div className="form-group">
+                  <input onChange={this.onChange}
+                    value={this.state.addorijectlink}
+                      
+                    type="text"
+                    className={("form-control")}
+                    placeholder="Add Project Link"
+                    name="addprojectlink"
+                          
+                        required autoFocus 
+                  />
+                </div>
+               <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
+              </form>
+      
+            </Modal>
+          </div>
+        </section>
+
+        <section id="skills" style={{display:this.state.sectionSk}}>
+   <div id = "skillsection" style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='skills'></Translate> </h2>
       <div>         
       <p style= {{ fontSize: '25px'}} >{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.skills.map( (item, index) =>
     <li key = {index} style={{paddingBottom:"20px"}}><span style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px',borderBottom:'solid #11ABB0'}}>{item}</span> <Button onClick={()=>{this.deleteskills(index,this.props.auth.user)}}><Translate content='delete'></Translate></Button></li>
   )}<button style={{alignItems:'center'}} onClick={this.showskillsModal}><Translate content='add_skills'></Translate> </button></ul> } </p>
-      </div> 
+      </div>
+      
       
       <Modal show={this.state.showskills}>
                 <Modal.Header closeButton onClick={this.hideskillsModal}></Modal.Header>
@@ -965,8 +1074,8 @@ onSubmitGalleryPhoto = (e) => {
       </div>
    </section>
 
-   <section id="subjects">
-      <div id = "subjectsection" style={{backgroundColor:'#fff'}}>
+        <section id="subjects" style={{display:this.state.sectionSu}}>
+   <div id = "subjectsection" style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='subjects'></Translate> </h2>
       <div>         
       <p > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.subjects).sort((a, b) => b.subjectyear - a.subjectyear)).map( (item, index) =>
@@ -1043,7 +1152,7 @@ onSubmitGalleryPhoto = (e) => {
       </div>
    </section>
 
-   <section id = "gallery">
+        <section id = "gallery" style={{display:this.state.sectionG}}>
    <div id = "gallerysection" style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='gallery'></Translate></h2>
      

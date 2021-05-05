@@ -6,6 +6,22 @@ var app = express()
 const mongoose = require('mongoose')
 var port = process.env.PORT || 5000
 
+var fs = require('fs')
+var key = fs.readFileSync('private.key');
+var cert = fs.readFileSync('mydomain.crt');
+
+var options = {
+    key: key,
+    cert: cert
+};
+// Run static server
+var https = require('https');
+https.createServer(options, app).listen(port, function() {
+  console.log('Server is running on port: ' + port)
+}) 
+
+
+
 app.use(bodyParser.json())
 app.use(cors())
 app.use(
@@ -26,18 +42,22 @@ mongoose.connect(
 require('./models/user.js');
 require('./models/profile.js');
 
+mongoose.set('useFindAndModify', false);
+
 const routes = require('./routes/router.js');
 const fileRoutes = require('./routes/file-upload.js');
+const userRoutes = require('./routes/user.js');
 app.use('/', routes);
 app.use('/', fileRoutes);
+app.use('/', userRoutes);
 
 app.use(express.static(__dirname + '/public'));
 app.use('/static', express.static(path.join(__dirname, 'client/build')));
 
 
-app.listen(port, function() {
-  console.log('Server is running on port: ' + port)
-})
+// app.listen(port, function() {
+//   console.log('Server is running on port: ' + port)
+// })
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files

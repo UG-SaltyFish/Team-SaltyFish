@@ -51,7 +51,7 @@ export const CarouselHomepage = () => (
     
     backgroundColor: 'whitesmoke',
    opacity:"0.8"}}>
-              <h3>Swat Kats, an online E-Portfolio hosting service.</h3>
+              <h3>Swat Kats&Salty Fish, an online E-Portfolio hosting service.</h3>
               <p style={{color:"grey"}}>Choose from multiple stunning templates to showcase your results and skills in an E-Portfolio format.</p>
           </Carousel.Caption>
         </Carousel.Item>
@@ -84,7 +84,7 @@ export const CarouselHomepage = () => (
     backgroundColor: 'whitesmoke',
    opacity:"0.8"}}>
               <h3>Get yourself closer to your dream job</h3>
-              <p style={{color:"grey"}}>Swat Kats makes it easier for employers to view prospective employees' credentials. Don't miss the chance to secure your dream position.</p>
+              <p style={{color:"grey"}}>Swat Kats&Salty Fish makes it easier for employers to view prospective employees' credentials. Don't miss the chance to secure your dream position.</p>
           </Carousel.Caption>
         </Carousel.Item>
         </Carousel>

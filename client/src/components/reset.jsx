@@ -5,7 +5,10 @@ import classnames from 'classnames';
 import { Button, Image, Row} from 'react-bootstrap';
 import icon from './registerImage.svg';
 
-
+import decode from 'jwt-decode';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Nav, Navbar, Dropdown} from 'react-bootstrap';
 import styled from 'styled-components';
@@ -19,6 +22,8 @@ import en from "./i18n/en";
 import cn from "./i18n/cn";
 import jp from "./i18n/jp";
 import "./Footer.css";
+
+import { Container, Col } from 'reactstrap';
 
 //Translation
 counterpart.registerTranslations('en',en);
@@ -49,16 +54,13 @@ const Styles = styled.div
   }
 `;
 
-
-
-
-class Register extends Component {
-  constructor() {
-    super();
+class Reset extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
+      id:'',
       name: '',
       email: '',
-      image:null,
       password: '',
       password2: '',
       errors: ''
@@ -68,27 +70,53 @@ class Register extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  //Get UserACC and set as default (display name and email only)
+  componentWillMount(){
+
+    const user = this.props.auth.user;
+    console.log(user);
+
+    axios
+      .get('/user/' + user)
+      .then(res=>{
+        this.setState({
+          user:res.data,
+          id:res.data.id,
+          name:res.data.name,
+          email:res.data.email
+        });
+      });
+
+  }
+
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   onSubmit(e) {
+
     e.preventDefault();
 
-    const newUser = {
+    const id = this.props.auth.user;
+    const updatedUser = {
+      id: this.state.user._id,
       name: this.state.name,
       email: this.state.email,
-      image: this.state.image,
       password: this.state.password,
       password2: this.state.password2
     };
-
+    
     axios
-      .post('/register', newUser)
+      .post('/user/' + id + '/update',updatedUser)
+      .then(res => {
+        this.setState({
+          email:res.data.email,
+          name:res.data.name
+        });
+      })
       .then(res => {this.props.history.push("/login");})
       .catch(err => this.setState({ errors: err.response.data }));
-    
- 
+
   }
 
   switchtoen = () => {
@@ -112,7 +140,7 @@ class Register extends Component {
     
 
     return (
-      <div className="register">
+      <div className="reset">
         <Styles>  
     <Navbar className = "color-nav" expand="lg" bg="light" variant="light">
       <Navbar.Brand href="/">
@@ -134,9 +162,9 @@ class Register extends Component {
       <Navbar.Toggle aria-controls="basic-navbar-nav"/>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-        <Nav.Item style={{paddingRight:"4px"}}><Nav.Link href="/register" style={{borderStyle:"solid", borderRadius:"8px", borderWidth:"thin", color:"#17a2b8"}}><Translate content='register'></Translate></Nav.Link></Nav.Item>
+        
  
- <Nav.Item style={{paddingRight:"4px"}}><Nav.Link href="/login" style={{borderStyle:"solid", borderRadius:"8px", borderWidth:"thin", color:"#17a2b8"}}><Translate content='login'></Translate></Nav.Link></Nav.Item>
+ <Nav.Item style={{paddingRight:"4px"}}><Nav.Link href="/login" style={{borderStyle:"solid", borderRadius:"8px", borderWidth:"thin", color:"#17a2b8"}}><Translate content='profile'></Translate></Nav.Link></Nav.Item>
  <Nav.Item>
  <Dropdown style={{size:"50px"}}>
        <Dropdown.Toggle variant = "outline-info" id = "dropdown-basic"  style={{borderStyle:"solid", borderRadius:"8px", borderWidth:"thin", }}>
@@ -154,57 +182,64 @@ class Register extends Component {
       </Navbar.Collapse>
     </Navbar>
   </Styles>
-        <div style={{backgroundColor:"#fff", padding:"10px"}}>
+
+<div style={{backgroundColor:"#fff", padding:"10px"}}>
           <div className = "row">
-            <h1 className="display-4 mx-auto mt-3"><Translate content='Createacc'></Translate></h1>
+            <h1 className="display-1 mx-auto mt-1"><font color="#338DFF"><Translate content='Resetacc'></Translate></font></h1>
+          </div>
+          <div class="row">
+            <h1 className="display-10 mx-auto mt-10"><font size="5.5" color="grey"> <Translate content='instruction'></Translate> </font></h1>
+          </div>
+
+          <div class="container h-50">
+          <div class="row h-100 justify-content-center align-items-center">
+              <h2 style={{color:'red', paddingBlock:'10px'}}>{this.state.errors}</h2>
             </div>
-            <div>
-              <h1>{this.state.errors}</h1>
-            </div>
-          <div className="row align-self-center nr-1">
-            <div className="col align-self-center d-none d-lg-block">
-              <div className="col-md-10 m-auto">
-                <Image src={icon} fluid />
-              </div>
-            </div>
-            <div className="col align-self-center nl-1">
-              <div className="col-md-12 m-auto">
-                
+          </div>
+     
+
+            <div class="container h-100">
+            
+            <div class="row h-100 justify-content-center align-items-center">
+  
+            <form class="col-5">
                 <form noValidate onSubmit={this.onSubmit}>
-                  <div className="form-group">
+                 <div className="form-group">
                     <input
                       type="text"
                       className={classnames('form-control form-control-lg')}
-                      placeholder="Name"
+      
                       name="name"
                       value={this.state.name}
                       onChange={this.onChange}
                     />
-                    
+          
                   </div>
+
                   <div className="form-group">
                     <input
                       type="email"
                       className={classnames('form-control form-control-lg')}
-                      placeholder="Email Address"
+                      
                       name="email"
                       value={this.state.email}
                       onChange={this.onChange}
                     />
                    
-
                   </div>
+                  
                   <div className="form-group">
                     <input
                       type="password"
                       className={classnames('form-control form-control-lg')}
-                      placeholder="Password"
+                      placeholder="New Password"
                       name="password"
                       value={this.state.password}
                       onChange={this.onChange}
                     />
                    
                   </div>
+                  
                   <div className="form-group">
                     <input
                       type="password"
@@ -218,20 +253,16 @@ class Register extends Component {
                   </div>
                   <Button variant="info" type="submit" size="lg" block>
                   <Translate content='submit'></Translate>
-                    </Button>
+                  </Button>
                     
-                    <Row>
-                      <a href="/login" className="small mx-auto mt-2">
-                      <Translate content='registerfa'></Translate>
-                      </a>
-                    </Row>
+                    
                   
                 </form>
-              </div>
-            </div>
+                </form>
+             </div>    
           </div>
-          
         </div>
+
         <div className = "main-footer">
     <div className = "container">
       <div className = "row">
@@ -277,4 +308,14 @@ class Register extends Component {
   }
 }
 
-export default Register;
+Reset.propTypes = {
+  auth: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+};
+        
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+  });
+        
+export default connect(mapStateToProps)(Reset);
