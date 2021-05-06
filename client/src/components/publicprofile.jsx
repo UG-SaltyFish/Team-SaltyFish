@@ -231,14 +231,16 @@ hidecontactModal = () => {
             
                     <div>
                       <Button  onClick={this.showcontactModal}><Translate content='edit_contact'></Translate></Button>
-                      <Modal show={this.state.showcontact}>
+
+                      
+
+                      <Modal show={this.state.showcontact} centered>
+                        
+                        
                         <Modal.Header closeButton onClick={this.hidecontactModal}></Modal.Header>
                         <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_con'></Translate> </h2>
                         <form onSubmit={this.onSubmitcontact}>
                           <input onChange={this.onChange}
-
-
-
                             value={this.state.addinfo}
                             type="text"
                             className={("form-control")}
@@ -254,6 +256,13 @@ hidecontactModal = () => {
                       </Modal>
              
                     </div>
+
+                    
+
+                     
+
+
+            
             
          </div>
 
