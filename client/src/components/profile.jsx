@@ -75,9 +75,7 @@ class Profile extends Component {
       addprojectdescripition:'',
       addprojectlink:'',
       showphone:false,
-      lang:'en',
-      hastranscript:'notranscript',
-      filename:''
+      lang:'en'
     };
   this.onLogoutClick=this.onLogoutClick.bind(this);
   this.onChange =this.onChange.bind(this);
@@ -343,14 +341,6 @@ onSubmitGalleryPhoto = (e) => {
                          imgHash: Date.now()
                         });
           })
-
-    if (this.state.transcript !== "") {
-      this.state.hastranscript ='yestranscript';
-      this.state.filename=this.state.transcript;
-    }else{
-      this.state.hastranscript ='notranscript';
-      this.state.filename='';
-    }
 }
   fileSelectedHandler = event => {
     event.preventDefault();
@@ -365,7 +355,7 @@ onSubmitGalleryPhoto = (e) => {
   hideEdu = ()=>{
     var checkbox1 = document.getElementById("edusec");
     var edusection = document.getElementById("educationsec");
-    if(checkbox1.checked == false){
+    if(checkbox1.checked === false){
       edusection.style.display = "none";
     }else{
       edusection.style.display = "block";
@@ -383,7 +373,7 @@ onSubmitGalleryPhoto = (e) => {
   hideWork = ()=>{
     var checkbox1 = document.getElementById("worksec");
     var worksection = document.getElementById("worksection");
-    if(checkbox1.checked == false){
+    if(checkbox1.checked === false){
       worksection.style.display = "none";
     }else{
       worksection.style.display = "block";
@@ -398,7 +388,7 @@ onSubmitGalleryPhoto = (e) => {
   hideProj = ()=>{
     var checkbox1 = document.getElementById("projsec");
     var projsection = document.getElementById("projectsection");
-    if(checkbox1.checked == false){
+    if(checkbox1.checked === false){
       projsection.style.display = "none";
     }else{
       projsection.style.display = "block";
@@ -413,7 +403,7 @@ onSubmitGalleryPhoto = (e) => {
   hideSkill = ()=>{
     var checkbox1 = document.getElementById("skillsec");
     var skisection = document.getElementById("skillsection");
-    if(checkbox1.checked == false){
+    if(checkbox1.checked === false){
       skisection.style.display = "none";
     }else{
       skisection.style.display = "block";
@@ -428,7 +418,7 @@ onSubmitGalleryPhoto = (e) => {
   hideSub = ()=>{
     var checkbox1 = document.getElementById("subsec");
     var subsection = document.getElementById("subjectsection");
-    if(checkbox1.checked == false){
+    if(checkbox1.checked === false){
       subsection.style.display = "none";
     }else{
       subsection.style.display = "block";
@@ -443,7 +433,7 @@ onSubmitGalleryPhoto = (e) => {
   hideGal = ()=>{
     var checkbox1 = document.getElementById("galsec");
     var galsection = document.getElementById("gallerysection");
-    if(checkbox1.checked == false){
+    if(checkbox1.checked === false){
       galsection.style.display = "none";
     }else{
       galsection.style.display = "block";
@@ -458,7 +448,7 @@ onSubmitGalleryPhoto = (e) => {
 
   SectionModal = () => {
     var form1 = document.getElementById("modalhere");
-    if(form1.style.display=="none"){
+    if(form1.style.display==="none"){
       form1.style.display="block";
     }else{
       form1.style.display="none";
@@ -479,11 +469,6 @@ onSubmitGalleryPhoto = (e) => {
       }).then(res=> {
         console.log(res);
       })
-      this.state.hastranscript ='yestranscript';
-      this.state.filename=this.state.transcript;
-    }else{
-      this.state.hastranscript ='notranscript';
-      this.state.filename='';
     }
 
     fd.append('transcript', this.state.selectedFile);

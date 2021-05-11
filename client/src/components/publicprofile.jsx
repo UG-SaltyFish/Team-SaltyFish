@@ -73,7 +73,6 @@ class PublicProfile extends Component {
       addprojectlink:'',
       showphone:false,
       lang:'en',
-      filename:''
     };
   this.onChange =this.onChange.bind(this);
   
@@ -138,11 +137,6 @@ pdfprint(){
                          imgHash: Date.now()
                         });
           })
-    if (this.state.transcript !== "") {
-      this.state.filename=this.state.transcript;
-    }else{
-      this.state.filename='';
-    }
 }
   
  
