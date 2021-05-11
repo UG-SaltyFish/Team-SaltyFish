@@ -1,5 +1,5 @@
 {
-  "name": "it-project",
+  "name": "Team-SaltyFish",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -16,14 +16,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/UG-SaltyFish/Team-SaltyFish/tree/Jiaxin.git"
+    "url": "https://github.com/UG-SaltyFish/Team-SaltyFish"
   },
-  "author": "Joyce",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/UG-SaltyFish/Team-SaltyFish/issues"
-  },
-  "homepage": "https://github.com/UG-SaltyFish/Team-SaltyFish/tree/Jiaxin#readme",
+  "homepage": "https://github.com/UG-SaltyFish/Team-SaltyFish#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
