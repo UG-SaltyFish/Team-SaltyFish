@@ -104,6 +104,12 @@ onChange = (e) => {
   
   this.setState({[e.target.name]: e.target.value});
 }
+
+pdfprint(){  
+  window.document.body.innerHTML = window.document.getElementById('profileprint').innerHTML;  
+  window.print(); 
+  window.location.reload();
+}
    
 showcontactModal = () => {
   this.setState({ showcontact: true });
@@ -203,11 +209,10 @@ hidecontactModal = () => {
       
       
     </Modal>
-    
+    <li><button onClick={this.pdfprint.bind(this)} style={{marginRight: '8px'}}><Translate content='print'></Translate></button></li>
    
 </ul>
 </nav>
-        
         <div class="row banner">
          <div class="banner-text">
             
@@ -217,12 +222,12 @@ hidecontactModal = () => {
                 <h2 style={{color:'white', fontFamily:'Palatino Linotype'}}>  {this.state.intro}</h2>
                 
             </div>
-            
             <hr />
             
          </div>
       </div>
       </header>
+      <div className="profile-content" id={'profileprint'}>
       <section id="about" >
       <div className="row">
       <div className="three columns">
@@ -276,6 +281,7 @@ hidecontactModal = () => {
 
        
          <div className="nine columns main-col">
+           <h1 style={{fontFamily:'Georgia, serif', color:'white'}}> {this.state.name} </h1>
             <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='about_me'></Translate> </h2>
             <div style={{display:'inline-block', width:'100%', wordWrap:'break-word', whitespace:'normal'}}>
             <p>{this.state.bio}</p>
@@ -433,7 +439,7 @@ hidecontactModal = () => {
       
       </div>
    </section>
-
+   </div>
    <section id = "gallery" style={{display:this.state.sectionG}}>
    <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='gallery'></Translate> </h2>

@@ -672,7 +672,7 @@ onSubmitGalleryPhoto = (e) => {
 
               <li><Link activeClass="active" to="subjects" spy={true} smooth={true} duration={1000} href="#"><Translate content='subjects'></Translate>  </Link></li>
   
-              <li><Link activeClass="active" to="gallery" spy={true} smooth={true} duration={1000} href="#"style={{paddingRight:"380px"}}><Translate content='gallery'></Translate>  </Link></li>
+              <li><Link activeClass="active" to="gallery" spy={true} smooth={true} duration={1000} href="#"><Translate content='gallery'></Translate>  </Link></li>
               <li><a className="smoothscroll" href="#" onClick={this.showLanguage}> <Translate content='language'></Translate> </a> </li>
               <Modal show={this.state.showlang} >
                 <Modal.Header closeButton onClick={this.hideLanguage}></Modal.Header>
@@ -682,8 +682,8 @@ onSubmitGalleryPhoto = (e) => {
       
               </Modal>
     
-              <li><a  className="smoothscroll" href=""  onClick={this.onLogoutClick}style={{textAlign: 'right'}}><Translate content='logout'></Translate> </a></li>
-              <li><a  className="smoothscroll" href="" onClick={this.onResetClick}><Translate content='reset'></Translate> </a></li>
+              <li><button id="but1" onClick={this.onLogoutClick}style={{textAlign: 'right'}}><Translate content='logout'></Translate></button></li>
+              <li><button className="smoothscroll" href="" onClick={this.onResetClick}><Translate content='reset'></Translate> </button></li>
 
             </ul>
           </nav>
