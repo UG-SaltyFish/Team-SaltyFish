@@ -6,19 +6,19 @@ var app = express()
 const mongoose = require('mongoose')
 var port = process.env.PORT || 5000
 
-var fs = require('fs')
-var key = fs.readFileSync('private.key');
-var cert = fs.readFileSync('mydomain.crt');
+// var fs = require('fs')
+// var key = fs.readFileSync('private.key');
+// var cert = fs.readFileSync('mydomain.crt');
 
-var options = {
-    key: key,
-    cert: cert
-};
-// Run static server
-var https = require('https');
-https.createServer(options, app).listen(port, function() {
-  console.log('Server is running on port: ' + port)
-}) 
+// var options = {
+//     key: key,
+//     cert: cert
+// };
+// // Run static server
+// var https = require('https');
+// https.createServer(options, app).listen(port, function() {
+//   console.log('Server is running on port: ' + port)
+// }) 
 
 
 
@@ -55,9 +55,9 @@ app.use(express.static(__dirname + '/public'));
 app.use('/static', express.static(path.join(__dirname, 'client/build')));
 
 
-// app.listen(port, function() {
-//   console.log('Server is running on port: ' + port)
-// })
+app.listen(port, function() {
+  console.log('Server is running on port: ' + port)
+})
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files

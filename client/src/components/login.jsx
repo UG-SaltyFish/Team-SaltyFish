@@ -107,19 +107,19 @@ class Login extends Component {
   };
   
 
-  callback = (res) => {
-    console.log(res);
-    const fbUser = {
-          name: res.name, //res.profileObj.name
-          email: res.email, //res.profileObj.email
-          password: res.id,   //res.profileObj.googleId
-        };
+  // callback = (res) => {
+  //   console.log(res);
+  //   const fbUser = {
+  //         name: res.name, //res.profileObj.name
+  //         email: res.email, //res.profileObj.email
+  //         password: res.id,   //res.profileObj.googleId
+  //       };
       
-        this.props.fbLoginUser(fbUser);
-        this.props.setUserLoading();
+  //       this.props.fbLoginUser(fbUser);
+  //       this.props.setUserLoading();
       
-        fbrefreshTokenSetup(res);
-  };
+  //       fbrefreshTokenSetup(res);
+  // };
 
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
@@ -303,24 +303,7 @@ class Login extends Component {
 
 {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
                       {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
-                      <FacebookLogin
-                          appId={appId} // appId of our application registered on Facebook developer platform
-                          textButton="FACEBOOK LOGIN"
-                          typeButton={"button"}
-                          size={"small"}
-                          theme={"light"}
-                          cssClass="kep-login-facebook"
-                          fields="name,email,picture"
-                          autoLoad={false}
-                          //icon={}
-                          //containerStyle={}
-                          //buttonStyle={}
-                          callback={this.callback}
-                          uxMode={"redirect"}
-                          redirectUri={"https://it-project-eportfolio.herokuapp.com/"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
-                          cookiePolicy={'single_host_origin'}
-                      />
-                    
+                      
                     
                     
                       
@@ -423,9 +406,7 @@ class Login extends Component {
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   gooLoginUser: PropTypes.func.isRequired,
-  fbLoginUser: PropTypes.func.isRequired,
   refreshTokenSetup: PropTypes.func.isRequired,
-  fbrefreshTokenSetup: PropTypes.func.isRequired,
   setUserLoading: PropTypes.func.isRequired,
   setUserNotLoading: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
@@ -440,5 +421,5 @@ Login.propTypes = {
   
   export default connect(
   mapStateToProps,
-  { loginUser, setUserLoading, setUserNotLoading, gooLoginUser, fbLoginUser, refreshTokenSetup, fbrefreshTokenSetup }
+  { loginUser, setUserLoading, setUserNotLoading, gooLoginUser,  refreshTokenSetup }
   )(Login);
