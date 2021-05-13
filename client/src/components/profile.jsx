@@ -20,6 +20,8 @@ import "./css/media-queries.css";
 import en from "./i18n/en";
 import cn from "./i18n/cn";
 import jp from "./i18n/jp";
+import copy from 'copy-to-clipboard';
+
 
 //Translation
 counterpart.registerTranslations('en',en);
@@ -360,7 +362,11 @@ onSubmitGalleryPhoto = (e) => {
   }
 
 
-
+  getUrl = ()=>{
+    var userURL = "https://it-project-eportfolio.herokuapp.com" + "/public/" + this.state.email;
+    copy(userURL);
+    alert("Successful Copy URL to Clipboard");
+  }
 
   hideEdu = ()=>{
     var checkbox1 = document.getElementById("edusec");
@@ -672,7 +678,8 @@ onSubmitGalleryPhoto = (e) => {
 
               <li><Link activeClass="active" to="subjects" spy={true} smooth={true} duration={1000} href="#"><Translate content='subjects'></Translate>  </Link></li>
   
-              <li><Link activeClass="active" to="gallery" spy={true} smooth={true} duration={1000} href="#"style={{paddingRight:"380px"}}><Translate content='gallery'></Translate>  </Link></li>
+              <li><Link activeClass="active" to="gallery" spy={true} smooth={true} duration={1000} href="#" style={{paddingRight:"300px"}}><Translate content='gallery'></Translate>  </Link></li>
+              <li><a className="smoothscroll" href="#" onClick={this.getUrl}> <Translate content='url'></Translate> </a> </li>
               <li><a className="smoothscroll" href="#" onClick={this.showLanguage}> <Translate content='language'></Translate> </a> </li>
               <Modal show={this.state.showlang} >
                 <Modal.Header closeButton onClick={this.hideLanguage}></Modal.Header>
