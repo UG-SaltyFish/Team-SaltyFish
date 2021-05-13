@@ -364,8 +364,11 @@ onSubmitGalleryPhoto = (e) => {
 
   getUrl = ()=>{
     var userURL = "https://it-project-eportfolio.herokuapp.com" + "/public/" + this.state.email;
-    copy(userURL);
-    alert("Successful Copy URL to Clipboard");
+    if(copy(userURL)){
+    alert("Successful copy URL to clipboard!");
+    }else{
+    alert("Copy URL failed, please try again.");  
+    }
   }
 
   hideEdu = ()=>{
