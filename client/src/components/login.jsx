@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {GoogleLogin } from 'react-google-login';
-
+import axios from 'axios';
 import { Button, Image, Col, Row,Modal} from 'react-bootstrap';
 import icon from './loginImage.svg';
 
@@ -37,6 +37,8 @@ const googleClientId = '996695088450-8vihibptuoco1cqafe0mpsvqdmp48fhu.apps.googl
 const appId = '277936307150836'
 
 const Styles = styled.div
+
+
 `
   .navbar { background-color: #365; }
   a, .navbar-nav, .navbar-light .nav-link {
@@ -60,6 +62,7 @@ const Styles = styled.div
 
 
 class Login extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -67,6 +70,8 @@ class Login extends Component {
       password: '',
       errors: '',
       showmessage:false,
+      can: false,
+      realpassword:'',
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -77,9 +82,19 @@ class Login extends Component {
     counterpart.setLocale('en')
  
   };
-  switchtocn = () => {
-    
-    counterpart.setLocale('cn');
+  onSubmitEmail = (e) => {
+    e.preventDefault();
+    const mailDirc = {
+      mail: this.state.email,
+      pass: this.state.realpassword,
+    }
+    axios.get('/getpassword',mailDirc).then(res=>this.setState({realpassword:res.data}));
+    console.log(this.state.realpassword);
+    axios.post('/sendmail', mailDirc);
+  }
+  
+  
+  switchtojp= () =>{
 
   };
   switchtojp= () => {
@@ -166,7 +181,7 @@ class Login extends Component {
     this.props.loginUser(userData);
     this.props.setUserLoading();
   };
-
+  
   showmessageModal = () => {
     this.setState({ showmessage: true });
   };
@@ -350,7 +365,7 @@ class Login extends Component {
                     <Modal show={this.state.showmessage}>
                     <Modal.Header closeButton onClick={this.hidemessageModal}></Modal.Header>
                     <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='message'></Translate> </h2>
-                    <form onSubmit={this.onSubmitEmail}>
+                    <form>
                      <input onChange={this.onChange}
                       value={this.state.email}
                       type="text"
@@ -362,7 +377,7 @@ class Login extends Component {
                           required autoFocus 
                     />
                   
-                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
+                    <button type="submit" onClick = {this.onSubmitEmail} style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
                   </form>
                 </Modal>
                     
