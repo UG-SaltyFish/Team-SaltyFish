@@ -197,11 +197,11 @@ pdfprint(){
    
 </ul>
 </nav>
-        <div class="row banner">
-         <div class="banner-text">
+        <div className="row banner">
+         <div className="banner-text">
             
             <h1 className="responsive-headline"> <Translate content='Im'></Translate>  {this.state.name} </h1>
-            <div class="float-container">
+            <div className="float-container">
           
                 <h2 style={{color:'white', fontFamily:'Palatino Linotype'}}>  {this.state.intro}</h2>
                 
@@ -228,19 +228,19 @@ pdfprint(){
             <div className="row">
                <div className="columns contact-details">
                   <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='contact_details'></Translate> </h2>
-                  <p className="address">
+                  <h6 className="address" style={{color:"gray"}}>
 						   <span>{this.state.phone}</span><br />
                <div>
                 
       </div>
                      <span>{this.state.email}</span>
-					   </p>
+					   </h6>
                </div>
                <div className="columns download">
-                  <p>
+                  <div>
                   <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='transcript_file'></Translate> </h2>
                   <p><a href = {this.state.transcript} target = "_blank"  download = "transcript" >{this.state.transcript}</a> </p>
-                  </p>
+                  </div>
                </div>
             </div>
          </div>
@@ -250,14 +250,13 @@ pdfprint(){
    <section id="education" style={{display:this.state.sectionE}}>
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='education'></Translate> </h2>
-      <div>         
-    <p   style= {{ fontSize: '20px'}}  >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.education.map( (item, index) =>
+      <div   style= {{ fontSize: '20px'}}  >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.education.map( (item, index) =>
 <li key = {index} > 
         <p style={{color:'black', fontFamily:'bookman', fontSize:'25px',  letterSpacing:'1px'}}>{item.school} </p>    
         <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'20px',  letterSpacing:'1px'}}>{item.qual}</p>
         <hr />
       </li>
-  )}</ul>} </p>
+  )}</ul>}
   
       </div>
              
@@ -268,8 +267,7 @@ pdfprint(){
    <section id="work" style={{display:this.state.sectionW}}>
    <div style={{backgroundColor:'#fff'}}>
     <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='work1'></Translate> </h2>
-    <div>
-    <p     >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.work).sort((a,b)=>b.from -a.from)).map( (item, index) =>
+    <div>{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.work).sort((a,b)=>b.from -a.from)).map( (item, index) =>
 <li key = {index} > 
 <div className="row education">
          <div style={{width:"40%", float:"right"}}>
@@ -290,7 +288,7 @@ pdfprint(){
      </div>
         
       </li>
-  )}</ul>} </p>
+  )}</ul>}
     </div>
 </div>
    </section>
@@ -298,8 +296,7 @@ pdfprint(){
    <section id='projects' style={{display:this.state.sectionP}}>
    <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='projects'></Translate> </h2>
-      <div>         
-      <p > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.projects).map( (item, index) =>
+      <div>{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.projects).map( (item, index) =>
    
   <li key = {index} >
     <div className="row education">
@@ -320,7 +317,7 @@ pdfprint(){
          </div>
       
          </div></li>
-    )}</ul> } </p>
+    )}</ul> }
     </div>
     </div>
 </section>
@@ -329,10 +326,9 @@ pdfprint(){
    <section id="skills" style={{display:this.state.sectionSk}}>
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='skills'></Translate> </h2>
-      <div>         
-      <p style= {{ fontSize: '25px'}} >{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.skills.map( (item, index) =>
+      <div style= {{ fontSize: '25px'}} >{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.skills.map( (item, index) =>
     <li key = {index} style={{paddingBottom:"20px"}}><span style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px',borderBottom:'solid #11ABB0'}}>{item}</span> </li>
-  )}</ul> } </p>
+  )}</ul> }
       </div>
        </div>
    </section>
@@ -340,8 +336,7 @@ pdfprint(){
    <section id="subjects" style={{display:this.state.sectionSu}}>
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='subjects'></Translate> </h2>
-      <div>         
-      <p > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.subjects).sort((a, b) => b.subjectyear - a.subjectyear)).map( (item, index) =>
+      <div> {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.subjects).sort((a, b) => b.subjectyear - a.subjectyear)).map( (item, index) =>
    
   <li key = {index} >
     <div className="row education">
@@ -362,8 +357,7 @@ pdfprint(){
          </div>
       
          </div></li>
-    )}</ul> } </p>
-      
+    )}</ul> }
       </div>
             
       
@@ -376,7 +370,7 @@ pdfprint(){
      
         <Carousel style={{backgroundColor:"grey"}}>
       {(this.state.gallery).map( (item, index) =>
-       <Carousel.Item>
+       <Carousel.Item key={index}>
        <img
        className="carousel-img"
        key={index} src={item.imagesource}

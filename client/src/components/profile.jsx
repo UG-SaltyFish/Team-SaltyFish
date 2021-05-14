@@ -61,7 +61,7 @@ class Profile extends Component {
       showintro:false,
       addintro:'',
       addinfo:'',
-      showskills:'',
+      showskills:false,
       showedu:false,
       addschoolname:'',
       addqual:'',
@@ -672,11 +672,11 @@ onSubmitGalleryPhoto = (e) => {
 
             </ul>
           </nav>
-          <div class="row banner">
-         <div class="banner-text">
+          <div className="row banner">
+         <div className="banner-text">
             
             <h1 className="responsive-headline"> <Translate content='Im'></Translate>  {this.state.name} </h1>
-            <div class="float-container">
+            <div className="float-container">
           
                 <h2 style={{color:'white', fontFamily:'Palatino Linotype'}}>  {this.state.intro}</h2>
                 <Button  onClick={this.showintroModal}><Translate content='edit_Intro'></Translate></Button>
@@ -743,7 +743,7 @@ onSubmitGalleryPhoto = (e) => {
               <div className="row">
                <div className="columns contact-details">
                   <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='contact_details'></Translate> </h2>
-                  <p className="address">
+                  <h6 className="address" style={{color:"gray"}}>
 						        <span>{this.state.phone}</span><br />
                     <div>
                       <Button  onClick={this.showphoneModal}><Translate content='edit_phone'></Translate></Button>
@@ -767,17 +767,17 @@ onSubmitGalleryPhoto = (e) => {
              
                     </div>
                     <span>{this.state.email}</span>
-					        </p>
+					        </h6>
                 </div>
                 <div className="columns download">
-                  <p>
+                  <div>
                     <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='transcript_file'></Translate> </h2>
                     <span><a href = {this.state.transcript} target = "_blank"  download = "transcript" >{this.state.transcript}</a> </span>
                     <Button  onClick={this.deletetranscript}><Translate content='delete'></Translate></Button><br/>
                   
                     <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
                     <Button onClick={this.pdfUploadHandler}><Translate content='upload_transcript'></Translate> </Button>
-                  </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -818,15 +818,14 @@ onSubmitGalleryPhoto = (e) => {
    <div id = "educationsec" style={{backgroundColor:'#fff'}} >
       
             <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='education'></Translate> </h2>
-            <div>         
-              <p   style= {{ fontSize: '20px'}}  >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.education.map( (item, index) =>
+            <div   style= {{ fontSize: '20px'}}  >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.education.map( (item, index) =>
                 <li key = {index} > 
                   <p style={{color:'black', fontFamily:'bookman', fontSize:'25px',  letterSpacing:'1px'}}>{item.school} </p>    
                   <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'20px',  letterSpacing:'1px'}}>{item.qual}</p>
                   <Button onClick={()=>{this.deleteedu((this.state.education)[index],this.props.auth.user)}}><Translate content='delete'></Translate></Button>
                   <hr />
                 </li>
-                )} <button style={{alignItems:'center'}} onClick={this.showEduModal}><Translate content='add_edu'></Translate> </button></ul>} </p>
+                )} <button style={{alignItems:'center'}} onClick={this.showEduModal}><Translate content='add_edu'></Translate> </button></ul>}
       
             </div>
       
@@ -867,8 +866,7 @@ onSubmitGalleryPhoto = (e) => {
         <section id="work" style={{display:this.state.sectionW}} >
           <div id = "worksection" style={{backgroundColor:'#fff'}}>
             <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='work1'></Translate> </h2>
-            <div>
-              <p>{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.work).sort((a,b)=>b.from -a.from)).map( (item, index) =>
+            <div>{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.work).sort((a,b)=>b.from -a.from)).map( (item, index) =>
                 <li key = {index} > 
                   <div className="row education">
                     <div style={{width:"40%", float:"right"}}>
@@ -892,7 +890,7 @@ onSubmitGalleryPhoto = (e) => {
                   </div>
         
                 </li>
-                )}  <button style={{alignItems:'center', marginLeft:'auto'}} onClick={this.showWorkModal}><Translate content='add_work'></Translate> </button></ul>} </p>
+                )}  <button style={{alignItems:'center', marginLeft:'auto'}} onClick={this.showWorkModal}><Translate content='add_work'></Translate> </button></ul>}
             </div>
    
             <Modal show={this.state.showwork} >
@@ -954,8 +952,7 @@ onSubmitGalleryPhoto = (e) => {
         <section id='projects' style={{display:this.state.sectionP}}>
           <div id = "projectsection" style={{backgroundColor:'#fff'}}>
             <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='projects'></Translate> </h2>
-            <div>         
-              <p > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.projects).map( (item, index) =>
+            <div>{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.projects).map( (item, index) =>
                 <li key = {index} >
                   <div className="row education">
                     <div style={{width:"40%", float:"right"}}>
@@ -977,7 +974,7 @@ onSubmitGalleryPhoto = (e) => {
       
                   </div>
                 </li>
-                )} <button style={{alignItems:'center'}} onClick={this.showProjectModal}><Translate content='add_projects'></Translate> </button></ul> } </p>
+                )} <button style={{alignItems:'center'}} onClick={this.showProjectModal}><Translate content='add_projects'></Translate> </button></ul> }
             </div>
     
             <Modal show={this.state.showproject} >
@@ -1030,10 +1027,9 @@ onSubmitGalleryPhoto = (e) => {
         <section id="skills" style={{display:this.state.sectionSk}}>
    <div id = "skillsection" style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='skills'></Translate> </h2>
-      <div>         
-      <p style= {{ fontSize: '25px'}} >{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.skills.map( (item, index) =>
+      <div style= {{ fontSize: '25px'}} >{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.skills.map( (item, index) =>
     <li key = {index} style={{paddingBottom:"20px"}}><span style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px',borderBottom:'solid #11ABB0'}}>{item}</span> <Button onClick={()=>{this.deleteskills(index,this.props.auth.user)}}><Translate content='delete'></Translate></Button></li>
-  )}<button style={{alignItems:'center'}} onClick={this.showskillsModal}><Translate content='add_skills'></Translate> </button></ul> } </p>
+  )}<button style={{alignItems:'center'}} onClick={this.showskillsModal}><Translate content='add_skills'></Translate> </button></ul> }
       </div>
       
       
@@ -1065,8 +1061,7 @@ onSubmitGalleryPhoto = (e) => {
         <section id="subjects" style={{display:this.state.sectionSu}}>
    <div id = "subjectsection" style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='subjects'></Translate> </h2>
-      <div>         
-      <p > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.subjects).sort((a, b) => b.subjectyear - a.subjectyear)).map( (item, index) =>
+      <div> {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.subjects).sort((a, b) => b.subjectyear - a.subjectyear)).map( (item, index) =>
    
   <li key = {index} >
     <div className="row education">
@@ -1088,7 +1083,7 @@ onSubmitGalleryPhoto = (e) => {
          </div>
       
          </div></li>
-    )}<button style={{alignItems:'center'}} onClick={this.showAddModal}><Translate content='add_subjects'></Translate> </button></ul> } </p>
+    )}<button style={{alignItems:'center'}} onClick={this.showAddModal}><Translate content='add_subjects'></Translate> </button></ul> }
       
       <Modal show={this.state.showAdd} >
         <Modal.Header closeButton onClick={this.hideAddModal}></Modal.Header>
@@ -1146,7 +1141,7 @@ onSubmitGalleryPhoto = (e) => {
      
         <Carousel style={{backgroundColor:"grey", paddingBottom:"35px"}}>
       {(this.state.gallery).map( (item, index) =>
-       <Carousel.Item>
+       <Carousel.Item key={index}>
        <img
        className="carousel-img"
        key={index} src={item.imagesource}
@@ -1179,7 +1174,7 @@ onSubmitGalleryPhoto = (e) => {
       )}
      </Carousel>
    
-        <form name="uploadForm" onkeydown="return event.key != 'Enter';">
+        <form name="uploadForm" >
           <div>
             <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
           </div>

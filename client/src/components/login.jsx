@@ -410,7 +410,6 @@ Login.propTypes = {
   setUserLoading: PropTypes.func.isRequired,
   setUserNotLoading: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
   };
   
   // This maps the state that we get from the Redux store to the props for this component

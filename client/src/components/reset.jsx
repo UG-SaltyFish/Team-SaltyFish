@@ -187,22 +187,22 @@ class Reset extends Component {
           <div className = "row">
             <h1 className="display-1 mx-auto mt-1"><font color="#338DFF"><Translate content='Resetacc'></Translate></font></h1>
           </div>
-          <div class="row">
+          <div className="row">
             <h1 className="display-10 mx-auto mt-10"><font size="5.5" color="grey"> <Translate content='instruction'></Translate> </font></h1>
           </div>
 
-          <div class="container h-50">
-          <div class="row h-100 justify-content-center align-items-center">
+          <div className="container h-50">
+          <div className="row h-100 justify-content-center align-items-center">
               <h2 style={{color:'red', paddingBlock:'10px'}}>{this.state.errors}</h2>
             </div>
           </div>
      
 
-            <div class="container h-100">
+            <div className="container h-100">
             
-            <div class="row h-100 justify-content-center align-items-center">
+            <div className="row h-100 justify-content-center align-items-center">
   
-            <form class="col-5">
+            <div className="col-5">
                 <form noValidate onSubmit={this.onSubmit}>
                  <div className="form-group">
                     <input
@@ -258,7 +258,7 @@ class Reset extends Component {
                     
                   
                 </form>
-                </form>
+                </div>
              </div>    
           </div>
         </div>

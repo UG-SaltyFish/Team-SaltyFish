@@ -272,7 +272,7 @@ renderSuggestion = suggestion => (
                     <Col>
                   
                   <div style={{backgroundColor:"#f2f2f2"}}>
-                      <div class="container">
+                      <div className="container">
                           <FontAwesomeIcon icon = {faHandshake} size = "4x" className = "cimg" />
                           <h4 style={{color:"Black"}}><b><Translate content="landing3"></Translate></b></h4>
                           <br/>
@@ -286,7 +286,7 @@ renderSuggestion = suggestion => (
                   <Col>
                 
                   <div style={{backgroundColor:"#f2f2f2"}} >
-                      <div class="container">
+                      <div className="container">
                           <FontAwesomeIcon icon = {faUserPlus} size = "4x" className = "cimg" />
                           <h4 style={{color:"Black"}}><b><Translate content="landing5"></Translate></b></h4>
                           <br/>
@@ -300,7 +300,7 @@ renderSuggestion = suggestion => (
                   <Col>
                   
                   <div style={{backgroundColor:"#f2f2f2"}}> 
-                      <div class="container">
+                      <div className="container">
                           <FontAwesomeIcon icon = {faLanguage} size = "4x" className = "cimg" />
                           <h4 style={{color:"Black"}}><b><Translate content="landing7"></Translate></b></h4>
                           <br/>
