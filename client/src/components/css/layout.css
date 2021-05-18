@@ -168,8 +168,7 @@ ul#nav li a {
    padding: 8px 13px;
    line-height: 32px;
 	text-decoration: none;
-   text-align: right;
-   
+   text-align: left;
    color: #fff;
 
 	-webkit-transition: color .2s ease-in-out;
@@ -182,8 +181,6 @@ ul#nav li a {
 ul#nav li a:active { background-color: transparent !important; }
 ul#nav li.current a { color: #F06000; }
 
-ul#nav li button{text-align:center; margin-top: 5px;padding-top: 5px;height: 40px;position:fixed;right:5px;}
-ul#nav li button#but1{text-align:center; margin-top: 5px;padding-top: 5px;height: 40px;position:fixed;right:110px;}
 
 /* ------------------------------------------------------------------ */
 /* c. About Section
