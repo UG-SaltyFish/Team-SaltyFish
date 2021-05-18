@@ -682,7 +682,7 @@ onSubmitGalleryPhoto = (e) => {
               <li><Link activeClass="active" to="subjects" spy={true} smooth={true} duration={1000} href="#"><Translate content='subjects'></Translate>  </Link></li>
   
               <li><Link activeClass="active" to="gallery" spy={true} smooth={true} duration={1000} href="#" style={{paddingRight:"300px"}}><Translate content='gallery'></Translate>  </Link></li>
-              <li><a className="smoothscroll" href="#" onClick={this.getUrl}> <Translate content='url'></Translate> </a> </li>
+              
               <li><a className="smoothscroll" href="#" onClick={this.showLanguage}> <Translate content='language'></Translate> </a> </li>
               <Modal show={this.state.showlang} >
                 <Modal.Header closeButton onClick={this.hideLanguage}></Modal.Header>
@@ -692,8 +692,8 @@ onSubmitGalleryPhoto = (e) => {
       
               </Modal>
     
-              <li><button id="but1" onClick={this.onLogoutClick}style={{textAlign: 'right'}}><Translate content='logout'></Translate></button></li>
-              <li><button className="smoothscroll" href="" onClick={this.onResetClick}><Translate content='reset'></Translate> </button></li>
+              <li><a className="smoothscroll" onClick={this.onLogoutClick}style={{textAlign: 'right'}}><Translate content='logout'></Translate></a></li>
+              <li><a className="smoothscroll" href="" onClick={this.onResetClick}><Translate content='reset'></Translate> </a></li>
 
             </ul>
           </nav>
@@ -735,12 +735,17 @@ onSubmitGalleryPhoto = (e) => {
 
         <section id="about"  >
           <div className="row" >
-            <div className="three columns" >
+            <div className="four columns" >
               <img className="profile-pic"  src={this.state.profilePicture} alt="Profile Pic" />
               <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
               <Button onClick={this.imgUploadHandler}><Translate content='upload'></Translate> </Button>
+              {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+              <Button onClick={this.getUrl}><Translate content='url'></Translate> </Button>
             </div>
-       
+            
+
+           
+
             <div className="nine columns main-col">
               <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='about_me'></Translate> </h2>
               <div style={{display:'inline-block', width:'100%', wordWrap:'break-word', whitespace:'normal'}}>
