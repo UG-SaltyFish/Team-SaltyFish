@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {GoogleLogin } from 'react-google-login';
-
+import axios from 'axios';
 import { Button, Image, Col, Row,Modal} from 'react-bootstrap';
 import icon from './loginImage.svg';
 
@@ -67,6 +67,8 @@ class Login extends Component {
       password: '',
       errors: '',
       showmessage:false,
+      can: false,
+      realpassword:'',
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -87,6 +89,21 @@ class Login extends Component {
     counterpart.setLocale('jp')
 
   };
+  onSubmitEmail = (e) => {
+    e.preventDefault();
+    const mail = this.state.email;
+    console.log(mail)
+    axios.get('/getpassword/'+mail).then(res=>
+      {this.setState({realpassword:res.data.password});})
+    console.log(this.state.password);
+    var password = this.state.password;
+    var toUser={
+      mail: this.state.email,
+      pass: password,
+    }
+    console.log(toUser);
+    axios.post('/sendmail/',toUser);
+  }
   
   //Google Login
   onSuccess = (res) => {

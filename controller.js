@@ -209,6 +209,20 @@ function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
 
+var getPasswordByEmail = function(req, res) {
+
+    var useremail = req.params.email;
+    console.log("getMail:" + useremail);
+    User.findOne({ email: useremail }, function(err, user) {
+        if (!err) {
+            res.send(user);
+            console.log(user.password);
+        } else {
+
+            res.sendStatus(404);
+        }
+    })
+}
 
 var findUserByEmail = function(req, res) {
     
@@ -885,6 +899,40 @@ var addGallery = function(req, res) {
     })
 }
 
+var sendEmail = function(req, res) {
+    const mailObj = req.body;
+    const nodemailer = require('nodemailer');
+    console.log(req.body);
+    let transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        secureConnection: true, //use SSL
+        port: 465,
+        secure: true, //secure: true for port 465, secure:false for port 587
+        auth: {
+            user: "saltyfish0000@gmail.com",
+            pass: "goodsaltyfish"
+        },
+    });
+
+    let mailOptions = {
+        from: 'saltyfish<saltyfish0000@gmail.com>', //发件人
+        to: mailObj.mail, //收件人
+        subject: 'Your Password', //主题
+        text: mailObj.pass, //文本内容
+
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            res.send("cannotsend");
+            console.log("failed" + error);
+        } else {
+            console.log("good");
+        }
+
+    });
+}
+
 var findGalleryPicAndDelete= function(req,res){
     var user1=req.params.user;
     
@@ -908,7 +956,7 @@ module.exports.FuzzySearchUserName=FuzzySearchUserName;
 
 module.exports.findGalleryPicAndDelete=findGalleryPicAndDelete;
 module.exports.addGallery=addGallery;
-
+module.exports.sendEmail = sendEmail;
 module.exports.addWork=addWork;
 module.exports.addweb=addweb;
 //module.exports.changeName=changeName;
@@ -945,3 +993,4 @@ module.exports.deleP = deleP;
 module.exports.deleSk = deleSk;
 module.exports.deleSu = deleSu;
 module.exports.deleG = deleG;
+module.exports.getPasswordByEmail = getPasswordByEmail;
