@@ -231,7 +231,7 @@ var findUserByEmail = function(req, res) {
     Profile.find({email:useremail}, function(err, user) {
         if (!err) {
            
-            res.send(user);
+            res.send(user.password);
         } else {
             
             res.sendStatus(404);
