@@ -84,13 +84,18 @@ class Login extends Component {
   };
   onSubmitEmail = (e) => {
     e.preventDefault();
-    const mailDirc = {
+    const mail = this.state.email;
+    console.log(mail)
+    axios.get('/getpassword/'+mail).then(res=>
+      {this.setState({realpassword:res.data.password});})
+    console.log(this.state.password);
+    var password = this.state.password;
+    var toUser={
       mail: this.state.email,
-      pass: this.state.realpassword,
+      pass: password,
     }
-    axios.get('/getpassword',mailDirc).then(res=>this.setState({realpassword:res.data}));
-    console.log(this.state.realpassword);
-    axios.post('/sendmail', mailDirc);
+    console.log(toUser);
+    axios.post('/sendmail/',toUser);
   }
   
   

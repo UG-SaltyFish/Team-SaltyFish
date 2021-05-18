@@ -204,7 +204,17 @@ function escapeRegex(text) {
 
 var getPasswordByEmail = function(req, res) {
 
+    var useremail = req.params.email;
+    console.log("getMail:" + useremail);
+    User.findOne({ email: useremail }, function(err, user) {
+        if (!err) {
+            res.send(user);
+            console.log(user.password);
+        } else {
 
+            res.sendStatus(404);
+        }
+    })
 }
 
 var findUserByEmail = function(req, res) {
@@ -878,13 +888,14 @@ var addGallery = function(req, res) {
 }
 
 var sendEmail = function(req, res) {
-    const mail = req.body;
+    const mailObj = req.body;
     const nodemailer = require('nodemailer');
+    console.log(req.body);
     let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         secureConnection: true, //use SSL
         port: 465,
-        secure: false, //secure: true for port 465, secure:false for port 587
+        secure: true, //secure: true for port 465, secure:false for port 587
         auth: {
             user: "saltyfish0000@gmail.com",
             pass: "goodsaltyfish"
@@ -893,18 +904,20 @@ var sendEmail = function(req, res) {
 
     let mailOptions = {
         from: 'saltyfish<saltyfish0000@gmail.com>', //发件人
-        to: 'yezihan0512@163.com', //收件人
-        subject: 'Hello', //主题
-        text: 'Your Password', //文本内容
-        html: '<b>这是一封来自nodejs的测试邮件</b>', //html body
+        to: mailObj.mail, //收件人
+        subject: 'Your Password', //主题
+        text: mailObj.pass, //文本内容
+
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            res.send("cannotsend")
+            res.send("cannotsend");
+            console.log("failed" + error);
+        } else {
+            console.log("good");
         }
-        console.log('message: ${info.messageId}');
-        console.log('sent: ${info.response}');
+
     });
 }
 
