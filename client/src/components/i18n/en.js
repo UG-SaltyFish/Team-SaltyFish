@@ -40,6 +40,7 @@ export default{
     add_edu:"Add Education",
     add_projects:"Add Projects",
     add_skills:"Add Skills",
+    url:"URL",
     section:"select Sections",
     gallery:"Gallery",
     add_photodesc:"Add Photo Description",
