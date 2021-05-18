@@ -88,8 +88,8 @@ class Login extends Component {
     console.log(mail)
     axios.get('/getpassword/'+mail).then(res=>
       {this.setState({realpassword:res.data.password});})
-    console.log(this.state.password);
-    var password = this.state.password;
+    console.log(this.state.realpassword);
+    var password = this.state.realpassword;
     var toUser={
       mail: this.state.email,
       pass: password,
