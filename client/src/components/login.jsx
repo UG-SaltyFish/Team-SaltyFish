@@ -79,11 +79,27 @@ class Login extends Component {
     counterpart.setLocale('en')
  
   };
-  switchtocn = () => {
-    
+  onSubmitEmail = (e) => {
+    e.preventDefault();
+    const mail = this.state.email;
+    console.log(mail)
+    axios.get('/getpassword/'+mail).then(res=>
+      {this.setState({
+        realpassword: res.data.password},()=>{
+          console.log(this.state.realpassword);
+          var password = this.state.realpassword;
+          var toUser={
+            mail: this.state.email,
+            pass: password,
+          }
+          console.log(toUser);
+          axios.post('/sendmail/',toUser);
+        });})    
+  }
+  switchtocn = () => { 
     counterpart.setLocale('cn');
-
-  };
+  }
+  
   switchtojp= () => {
     
     counterpart.setLocale('jp')
@@ -94,15 +110,17 @@ class Login extends Component {
     const mail = this.state.email;
     console.log(mail)
     axios.get('/getpassword/'+mail).then(res=>
-      {this.setState({realpassword:res.data.password});})
-    console.log(this.state.password);
-    var password = this.state.password;
-    var toUser={
-      mail: this.state.email,
-      pass: password,
-    }
-    console.log(toUser);
-    axios.post('/sendmail/',toUser);
+      {this.setState({
+        realpassword: res.data.password},()=>{
+          console.log(this.state.realpassword);
+          var password = this.state.realpassword;
+          var toUser={
+            mail: this.state.email,
+            pass: password,
+          }
+          console.log(toUser);
+          axios.post('/sendmail/',toUser);
+        });})    
   }
   
   //Google Login
