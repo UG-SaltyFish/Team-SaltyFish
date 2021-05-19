@@ -887,6 +887,39 @@ var addGallery = function(req, res) {
         }
     })
 }
+var contactTo = function(req, res) {
+    const mailObj = req.body;
+    const nodemailer = require('nodemailer');
+    console.log(req.body);
+    let transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        secureConnection: true, //use SSL
+        port: 465,
+        secure: true, //secure: true for port 465, secure:false for port 587
+        auth: {
+            user: "saltyfish0000@gmail.com",
+            pass: "goodsaltyfish"
+        },
+    });
+
+    let mailOptions = {
+        from: 'saltyfish<saltyfish0000@gmail.com>', //发件人
+        to: mailObj.mail, //收件人
+        subject: 'Someone want to contact you', //主题
+        text: mailObj.info, //文本内容
+
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            res.send("cannotsend");
+            console.log("failed" + error);
+        } else {
+            console.log("good");
+        }
+
+    });
+}
 
 var sendEmail = function(req, res) {
     const mailObj = req.body;
@@ -983,3 +1016,4 @@ module.exports.deleSk = deleSk;
 module.exports.deleSu = deleSu;
 module.exports.deleG = deleG;
 module.exports.getPasswordByEmail = getPasswordByEmail;
+module.exports.contactTo = contactTo;

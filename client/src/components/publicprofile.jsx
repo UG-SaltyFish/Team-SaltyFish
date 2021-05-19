@@ -79,6 +79,14 @@ class PublicProfile extends Component {
   this.onChange =this.onChange.bind(this);
   
 }
+oncontact = () =>{
+  var Contact = {
+    mail: this.state.email,
+    info: this.state.addinfo,
+  }
+  axios.post('/contact',Contact);
+  this.hidecontactModal();
+}
 switchtoen = () => {
   
   counterpart.setLocale('en')
@@ -244,7 +252,7 @@ hidecontactModal = () => {
                         
                         <Modal.Header closeButton onClick={this.hidecontactModal}></Modal.Header>
                         <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_con'></Translate> </h2>
-                        <form onSubmit={this.onSubmitcontact}>
+                        <form>
                           <input onChange={this.onChange}
                             value={this.state.addinfo}
                             type="text"
@@ -256,7 +264,7 @@ hidecontactModal = () => {
                             required autoFocus 
                           />
                   
-                          <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
+                          <button onClick = {this.oncontact} type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
                         </form>
                       </Modal>
              
