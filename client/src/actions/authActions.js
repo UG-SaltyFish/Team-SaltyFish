@@ -15,56 +15,58 @@ import {
 //Regular login
 export const loginUser = user => dispatch => {
     axios
-        .post('/login', user)
-        .then(res => {
-            const token = res.data;
-            console.log(token._id);
-            localStorage.setItem("jwtToken", token._id);
-            setAuthToken(token._id);
-            const decoded = token._id;
-            // Set the current user
-            dispatch(setCurrentUser(decoded));
+    .post('/login', user)
+      .then(res => {
+        const token=res.data;
+        console.log(token._id);
+        localStorage.setItem("jwtToken", token._id);
+        setAuthToken(token._id);
+        const decoded = token._id;
+        // Set the current user
+        dispatch(setCurrentUser(decoded));
 
-
-        })
-        .catch(err => dispatch({
-            type: SHOW_ERROR,
-            payload: err.response.data
-        }));
-};
+        
+      })
+      .catch(err => dispatch({
+        type: SHOW_ERROR,
+        payload: err.response.data
+    })
+    );
+  };
 
 //Google login
 export const gooLoginUser = user => dispatch => {
     axios
-        .post('/goologin', user)
-        .then(res => {
-            const token = res.data;
-            console.log(token._id);
-            localStorage.setItem("jwtToken", token._id);
-            setAuthToken(token._id);
-            const decoded = token._id;
-            // Set the current user
-            dispatch(setCurrentUser(decoded));
+    .post('/goologin', user)
+      .then(res => {
+        const token=res.data;
+        console.log(token._id);
+        localStorage.setItem("jwtToken", token._id);
+        setAuthToken(token._id);
+        const decoded = token._id;
+        // Set the current user
+        dispatch(setCurrentUser(decoded));
+
+        
+      })
+      .catch(err => dispatch({
+        type: SHOW_ERROR,
+        payload: err.response.data
+    })
+    );
+  };
+  
 
 
-        })
-        .catch(err => dispatch({
-            type: SHOW_ERROR,
-            payload: err.response.data
-        }));
-};
-
-
-
-export const refreshTokenSetup = (res) => {
+export const refreshTokenSetup = (res) =>{
     //Timing to renew access token
     let refreshTiming = (res.tokenObj.expires_in || 3600 - 5 * 60) * 1000;
-
-    const refreshToken = async() => {
+    
+    const refreshToken = async () => {
         const newAuthRes = await res.reloadAuthResponse();
         refreshTiming = (newAuthRes.expires_in || 3600 - 5 * 60) * 1000;
         console.log('newAuthRes:', newAuthRes);
-
+        
         console.log('new auth Token', newAuthRes.id_token);
         //Setup the other timer after the first one
         setTimeout(refreshToken, refreshTiming);
@@ -74,44 +76,45 @@ export const refreshTokenSetup = (res) => {
 };
 
 
-//fb login  
-export const fbLoginUser = user => dispatch => {
+  //fb login  
+  export const fbLoginUser = user => dispatch => {
     console.log("000");
     axios
-        .post('/fblogin', user)
-        .then(res => {
-            const token = res.data;
-            console.log(token._id);
-            localStorage.setItem("jwtToken", token._id);
-            setAuthToken(token._id);
-            const decoded = token._id;
-            // Set the current user
-            dispatch(setCurrentUser(decoded));
-        })
-        .catch(err => dispatch({
-            type: SHOW_ERROR,
-            payload: err.response.data
-        }));
+    .post('/fblogin', user)
+      .then(res => {
+        const token=res.data;
+        console.log(token._id);
+        localStorage.setItem("jwtToken", token._id);
+        setAuthToken(token._id);
+        const decoded = token._id;
+        // Set the current user
+        dispatch(setCurrentUser(decoded));
+      })
+      .catch(err => dispatch({
+        type: SHOW_ERROR,
+        payload: err.response.data
+    })
+    );
     console.log("111");
-};
+  };
 
 
-export const fbrefreshTokenSetup = (res) => {
-    //Timing to renew access token
-    let refreshTiming = (res.expiresIn || 3600 - 5 * 60) * 1000;
-
-    const refreshToken = async() => {
-        const newAuthRes = await res.reloadAuthResponse();
-        refreshTiming = (newAuthRes.expiresIn || 3600 - 5 * 60) * 1000;
-        console.log('newAuthRes:', newAuthRes);
-
-        console.log('new auth Token', newAuthRes.id_token);
-        //Setup the other timer after the first one
-        setTimeout(refreshToken, refreshTiming);
-    };
-    //Setup first refreshtimer
-    setTimeout(refreshToken, refreshTiming);
-    console.log("222");
+export const fbrefreshTokenSetup = (res) =>{
+  //Timing to renew access token
+  let refreshTiming = (res.expiresIn || 3600 - 5 * 60) * 1000;
+  
+  const refreshToken = async () => {
+      const newAuthRes = await res.reloadAuthResponse();
+      refreshTiming = (newAuthRes.expiresIn || 3600 - 5 * 60) * 1000;
+      console.log('newAuthRes:', newAuthRes);
+      
+      console.log('new auth Token', newAuthRes.id_token);
+      //Setup the other timer after the first one
+      setTimeout(refreshToken, refreshTiming);
+  };
+  //Setup first refreshtimer
+  setTimeout(refreshToken, refreshTiming);
+  console.log("222");
 };
 
 

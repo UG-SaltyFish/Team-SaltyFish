@@ -37,8 +37,6 @@ const googleClientId = '996695088450-8vihibptuoco1cqafe0mpsvqdmp48fhu.apps.googl
 const appId = '277936307150836'
 
 const Styles = styled.div
-
-
 `
   .navbar { background-color: #365; }
   a, .navbar-nav, .navbar-light .nav-link {
@@ -62,7 +60,6 @@ const Styles = styled.div
 
 
 class Login extends Component {
-  
   constructor(props) {
     super(props);
     this.state = {
@@ -99,16 +96,32 @@ class Login extends Component {
           axios.post('/sendmail/',toUser);
         });})    
   }
+  switchtocn = () => { 
+    counterpart.setLocale('cn');
+  }
   
-  
-  switchtojp= () =>{
-
-  };
   switchtojp= () => {
     
     counterpart.setLocale('jp')
 
   };
+  onSubmitEmail = (e) => {
+    e.preventDefault();
+    const mail = this.state.email;
+    console.log(mail)
+    axios.get('/getpassword/'+mail).then(res=>
+      {this.setState({
+        realpassword: res.data.password},()=>{
+          console.log(this.state.realpassword);
+          var password = this.state.realpassword;
+          var toUser={
+            mail: this.state.email,
+            pass: password,
+          }
+          console.log(toUser);
+          axios.post('/sendmail/',toUser);
+        });})    
+  }
   
   //Google Login
   onSuccess = (res) => {
@@ -188,7 +201,7 @@ class Login extends Component {
     this.props.loginUser(userData);
     this.props.setUserLoading();
   };
-  
+
   showmessageModal = () => {
     this.setState({ showmessage: true });
   };
@@ -372,7 +385,7 @@ class Login extends Component {
                     <Modal show={this.state.showmessage}>
                     <Modal.Header closeButton onClick={this.hidemessageModal}></Modal.Header>
                     <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='message'></Translate> </h2>
-                    <form>
+                    <form onSubmit={this.onSubmitEmail}>
                      <input onChange={this.onChange}
                       value={this.state.email}
                       type="text"
@@ -384,7 +397,7 @@ class Login extends Component {
                           required autoFocus 
                     />
                   
-                    <button type="submit" onClick = {this.onSubmitEmail} style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
+                  <button type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
                   </form>
                 </Modal>
                     
