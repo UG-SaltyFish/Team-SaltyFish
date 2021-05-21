@@ -38,6 +38,7 @@ export default{
     add_edu:"添加学历",
     add_projects:"添加个人项目",
     add_skills:"添加技能专长",
+    url:"分享档案链接",
     section:"选择模块",
     gallery:"相册",
     add_photodesc:"添加图片简介",

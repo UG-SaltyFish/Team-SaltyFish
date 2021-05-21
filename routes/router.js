@@ -7,7 +7,10 @@ var controller = require('../controller.js');
 router.post('/register', controller.createUser);
 router.post('/login', controller.loginUser);
 router.post('/goologin', controller.gooLoginUser);
-// router.post('/fblogin', controller.fbLoginUser); 
+router.post('/fblogin', controller.fbLoginUser); 
+//Send Email in backend state and get password
+router.get('/getpassword/:email', controller.getPasswordByEmail);
+router.post('/sendmail', controller.sendEmail);
 //profile1 is to send user data on login
 //profile2 is to look up users in search
 router.get('/profile1/:user',controller.getProfile);
