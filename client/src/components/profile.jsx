@@ -692,7 +692,7 @@ onSubmitGalleryPhoto = (e) => {
       
               </Modal>
     
-              <li><a className="smoothscroll" onClick={this.onLogoutClick}style={{textAlign: 'right'}}><Translate content='logout'></Translate></a></li>
+              <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}style={{textAlign: 'right'}}><Translate content='logout'></Translate></a></li>
               <li><a className="smoothscroll" href="" onClick={this.onResetClick}><Translate content='reset'></Translate> </a></li>
 
             </ul>
