@@ -1,453 +1,132 @@
-# IT Project COMP30022
+# Team-SaltyFish<br>
+    Extend SwatKatz Eportfolio
+Documentation here:<br> 
+https://confluence.cis.unimelb.edu.au:8443/display/COMP900822021SM1UG/Group%3A+SaltyFish <br>
+Heroku link:<br> 
+https://saltyfish2.herokuapp.com <br>
 
-## :computer: E-portfolio system! :student:
-
-
-To create a functional, easy to use and visually appealing Eportfolio based upon client specifications
-
-Documentation here: https://swatkats.atlassian.net/wiki/spaces/IPD/overview?homepageId=32968
-
-Heroku link: https://it-project-eportfolio-2.herokuapp.com/
-
-## Routes
-
-REGISTER USER: router.post('/register', controller.createUser);
-
-LOGIN USER: router.post('/login', controller.loginUser);
-
-GET PROFILE ONCE LOGGED IN: router.get('/profile1/:user',controller.getProfile);
-
-GET PUBLIC VIEW OF A PROFILE: router.get('/profile2/:email', controller.findUserByEmail);
-
-FIND AND ADD/UPDATE BIO: router.put('/profilebio/:user',controller.addBio);
-
-FIND AND ADD/UPDATE WORK: router.put('/profilework/:user',controller.addWork);
-
-FIND AND UPDATE PHONE: router.put('/profilephone/:user',controller.addPhone);
-
-FIND AND ADD/UPDATE INTRO: router.put('/profileintro/:user',controller.addIntro);
-
-FIND AND ADD PERSONAL PROJECTS: router.put('/profileproject/:user',controller.addproject);
-
-FIND AND ADD/UPDATE SKILLS: router.put('/profileskills/:user',controller.addSkills);
-
-FIND AND ADD/UPDATE EDUCATION: router.put('/profileedu/:user',controller.addEducation);
-
-FIND AND ADD SUBJECTS: router.put('/profilesub/:user',controller.addSubjects);
-
-FIND AND DELETE SUBJECTS: router.put('/findanddeletsub/:user',controller.findSubjectsAndDelete);
-
-FIND AND DELETE WORK: router.put('/findanddeletwork/:user',controller.findWorkAndDelete);
-
-FIND AND DELETE PROJECT: router.put('/findanddeletproject/:user',controller.findProjectAndDelete);
-
-FIND AND DELETE SKILLS: router.put('/findanddeletskill/:user',controller.findSkillAndDelete);
-
-FIND AND GET PUBLIC USER PROFILE: router.get('/profile2/:email', controller.findUserByEmail);
-
-ADD PROFILE PICTURE: router.put('/addprofilepic/:user',controller.addProfilePicture);
-
-ADD TRANSCRIPT:router.put('/addtranscript/:user',controller.addTranscript);
-
-ADD TO GALLERY: router.put('/addtogallery/:user',controller.addGallery);
-
-DELETE FROM GALLERY: router.put('/deletefromgallery/:user', controller.findGalleryPicAndDelete);
-
-ROUTER FOR SEARCH BAR: router.get('/users/name/:name', controller.FuzzySearchUserName);
-
-## Controllers
-
-CREATE USER AND USER’S PROFILE
-
-    var createUser = function(req, res) {
-
-    var user = new User({
-        "name":req.body.name,
-        "email":req.body.email,
-        "password":req.body.password
-    });
-
-    User.findOne({email:user.email}, function(err, user1) {
-        if (user1) {
-            console.log("User exists!");
-     
-            
-        } else {
-           
-            user.save(function (err, newUser) {
-                console.log(newUser);
-                if (!err) {
-                    var profile =new Profile({
-                        user: newUser,
-                        name: user.name,
-                        website:'',
-                        education:[],
-                        subjects:[],
-                        email:user.email,
-                        phone:'',
-                        skills:'',
-                        bio:'',
-                        date:''});
-                    
-                    console.log(profile.save());
-                    console.log("registered");
-                } else {
-                    res.sendStatus(400);
-                }
-            });
-        }
-    });
-    };
-
-LOGIN USER AND SEND UNIQUE TOKEN TO GET PROFILE:
-
-    var loginUser = function(req, res) {
-    
-    const user = req.body;
-    
-    //check for existing user
-    User.findOne({email:user.email,password:user.password}, function(err, user1) {
-        if (user1) {
-            console.log("Successful login ");
-            const payload = {
-                _id: user1._id,
-                name: user1.name,
-                email: user1.email
-              }
-              let token = payload;
-              res.send(token);
-
-            
-     
-            
-        }
-        else{
-            return res.status(400).json("Incorrect Email or Password")
-        }
-
-      // Validate password
-      
-         });
+## Project Overview:
+This project is to test and further develop a web-based ePortfolio system built by students studying in COMP30022 capstone project in Semester 2, 2020. Our team selected the SwatKats ePortfolio as our development object. Since this project does not have clients, our supervisor will play the role of clients as well. In the following 3 months, we will try our best to expand some significant functions according to new project requirements, improve the user interface design and debug.<br>
   
-         };
-
-GET PROFILE BASED ON LOGGED IN USER’S TOKEN
-
-    var getProfile =function(req,res){
-    
-    var k=req.params.user;
-
-    
-    Profile.find({user:k},function(err,user2){
-        if(user2){
-            const payload=user2;
-            console.log(user2);
-            res.send(payload);
-        }else{
-           res.send(k);
-        }
-    })
-    };
-
-ADD AND UPDATE BIO
-
-    var addBio= function(req,res){
-    var user1=req.params.user;
-        const bio1= req.body.bio; 
-    Profile.findOneAndUpdate({user:user1},{$set:{bio:bio1}},{new: true},function(err,user2){
-        if(err){
-            console.log(user2);
-            res.send("wrong"); 
-        }else{
-            console.log(user2);
-           res.send("found");
-        }
-    })
-};
-ADD PHONE AND INTRO
-
-    var addPhone= function(req,res){
-    var user1=req.params.user;
-    
-    const phone1= req.body.bio;
-
-    
-    Profile.findOneAndUpdate({user:user1},{$set:{phone:phone1}},{new: true},function(err,user2){
-        if(err){
-            
-            res.send("wrong");
-            
-        }else{
-          
-           res.send(user2);
-        }
-    })
-    };
-    var addIntro= function(req,res){
-    var user1=req.params.user;
-    
-    const intro1= req.body.intro;
-
-    
-    Profile.findOneAndUpdate({user:user1},{$set:{intro:intro1}},{new: true},function(err,user2){
-        if(err){
-            
-            res.send("wrong");
-            
-        }else{
-          
-           res.send(user2);
-        }
-    })
-    };
-
- 
-ADD AND DELETE WORK EXPERIENCE
-
-    var addWork= function(req,res){
-    var user1=req.params.user;
-    
-    const work1= req.body;
-
-    console.log(work1);
-    Profile.findOneAndUpdate({user:user1},{$push: {work:{workplace:work1.workplace, position:work1.position,from:work1.from,to:work1.to}}},{new: true},function(err,user2){
-        if(err){
-            
-            res.send("wrong");
-            
-        }else{
-        
-           res.send(user2);
-        }
-    })
-    };
-    var findWorkAndDelete= function(req,res){
-    var user1=req.params.user;
-    
-    const work1= req.body;
-    
-    
-    Profile.findOneAndUpdate({user:user1},{$pull:{work:{workplace:work1.workplace, position:work1.position,from:work1.from,to:work1.to}}},{new: true},function(err,user2){
-        if(err){
-            
-            res.send("wrong");
-            
-        }else{
-            
-           res.send(user2);
-        }
-    })
-};
-
- 
-ADD AND DELETE PROJECTS
-
-    var addproject= function(req,res){
-    var user1=req.params.user;
-    
-    const work1= req.body;
-
-    console.log(work1);
-    Profile.findOneAndUpdate({user:user1},{$push: {projects:{projectname:work1.projectname, projectdescription:work1.projectdescription,projectlink:work1.projectlink}}},{new: true},function(err,user2){
-        if(err){
-            
-            res.send("wrong");
-            
-        }else{
-        
-           res.send(user2);
-        }
-    })
-     };
-     var findProjectAndDelete= function(req,res){
-    var user1=req.params.user;
-    
-    const work1= req.body;
-    
-    console.log(work1);
-    Profile.findOneAndUpdate({user:user1},{$pull:{projects:{projectname:work1.projectname, projectdescription:work1.projectdescription,projectlink:work1.projectlink}}},{new: true},function(err,user2){
-        if(err){
-            
-            res.send("wrong");
-            
-        }else{
-            
-           res.send(user2);
-        }
-    })
-    };
-
- 
-ADD SKILLS AND DELETE SKILLS
-
-    var addSkills= function(req,res){
-    var user1=req.params.user;
-    
-    const skill= req.body.skill;
-
-    
-    Profile.findOneAndUpdate({user:user1},{$push: {skills:skill}},{new: true},function(err,user2){
-        if(err){
-            console.log(user2);
-            res.send("wrong");
-            
-        }else{
-            console.log(user2);
-           res.send("found");
-        }
-    })
-    };
-
-    var findSkillAndDelete = function(req, res) {
-    var user1 = req.params.user;
-
-    const skill = req.body.skill;
-
-    Profile.findOneAndUpdate({user:user1},{$pull: {skills: {skill}}},{new: true},function(err,user2){
-        if(err){
-            console.log(user2);
-            res.send("wrong");
-            
-        }else{
-            console.log(user2);
-           res.send(user2);
-        }
-    })
-}
-
-ADD AND DELETE SUBJECTS
-
-    var addSubjects= function(req,res){
-    var user1=req.params.user;
-    
-    const edu= req.body;
-
-    Profile.findOneAndUpdate({user:user1},{$push: {subjects:{subjectname:edu.subjectname,subjectdescripition:edu.subjectdesc,subjectyear:edu.year}}},{new: true},function(err,user2){
-        if(err){
-         
-            res.send("wrong");
-            
-        }else{
-          
-           res.send(user2);
-        }
-    })
-    };
-
-    var findSubjectsAndDelete= function(req,res){
-    var user1=req.params.user;
-    
-    const edu= req.body;
-    console.log(req.body);
-    
-    Profile.findOneAndUpdate({user:user1},{$pull:{subjects:{subjectname:edu.subjectname,subjectdescripition:edu.subjectdescripition,subjectyear:edu.subjectyear}}},{new: true},function(err,user2){
-        if(err){
-            
-            res.send("wrong");
-            
-        }else{
-            
-           res.send(user2);
-        }
-    })
-};
-
- 
-ADD EDUCATION AND DELETE EDUCATION
-
-    var addEducation= function(req,res){
-    var user1=req.params.user;
-    
-    const edu= req.body;
-
-    
-    Profile.findOneAndUpdate({user:user1},{$push: {education:{school:edu.school, qual:edu.qual}}},{new: true},function(err,user2){
-        if(err){
-            
-            res.send("wrong");
-            
-        }else{
-        
-           res.send(user2);
-        }
-    })
-     };
-    var deleteEducation= function(req,res){
-    var user1=req.params.user;
-    
-    const edu= req.body;
-
-    
-    Profile.findOneAndUpdate({user:user1},{$pull: {education:{school:edu.school, qual:edu.qual}}},{new: true},function(err,user2){
-        if(err){
-          
-            res.send("wrong");
-            
-        }else{
-           
-           res.send(user2);
-        }
-    })
-    };
-FILE-DELETE.JS
-
-    const file_delete = (props) => {
-    const {region, bucket, key} = AmazonS3URI(props);
-
-    var params = {
-        Bucket : bucket,
-        Key : key
-    }
-
-    s3.deleteObject(params, function(err, data) {
-        if (err) console.log(err, err.stack);  // error
-        else     console.log();                 // deleted
-        return data;
-    }).promise();
-}
-
-IMG-UPLOAD.JS
-
-    const img_upload = multer({
-    fileFilter,
-    storage: multerS3({
-    s3: s3,
-    bucket: 'it-project-bucket-2020',
-    metadata: function (req, file, cb) {
-      cb(null, {fieldName: 'TESTING_IMAGE'});
-    },
-    key: function (req, file, cb) {
-      cb(null, Date.now().toString() + ".jpg")
-    }
+Our team will run the project based on the Agile development model. This Confluence space will document the information of project. Trello is used as the kanban board. Team communication is in Microsoft Team and WeChat. Source code is in our Github.<br>
   
+## Goals:<br>
+* To test the basic functions of SwatKat e-portfolio website and fix the bugs.<br>
+* To expand SwatKat by adding some functions and better meet the needs of the clients.<br>
+* To improve the UI design of SwatKat for easily using and visually appealing.<br>
 
-PDF-UPLOAD.JS
-
-
-    const pdf_upload = multer({
-    fileFilter,
-    storage: multerS3({
-      s3: s3,
-      bucket: 'it-project-pdf-2020',
-      metadata: function (req, file, cb) {
-        cb(null, {fieldName: 'TESTING_PDF'});
-      },
-      key: function (req, file, cb) {
-        cb(null, Date.now().toString() + ".pdf")
-      }
- 
-    })
-    })
-    
-## Credits
-
-FrontEnd profile page inspiration from Tim Baker and Ceevee templates.
-Header Photo credits Casey Horner.
-
- 
+## Tools:<br>
+* [Visual Studio Code](https://code.visualstudio.com) was used as the programming IDE for this project.<br> 
+* [MangoDB](https://www.mongodb.com/) was used as the database for this project.
+* [AWS](https://aws.amazon.com/cn/) was used to store the URLs and pictures in the website.
+* [Heroku](https://id.heroku.com/login) was the platform we use to run our eportfolio.
+* This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br>
+* The back-end was developed using [Node.js](https://nodejs.org/en/download/).<br>
+Below are the main plugins in our project: <br>
+* React
+```
+npm install react
+``` 
+* Express
+```
+npm install express
+``` 
+<br>
 
 
+## Deployment:<br>
+### Local:<br>
+In a cmd prompt, some available commands and scripts can be run at src/ directory:<br>
+```
+npm install
+``` 
+Install Node.js dependencies.<br>
+
+```
+npm start
+``` 
+It runs the server in the development mode at http://localhost:5000. The page will reload if you save changes of your code.<br>
+In another cmd terminal, enter the command:<br>
+```
+npm run client
+``` 
+It loads the client in your browser at http://localhost:3000. <br>
+
+**Now, your app is deployed!**<br>
+
+If you are unable to load the app due to some errors, please install the following scripts as well.<br>
+```
+npm install openssl
+
+npm install bootstrap
+
+npm install react-google-login
+//or npm install react-google-login --legacy-peer-deps
+
+npm install react-facebook-login
+//or npm install react-facebook-login --legacy-peer-deps
+```
+OpenSSL is a general-purpose cryptography library that stores some private information for HTTPS.<br>
+Packages of react-google-login and react-facebook-login are necessary for Google and Facebook login.<br>
+
+### Heroku:<br>
+In the package.json, it needs to install the package and some parameters.<br>
+```
+{
+  "name": "it-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "client": "npm start --prefix client",
+    "client-install": "npm install --prefix client",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "dev": "concurrently \"npm start\" \"npm run client\""
+  },
+  "engines": {
+    "node": "15.14.0"
+  },
+  "homepage": "https://github.com/UG-SaltyFish/Team-SaltyFish#readme",
+  "dependencies": {
+    //your dependencies
+  }
+}
+```
+After you get a Heroku account, you can run the following commands in a cmd terminal at src/ directory:<br>
+```
+heroku create saltyfish2 --buildpack mars/create-react-app
+```
+Login Heroku with your API key. It sets the app to use this buildpack. A new app will be created in your account.<br>
+
+```
+git push heroku master
+//or git push heroku $BRANCH_NAME:master
+```
+Deploy and push to the Heroku app from local repository.<br>
+
+```
+heroku open
+```
+The app loads in your browser at https://saltyfish2.herokuapp.com <br>
 
 
-
-
+## Changelog:<br>
+### 26th March 2021:<br>
+* Add a new branch: former-version.<br>
+* Add a new tag: v-0.0.<br>
+  v-0.0 contains codes and corresponding documents about project SwatKatz, the team would start Sprint 1 based on v-0.0.<br>        
+### 30th March 2021:<br>
+* Add docs to store documents of the project.<br>
+* Update README.md.<br>
+### 29th April 2021:<br>
+* User story 2: Facebook and Google login functions.<br>
+* User story 3: Section Management function.<br>
+* User Story 4: Reset page for resetting user name, email, password functions.<br>
+* User Story 9: Changes on the layout of home page, profile page and login page.<br>
+* Add functional test of Sprint 1 in tests/.<br>
+* Add documents in doc/, data sample in datasample/, and images in ui/.<br>
+* Update README.md.<br>
+* Add a release tag: COMP90082_2021_RLSE_<UG>_<1.0>.<br>
+  COMP90082_2021_RLSE_<UG>_<1.0> contains codes and corresponding documents for our project in Sprint 1.<br>

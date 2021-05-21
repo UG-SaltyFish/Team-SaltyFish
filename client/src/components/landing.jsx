@@ -251,8 +251,6 @@ renderSuggestion = suggestion => (
           />
           </font>
           </h2>
-          <h3  className = "searchH3" ><font sizs="1" color="grey">Or you can copy and paste this link to go to a profile via email: https://it-project-eportfolio.herokuapp.com/public/useremail</font></h3>
-            
         </div>
       <div className = "page-wrapper">
         <CarouselHomepage/>
