@@ -365,78 +365,76 @@ var gooLoginUser = function(req, res) {
 };
 
 
+var fbLoginUser = function(req, res) {
 
-
-// var fbLoginUser = function(req, res) {
-
-//     const user = req.body;
+    const user = req.body;
     
-//     //Check for existing user to login
-//     User.findOne({email:user.email,password:user.password}, function(err, user1) {
-//         if (user1) {
-//             const payload = {
-//                 _id: user1._id,
-//                 name: user1.name,
-//                 email: user1.email
-//               }
-//               let token = payload;
-//               res.send(token);
-//         }
-//         else{
-//             //Register for fb login
-//             var user = new User({
-//                 "name":req.body.name,
-//                 "email":req.body.email,
-//                 "password":req.body.password
-//             });
+    //Check for existing user to login
+    User.findOne({email:user.email,password:user.password}, function(err, user1) {
+        if (user1) {
+            const payload = {
+                _id: user1._id,
+                name: user1.name,
+                email: user1.email
+              }
+              let token = payload;
+              res.send(token);
+        }
+        else{
+            //Register for fb login
+            var user = new User({
+                "name":req.body.name,
+                "email":req.body.email,
+                "password":req.body.password
+            });
         
            
-//             User.findOne({email:user.email}, function(err, user1) {
-//                 if (user1) {
+            User.findOne({email:user.email}, function(err, user1) {
+                if (user1) {
                     
-//                     return res.status(401).json("Email already registered");
-//                 } else {
+                    return res.status(401).json("Email already registered");
+                } else {
                     
-//                     user.save(function (err, newUser) {
-//                         if (!err) {
+                    user.save(function (err, newUser) {
+                        if (!err) {
                             
-//                             var profile =new Profile({
-//                                 user: newUser,
-//                                 name: user.name,
-//                                 profile_picture: "https://it-project-bucket-2020.s3-ap-southeast-1.amazonaws.com/blank-profile.png",
-//                                 transcript: "",
-//                                 website:'',
-//                                 gallery:[],
-//                                 education:[],
-//                                 subjects:[],
-//                                 projects:[],
-//                                 work:[],
-//                                 intro:"",
-//                                 email:user.email,
-//                                 phone:'',
-//                                 skills:[],
-//                                 bio:'',
-//                                 date:'',
-//                                 sectionE:'block',
-//                                 sectionW:'block',
-//                                 sectionP:'block',
-//                                 sectionSk:'block',
-//                                 sectionSu:'block',
-//                                 sectionG:'block'
-//                             });
+                            var profile =new Profile({
+                                user: newUser,
+                                name: user.name,
+                                profile_picture: "https://it-project-bucket-2020.s3-ap-southeast-1.amazonaws.com/blank-profile.png",
+                                transcript: "",
+                                website:'',
+                                gallery:[],
+                                education:[],
+                                subjects:[],
+                                projects:[],
+                                work:[],
+                                intro:"",
+                                email:user.email,
+                                phone:'',
+                                skills:[],
+                                bio:'',
+                                date:'',
+                                sectionE:'block',
+                                sectionW:'block',
+                                sectionP:'block',
+                                sectionSk:'block',
+                                sectionSu:'block',
+                                sectionG:'block'
+                            });
                             
-//                             profile.save();
+                            profile.save();
                            
-//                             return res.send("User created");
-//                         } else {
-//                             res.sendStatus(400);
-//                         }
-//                     });
-//                 }
-//             });
-//         }
-//     });
-// };
+                            return res.send("User created");
+                        } else {
+                            res.sendStatus(400);
+                        }
+                    });
+                }
+            });
+        }
+    });
+};
 
 
 
@@ -474,8 +472,6 @@ var getUserAccount = function (req, res) {
     });
 };
 
-
-/////////////////////没用到！！！！！！！！
 // var changeName= function(req,res){
 //     var user1=req.params.user;
     
@@ -915,10 +911,10 @@ var sendEmail = function(req, res) {
     });
 
     let mailOptions = {
-        from: 'saltyfish<saltyfish0000@gmail.com>', //发件人
-        to: mailObj.mail, //收件人
-        subject: 'Your Password', //主题
-        text: mailObj.pass, //文本内容
+        from: 'saltyfish<saltyfish0000@gmail.com>', 
+        to: mailObj.mail, 
+        subject: 'Your Password', 
+        text: mailObj.pass, 
 
     };
 
@@ -980,7 +976,7 @@ module.exports.getProfile =getProfile;
 module.exports.getUserAccount =getUserAccount;
 module.exports.loginUser =loginUser;
 module.exports.gooLoginUser =gooLoginUser;
-//module.exports.fbLoginUser =fbLoginUser;
+module.exports.fbLoginUser =fbLoginUser;
 module.exports.createUser = createUser;
 module.exports.resetUser = resetUser;
 module.exports.findAllUsers = findAllUsers;
