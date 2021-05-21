@@ -121,6 +121,7 @@ class Login extends Component {
           }
           console.log(toUser);
           axios.post('/sendmail/',toUser);
+          this.hidemessageModal();
         });})    
   }
   
