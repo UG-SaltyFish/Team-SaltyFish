@@ -363,7 +363,7 @@ onSubmitGalleryPhoto = (e) => {
 
 
   getUrl = ()=>{
-    var userURL = "https://saltyfish1.herokuapp.com/" + "public/" + this.state.email;
+    var userURL = "https://saltyfishwillgraduate.herokuapp.com/" + "public/" + this.state.email;
     if(copy(userURL)){
     alert("Successful copy URL to clipboard!");
     }else{
@@ -739,8 +739,7 @@ onSubmitGalleryPhoto = (e) => {
               <img className="profile-pic"  src={this.state.profilePicture} alt="Profile Pic" />
               <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
               <Button onClick={this.imgUploadHandler}><Translate content='upload'></Translate> </Button>
-              {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
-              <Button onClick={this.getUrl}><Translate content='url'></Translate> </Button>
+              
             </div>
             
 
@@ -812,6 +811,7 @@ onSubmitGalleryPhoto = (e) => {
               </div>
             </div>
             <div className="three columns" >
+            <Button onClick={this.getUrl}><Translate content='url'></Translate> </Button>
               <button onClick={this.SectionModal}><Translate content='section'></Translate></button>
               <form id = "modalhere" style={{display:"none" }}>
                 <div className="row">
