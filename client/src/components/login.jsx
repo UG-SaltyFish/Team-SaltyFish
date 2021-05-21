@@ -14,6 +14,7 @@ import { Nav, Navbar, Dropdown} from 'react-bootstrap';
 import styled from 'styled-components';
 import logo from './logo.svg';
 import logo1 from './logo1.svg';
+import laptop from './laptop.svg';
 import NavigationBar from "./NavigationBar";
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
@@ -273,8 +274,8 @@ class Login extends Component {
 
           <div className="row mt-5 align-self-center">
           <div className="col align-self-center d-none d-lg-block">
-              <div className="col-md-8 m-auto">
-                <Image src={icon} fluid />
+          <div className="col-md-8 m-auto">
+                <Image src={laptop}  />
               </div>
             </div>
             <div className="col align-self-center">
