@@ -352,7 +352,7 @@ class Login extends Component {
                           //buttonStyle={}
                           callback={this.callback}
                           uxMode={"redirect"}
-                          redirectUri={"https://it-project-eportfolio.herokuapp.com/"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
+                          redirectUri={"https://saltyfish1.herokuapp.com/"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
                           cookiePolicy={'single_host_origin'}
                       />
                     

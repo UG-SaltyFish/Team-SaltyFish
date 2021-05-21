@@ -363,7 +363,7 @@ onSubmitGalleryPhoto = (e) => {
 
 
   getUrl = ()=>{
-    var userURL = "https://it-project-eportfolio.herokuapp.com" + "/public/" + this.state.email;
+    var userURL = "https://saltyfish1.herokuapp.com/" + "public/" + this.state.email;
     if(copy(userURL)){
     alert("Successful copy URL to clipboard!");
     }else{
