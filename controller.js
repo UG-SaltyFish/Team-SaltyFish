@@ -206,11 +206,11 @@ var getPasswordByEmail = function(req, res) {
     var useremail = req.params.email;
     console.log("getMail:" + useremail);
     User.findOne({ email: useremail }, function(err, user) {
-        if (!err) {
+        if (user) {
             res.send(user);
-            console.log(user.password);
+            console.log("Your password is : " + user.password);
         } else {
-
+            console.log("cannotfind");
             res.sendStatus(404);
         }
     })
@@ -463,8 +463,6 @@ var getUserAccount = function(req, res) {
     });
 };
 
-
-/////////////////////没用到！！！！！！！！
 // var changeName= function(req,res){
 //     var user1=req.params.user;
 
@@ -903,10 +901,10 @@ var contactTo = function(req, res) {
     });
 
     let mailOptions = {
-        from: 'saltyfish<saltyfish0000@gmail.com>', //发件人
-        to: mailObj.mail, //收件人
-        subject: 'Someone want to contact you', //主题
-        text: mailObj.info, //文本内容
+        from: 'saltyfish<saltyfish0000@gmail.com>', 
+        to: mailObj.mail, 
+        subject: 'Someone want to contact you', 
+        text: mailObj.info, 
 
     };
 
@@ -937,10 +935,10 @@ var sendEmail = function(req, res) {
     });
 
     let mailOptions = {
-        from: 'saltyfish<saltyfish0000@gmail.com>', //发件人
-        to: mailObj.mail, //收件人
-        subject: 'Your Password', //主题
-        text: mailObj.pass, //文本内容
+        from: 'saltyfish<saltyfish0000@gmail.com>', 
+        to: mailObj.mail, 
+        subject: 'Your Password', 
+        text: mailObj.pass, 
 
     };
 

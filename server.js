@@ -6,22 +6,6 @@ var app = express()
 const mongoose = require('mongoose')
 var port = process.env.PORT || 5000
 
-// var fs = require('fs')
-// var key = fs.readFileSync('private.key');
-// var cert = fs.readFileSync('mydomain.crt');
-
-// var options = {
-//     key: key,
-//     cert: cert
-// };
-// // Run static server
-// var https = require('https');
-// https.createServer(options, app).listen(port, function() {
-//   console.log('Server is running on port: ' + port)
-// }) 
-
-
-
 app.use(bodyParser.json())
 app.use(cors())
 app.use(

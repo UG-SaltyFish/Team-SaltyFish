@@ -38,7 +38,7 @@ const Styles = styled.div
 
 export const CarouselHomepage = () => (
   
-    <React.Fragment className="carousel">
+    <React.Fragment>
       <Styles>
         <Carousel>
         <Carousel.Item>

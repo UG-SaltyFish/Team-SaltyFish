@@ -80,23 +80,6 @@ class Login extends Component {
     counterpart.setLocale('en')
  
   };
-  onSubmitEmail = (e) => {
-    e.preventDefault();
-    const mail = this.state.email;
-    console.log(mail)
-    axios.get('/getpassword/'+mail).then(res=>
-      {this.setState({
-        realpassword: res.data.password},()=>{
-          console.log(this.state.realpassword);
-          var password = this.state.realpassword;
-          var toUser={
-            mail: this.state.email,
-            pass: password,
-          }
-          console.log(toUser);
-          axios.post('/sendmail/',toUser);
-        });})    
-  }
   switchtocn = () => { 
     counterpart.setLocale('cn');
   }
@@ -111,7 +94,8 @@ class Login extends Component {
     const mail = this.state.email;
     console.log(mail)
     axios.get('/getpassword/'+mail).then(res=>
-      {this.setState({
+      {if(res.status != 404){
+        this.setState({
         realpassword: res.data.password},()=>{
           console.log(this.state.realpassword);
           var password = this.state.realpassword;
@@ -122,7 +106,9 @@ class Login extends Component {
           console.log(toUser);
           axios.post('/sendmail/',toUser);
           this.hidemessageModal();
-        });})    
+        });}else{
+          console.log("no such user");
+        }})    
   }
   
   //Google Login
@@ -349,9 +335,6 @@ class Login extends Component {
                           cssClass="kep-login-facebook"
                           fields="name,email,picture"
                           autoLoad={false}
-                          //icon={}
-                          //containerStyle={}
-                          //buttonStyle={}
                           callback={this.callback}
                           uxMode={"redirect"}
                           redirectUri={"https://saltyfishwillgraduate.herokuapp.com/"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
