@@ -206,11 +206,11 @@ var getPasswordByEmail = function(req, res) {
     var useremail = req.params.email;
     console.log("getMail:" + useremail);
     User.findOne({ email: useremail }, function(err, user) {
-        if (!err) {
+        if (user) {
             res.send(user);
-            console.log(user.password);
+            console.log("user is : " + user.password);
         } else {
-
+            console.log("cannotfind");
             res.sendStatus(404);
         }
     })
