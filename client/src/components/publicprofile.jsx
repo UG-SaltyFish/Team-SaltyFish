@@ -84,7 +84,11 @@ oncontact = () =>{
     mail: this.state.email,
     info: this.state.addinfo,
   }
-  axios.post('/contact',Contact);
+  if(Contact.info !== ""){
+    axios.post('/contact',Contact);
+  }else{
+    console.log("Please enter your message");
+  }
   this.hidecontactModal();
 }
 switchtoen = () => {
