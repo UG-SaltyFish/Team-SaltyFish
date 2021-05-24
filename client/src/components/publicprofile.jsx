@@ -84,9 +84,10 @@ oncontact = () =>{
     mail: this.state.email,
     info: this.state.addinfo,
   }
-  if(Contact.info !== ""){
+  if(Contact.info.trim().length !== 0){
     axios.post('/contact',Contact);
   }else{
+    console.log(Contact.info.replace(/(^s*)|(s*$)/g, "").length);
     console.log("Please enter your message");
   }
   this.hidecontactModal();
