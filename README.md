@@ -155,4 +155,3 @@ The app loads in your browser at https://saltyfishwillgraduate.herokuapp.com <br
 * Update documents in doc/, data sample in datasample/, and images in ui/.<br>
 * Add a release tag: COMP90082_2021_RLSE_<UG>_<2.0>.<br>
   COMP90082_2021_RLSE_<UG>_<2.0> contains codes and corresponding documents for Sprint 2.<br> 
->>>>>>> 4fac084fbc6217aa2d8bd16a577dfaedfbc6191a:README.md
