@@ -1,5 +1,4 @@
-<img align="center" width="300" height="100" src="/ui/logo.png">
-# SaltyFish ePortfolio<br>
+# SaltyFish ePortfolio <img align="center" width="300" height="100" src="/ui/logo.png"> <br>
     Extend SwatKatz Eportfolio
 Documentation here:<br> 
 https://confluence.cis.unimelb.edu.au:8443/display/COMP900822021SM1UG/Group%3A+SaltyFish <br>
