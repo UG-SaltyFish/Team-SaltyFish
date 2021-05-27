@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {GoogleLogin } from 'react-google-login';
-
+import axios from 'axios';
 import { Button, Image, Col, Row,Modal} from 'react-bootstrap';
 import icon from './loginImage.svg';
 
@@ -14,6 +14,7 @@ import { Nav, Navbar, Dropdown} from 'react-bootstrap';
 import styled from 'styled-components';
 import logo from './logo.svg';
 import logo1 from './logo1.svg';
+import laptop from './laptop.svg';
 import NavigationBar from "./NavigationBar";
 import counterpart from 'counterpart';
 import Translate from 'react-translate-component';
@@ -67,6 +68,8 @@ class Login extends Component {
       password: '',
       errors: '',
       showmessage:false,
+      can: false,
+      realpassword:'',
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -77,16 +80,36 @@ class Login extends Component {
     counterpart.setLocale('en')
  
   };
-  switchtocn = () => {
-    
+  switchtocn = () => { 
     counterpart.setLocale('cn');
-
-  };
+  }
+  
   switchtojp= () => {
     
     counterpart.setLocale('jp')
 
   };
+  onSubmitEmail = (e) => {
+    e.preventDefault();
+    const mail = this.state.email;
+    console.log(mail)
+    axios.get('/getpassword/'+mail).then(res=>
+      {if(res.status != 404){
+        this.setState({
+        realpassword: res.data.password},()=>{
+          console.log(this.state.realpassword);
+          var password = this.state.realpassword;
+          var toUser={
+            mail: this.state.email,
+            pass: password,
+          }
+          console.log(toUser);
+          axios.post('/sendmail/',toUser);
+          this.hidemessageModal();
+        });}else{
+          console.log("no such user");
+        }})    
+  }
   
   //Google Login
   onSuccess = (res) => {
@@ -238,8 +261,8 @@ class Login extends Component {
 
           <div className="row mt-5 align-self-center">
           <div className="col align-self-center d-none d-lg-block">
-              <div className="col-md-8 m-auto">
-                <Image src={icon} fluid />
+          <div className="col-md-8 m-auto">
+                <Image src={laptop}  />
               </div>
             </div>
             <div className="col align-self-center">
@@ -289,7 +312,7 @@ class Login extends Component {
                     </Row>
                     
                     <div>
-                    {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+                    {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
                     <GoogleLogin
                         clientId={googleClientId}
                         buttonText="GOOGLE LOGIN"
@@ -301,7 +324,7 @@ class Login extends Component {
                         isSignedIn={false}
                       />
 
-                      {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
+{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
                       {'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}{'\u00A0'}
                       <FacebookLogin
                           appId={appId} // appId of our application registered on Facebook developer platform
@@ -312,12 +335,9 @@ class Login extends Component {
                           cssClass="kep-login-facebook"
                           fields="name,email,picture"
                           autoLoad={false}
-                          //icon={}
-                          //containerStyle={}
-                          //buttonStyle={}
                           callback={this.callback}
                           uxMode={"redirect"}
-                          redirectUri={"https://it-project-eportfolio.herokuapp.com/"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
+                          redirectUri={"https://saltyfishwillgraduate.herokuapp.com/"} // if backend is finished, we could change redirect URL to "http://localhost:3000/profile"
                           cookiePolicy={'single_host_origin'}
                       />
                     

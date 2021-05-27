@@ -167,9 +167,9 @@ renderSuggestion = suggestion => (
         //<h3>{users.name}</h3>
         //<p>{users.email}</p>
         //<p>{index}</p>
-        <div class="row">            
-          <div class="col-md-4"></div>
-          <div class = "card-group " key = {index} >
+        <div className="row">            
+          <div className="col-md-4"></div>
+          <div className = "card-group " key = {index} >
             <this.cardchoice name  = {users.name} bio = {users.bio} num = {index}/>
           </div>
         </div>
@@ -251,8 +251,6 @@ renderSuggestion = suggestion => (
           />
           </font>
           </h2>
-          <h3  className = "searchH3" ><font sizs="1" color="grey">Or you can copy and paste this link to go to a profile via email: https://it-project-eportfolio.herokuapp.com/public/useremail</font></h3>
-            
         </div>
       <div className = "page-wrapper">
         <CarouselHomepage/>
@@ -272,7 +270,7 @@ renderSuggestion = suggestion => (
                     <Col>
                   
                   <div style={{backgroundColor:"#f2f2f2"}}>
-                      <div class="container">
+                      <div className="container">
                           <FontAwesomeIcon icon = {faHandshake} size = "4x" className = "cimg" />
                           <h4 style={{color:"Black"}}><b><Translate content="landing3"></Translate></b></h4>
                           <br/>
@@ -286,7 +284,7 @@ renderSuggestion = suggestion => (
                   <Col>
                 
                   <div style={{backgroundColor:"#f2f2f2"}} >
-                      <div class="container">
+                      <div className="container">
                           <FontAwesomeIcon icon = {faUserPlus} size = "4x" className = "cimg" />
                           <h4 style={{color:"Black"}}><b><Translate content="landing5"></Translate></b></h4>
                           <br/>
@@ -300,7 +298,7 @@ renderSuggestion = suggestion => (
                   <Col>
                   
                   <div style={{backgroundColor:"#f2f2f2"}}> 
-                      <div class="container">
+                      <div className="container">
                           <FontAwesomeIcon icon = {faLanguage} size = "4x" className = "cimg" />
                           <h4 style={{color:"Black"}}><b><Translate content="landing7"></Translate></b></h4>
                           <br/>

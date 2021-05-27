@@ -20,6 +20,8 @@ import "./css/media-queries.css";
 import en from "./i18n/en";
 import cn from "./i18n/cn";
 import jp from "./i18n/jp";
+import copy from 'copy-to-clipboard';
+
 
 //Translation
 counterpart.registerTranslations('en',en);
@@ -61,7 +63,7 @@ class Profile extends Component {
       showintro:false,
       addintro:'',
       addinfo:'',
-      showskills:'',
+      showskills:false,
       showedu:false,
       addschoolname:'',
       addqual:'',
@@ -75,9 +77,7 @@ class Profile extends Component {
       addprojectdescripition:'',
       addprojectlink:'',
       showphone:false,
-      lang:'en',
-      hastranscript:'notranscript',
-      filename:''
+      lang:'en'
     };
   this.onLogoutClick=this.onLogoutClick.bind(this);
   this.onChange =this.onChange.bind(this);
@@ -344,13 +344,6 @@ onSubmitGalleryPhoto = (e) => {
                         });
           })
 
-    if (this.state.transcript !== "") {
-      this.state.hastranscript ='yestranscript';
-      this.state.filename=this.state.transcript;
-    }else{
-      this.state.hastranscript ='notranscript';
-      this.state.filename='';
-    }
 }
   fileSelectedHandler = event => {
     event.preventDefault();
@@ -360,12 +353,19 @@ onSubmitGalleryPhoto = (e) => {
   }
 
 
-
+  getUrl = ()=>{
+    var userURL = "https://saltyfishwillgraduate.herokuapp.com/" + "public/" + this.state.email;
+    if(copy(userURL)){
+    alert("Successful copy URL to clipboard!");
+    }else{
+    alert("Copy URL failed, please try again.");  
+    }
+  }
 
   hideEdu = ()=>{
     var checkbox1 = document.getElementById("edusec");
     var edusection = document.getElementById("educationsec");
-    if(checkbox1.checked == false){
+    if(checkbox1.checked === false){
       edusection.style.display = "none";
     }else{
       edusection.style.display = "block";
@@ -383,7 +383,7 @@ onSubmitGalleryPhoto = (e) => {
   hideWork = ()=>{
     var checkbox1 = document.getElementById("worksec");
     var worksection = document.getElementById("worksection");
-    if(checkbox1.checked == false){
+    if(checkbox1.checked === false){
       worksection.style.display = "none";
     }else{
       worksection.style.display = "block";
@@ -398,7 +398,7 @@ onSubmitGalleryPhoto = (e) => {
   hideProj = ()=>{
     var checkbox1 = document.getElementById("projsec");
     var projsection = document.getElementById("projectsection");
-    if(checkbox1.checked == false){
+    if(checkbox1.checked === false){
       projsection.style.display = "none";
     }else{
       projsection.style.display = "block";
@@ -413,7 +413,7 @@ onSubmitGalleryPhoto = (e) => {
   hideSkill = ()=>{
     var checkbox1 = document.getElementById("skillsec");
     var skisection = document.getElementById("skillsection");
-    if(checkbox1.checked == false){
+    if(checkbox1.checked === false){
       skisection.style.display = "none";
     }else{
       skisection.style.display = "block";
@@ -428,7 +428,7 @@ onSubmitGalleryPhoto = (e) => {
   hideSub = ()=>{
     var checkbox1 = document.getElementById("subsec");
     var subsection = document.getElementById("subjectsection");
-    if(checkbox1.checked == false){
+    if(checkbox1.checked === false){
       subsection.style.display = "none";
     }else{
       subsection.style.display = "block";
@@ -443,7 +443,7 @@ onSubmitGalleryPhoto = (e) => {
   hideGal = ()=>{
     var checkbox1 = document.getElementById("galsec");
     var galsection = document.getElementById("gallerysection");
-    if(checkbox1.checked == false){
+    if(checkbox1.checked === false){
       galsection.style.display = "none";
     }else{
       galsection.style.display = "block";
@@ -458,7 +458,7 @@ onSubmitGalleryPhoto = (e) => {
 
   SectionModal = () => {
     var form1 = document.getElementById("modalhere");
-    if(form1.style.display=="none"){
+    if(form1.style.display==="none"){
       form1.style.display="block";
     }else{
       form1.style.display="none";
@@ -479,11 +479,6 @@ onSubmitGalleryPhoto = (e) => {
       }).then(res=> {
         console.log(res);
       })
-      this.state.hastranscript ='yestranscript';
-      this.state.filename=this.state.transcript;
-    }else{
-      this.state.hastranscript ='notranscript';
-      this.state.filename='';
     }
 
     fd.append('transcript', this.state.selectedFile);
@@ -607,6 +602,23 @@ onSubmitGalleryPhoto = (e) => {
     })
   }
 
+  deletetranscript = () => {
+    axios.delete('/deletefile', {
+      params: {
+        url: this.state.transcript
+      }
+    }).then(res=> {
+      console.log(res);
+      const transc = {transcript: ""};
+      axios
+        .put('/addtranscript/' + this.props.auth.user, transc)
+        .then(res => this.setState({transcript:res.data.transcript}))
+        .catch(err => {
+          console.log("delete error for transcript", err);
+        })
+    })
+  }
+
   scrollUp() {
     window.scroll(0,0);
   }
@@ -655,7 +667,8 @@ onSubmitGalleryPhoto = (e) => {
 
               <li><Link activeClass="active" to="subjects" spy={true} smooth={true} duration={1000} href="#"><Translate content='subjects'></Translate>  </Link></li>
   
-              <li><Link activeClass="active" to="gallery" spy={true} smooth={true} duration={1000} href="#"style={{paddingRight:"380px"}}><Translate content='gallery'></Translate>  </Link></li>
+              <li><Link activeClass="active" to="gallery" spy={true} smooth={true} duration={1000} href="#" style={{paddingRight:"300px"}}><Translate content='gallery'></Translate>  </Link></li>
+              
               <li><a className="smoothscroll" href="#" onClick={this.showLanguage}> <Translate content='language'></Translate> </a> </li>
               <Modal show={this.state.showlang} >
                 <Modal.Header closeButton onClick={this.hideLanguage}></Modal.Header>
@@ -665,16 +678,16 @@ onSubmitGalleryPhoto = (e) => {
       
               </Modal>
     
-              <li><a  className="smoothscroll" href=""  onClick={this.onLogoutClick}style={{textAlign: 'right'}}><Translate content='logout'></Translate> </a></li>
-              <li><a  className="smoothscroll" href="" onClick={this.onResetClick}><Translate content='reset'></Translate> </a></li>
+              <li><a className="smoothscroll" href="" onClick={this.onLogoutClick}style={{textAlign: 'right'}}><Translate content='logout'></Translate></a></li>
+              <li><a className="smoothscroll" href="" onClick={this.onResetClick}><Translate content='reset'></Translate> </a></li>
 
             </ul>
           </nav>
-          <div class="row banner">
-         <div class="banner-text">
+          <div className="row banner">
+         <div className="banner-text">
             
             <h1 className="responsive-headline"> <Translate content='Im'></Translate>  {this.state.name} </h1>
-            <div class="float-container">
+            <div className="float-container">
           
                 <h2 style={{color:'white', fontFamily:'Palatino Linotype'}}>  {this.state.intro}</h2>
                 <Button  onClick={this.showintroModal}><Translate content='edit_Intro'></Translate></Button>
@@ -708,12 +721,16 @@ onSubmitGalleryPhoto = (e) => {
 
         <section id="about"  >
           <div className="row" >
-            <div className="three columns" >
+            <div className="four columns" >
               <img className="profile-pic"  src={this.state.profilePicture} alt="Profile Pic" />
               <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
               <Button onClick={this.imgUploadHandler}><Translate content='upload'></Translate> </Button>
+              
             </div>
-       
+            
+
+           
+
             <div className="nine columns main-col">
               <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='about_me'></Translate> </h2>
               <div style={{display:'inline-block', width:'100%', wordWrap:'break-word', whitespace:'normal'}}>
@@ -741,13 +758,13 @@ onSubmitGalleryPhoto = (e) => {
               <div className="row">
                <div className="columns contact-details">
                   <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='contact_details'></Translate> </h2>
-                  <p className="address">
+                  <h6 className="address" style={{color:"gray"}}>
 						        <span>{this.state.phone}</span><br />
                     <div>
                       <Button  onClick={this.showphoneModal}><Translate content='edit_phone'></Translate></Button>
                       <Modal show={this.state.showphone}>
                         <Modal.Header closeButton onClick={this.hidephoneModal}></Modal.Header>
-                        <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_Bio'></Translate> </h2>
+                        <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_Phone'></Translate> </h2>
                         <form onSubmit={this.onSubmitPhone}>
                           <input onChange={this.onChange}
                             value={this.state.addinfo}
@@ -765,21 +782,22 @@ onSubmitGalleryPhoto = (e) => {
              
                     </div>
                     <span>{this.state.email}</span>
-					        </p>
+					        </h6>
                 </div>
                 <div className="columns download">
-                  <p>
+                  <div>
                     <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='transcript_file'></Translate> </h2>
                     <span><a href = {this.state.transcript} target = "_blank"  download = "transcript" >{this.state.transcript}</a> </span>
-                    <button><a href = {this.state.transcript} target = "_blank"  download = "transcript" style={{color:'white'}}><Translate content='delete'></Translate></a></button><br/>
+                    <Button  onClick={this.deletetranscript}><Translate content='delete'></Translate></Button><br/>
                   
                     <input type = "file" accept = ".pdf" onChange={this.fileSelectedHandler}/>
-                    <button onClick={this.pdfUploadHandler}><Translate content='upload_transcript'></Translate> </button>
-                  </p>
+                    <Button onClick={this.pdfUploadHandler}><Translate content='upload_transcript'></Translate> </Button>
+                  </div>
                 </div>
               </div>
             </div>
             <div className="three columns" >
+            <Button onClick={this.getUrl}><Translate content='url'></Translate> </Button>
               <button onClick={this.SectionModal}><Translate content='section'></Translate></button>
               <form id = "modalhere" style={{display:"none" }}>
                 <div className="row">
@@ -816,15 +834,14 @@ onSubmitGalleryPhoto = (e) => {
    <div id = "educationsec" style={{backgroundColor:'#fff'}} >
       
             <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='education'></Translate> </h2>
-            <div>         
-              <p   style= {{ fontSize: '20px'}}  >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.education.map( (item, index) =>
+            <div style= {{ fontSize: '20px'}}  >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.education.map( (item, index) =>
                 <li key = {index} > 
                   <p style={{color:'black', fontFamily:'bookman', fontSize:'25px',  letterSpacing:'1px'}}>{item.school} </p>    
                   <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'20px',  letterSpacing:'1px'}}>{item.qual}</p>
                   <Button onClick={()=>{this.deleteedu((this.state.education)[index],this.props.auth.user)}}><Translate content='delete'></Translate></Button>
                   <hr />
                 </li>
-                )} <button style={{alignItems:'center'}} onClick={this.showEduModal}><Translate content='add_edu'></Translate> </button></ul>} </p>
+                )} <button style={{alignItems:'center'}} onClick={this.showEduModal}><Translate content='add_edu'></Translate> </button></ul>}
       
             </div>
       
@@ -865,8 +882,7 @@ onSubmitGalleryPhoto = (e) => {
         <section id="work" style={{display:this.state.sectionW}} >
           <div id = "worksection" style={{backgroundColor:'#fff'}}>
             <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='work1'></Translate> </h2>
-            <div>
-              <p>{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.work).sort((a,b)=>b.from -a.from)).map( (item, index) =>
+            <div>{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.work).sort((a,b)=>b.from -a.from)).map( (item, index) =>
                 <li key = {index} > 
                   <div className="row education">
                     <div style={{width:"40%", float:"right"}}>
@@ -890,7 +906,7 @@ onSubmitGalleryPhoto = (e) => {
                   </div>
         
                 </li>
-                )}  <button style={{alignItems:'center', marginLeft:'auto'}} onClick={this.showWorkModal}><Translate content='add_work'></Translate> </button></ul>} </p>
+                )}  <button style={{alignItems:'center', marginLeft:'auto'}} onClick={this.showWorkModal}><Translate content='add_work'></Translate> </button></ul>}
             </div>
    
             <Modal show={this.state.showwork} >
@@ -952,8 +968,7 @@ onSubmitGalleryPhoto = (e) => {
         <section id='projects' style={{display:this.state.sectionP}}>
           <div id = "projectsection" style={{backgroundColor:'#fff'}}>
             <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='projects'></Translate> </h2>
-            <div>         
-              <p > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.projects).map( (item, index) =>
+            <div> {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.projects).map( (item, index) =>
                 <li key = {index} >
                   <div className="row education">
                     <div style={{width:"40%", float:"right"}}>
@@ -975,7 +990,7 @@ onSubmitGalleryPhoto = (e) => {
       
                   </div>
                 </li>
-                )} <button style={{alignItems:'center'}} onClick={this.showProjectModal}><Translate content='add_projects'></Translate> </button></ul> } </p>
+                )} <button style={{alignItems:'center'}} onClick={this.showProjectModal}><Translate content='add_projects'></Translate> </button></ul> }
             </div>
     
             <Modal show={this.state.showproject} >
@@ -1028,10 +1043,9 @@ onSubmitGalleryPhoto = (e) => {
         <section id="skills" style={{display:this.state.sectionSk}}>
    <div id = "skillsection" style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='skills'></Translate> </h2>
-      <div>         
-      <p style= {{ fontSize: '25px'}} >{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.skills.map( (item, index) =>
+      <div style= {{ fontSize: '25px'}} >{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.skills.map( (item, index) =>
     <li key = {index} style={{paddingBottom:"20px"}}><span style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px',borderBottom:'solid #11ABB0'}}>{item}</span> <Button onClick={()=>{this.deleteskills(index,this.props.auth.user)}}><Translate content='delete'></Translate></Button></li>
-  )}<button style={{alignItems:'center'}} onClick={this.showskillsModal}><Translate content='add_skills'></Translate> </button></ul> } </p>
+  )}<button style={{alignItems:'center'}} onClick={this.showskillsModal}><Translate content='add_skills'></Translate> </button></ul> }
       </div>
       
       
@@ -1063,8 +1077,7 @@ onSubmitGalleryPhoto = (e) => {
         <section id="subjects" style={{display:this.state.sectionSu}}>
    <div id = "subjectsection" style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='subjects'></Translate> </h2>
-      <div>         
-      <p > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.subjects).sort((a, b) => b.subjectyear - a.subjectyear)).map( (item, index) =>
+      <div>{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.subjects).sort((a, b) => b.subjectyear - a.subjectyear)).map( (item, index) =>
    
   <li key = {index} >
     <div className="row education">
@@ -1086,7 +1099,7 @@ onSubmitGalleryPhoto = (e) => {
          </div>
       
          </div></li>
-    )}<button style={{alignItems:'center'}} onClick={this.showAddModal}><Translate content='add_subjects'></Translate> </button></ul> } </p>
+    )}<button style={{alignItems:'center'}} onClick={this.showAddModal}><Translate content='add_subjects'></Translate> </button></ul> }
       
       <Modal show={this.state.showAdd} >
         <Modal.Header closeButton onClick={this.hideAddModal}></Modal.Header>
@@ -1144,7 +1157,7 @@ onSubmitGalleryPhoto = (e) => {
      
         <Carousel style={{backgroundColor:"grey", paddingBottom:"35px"}}>
       {(this.state.gallery).map( (item, index) =>
-       <Carousel.Item>
+       <Carousel.Item key={index}>
        <img
        className="carousel-img"
        key={index} src={item.imagesource}
@@ -1177,7 +1190,7 @@ onSubmitGalleryPhoto = (e) => {
       )}
      </Carousel>
    
-        <form name="uploadForm" onkeydown="return event.key != 'Enter';">
+        <form name="uploadForm" >
           <div>
             <input type = "file" accept=".jpg, .png" onChange={this.fileSelectedHandler}/>
           </div>

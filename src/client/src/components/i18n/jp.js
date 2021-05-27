@@ -20,13 +20,14 @@ export default{
   add_work:"職歴に追加",
   welcome:"ウエルカム",
   login:"ログイン",
-  profile:"プロフィール",
+  profile:"後退",
   instrction:"変更したい部分を入力してください。変更する必要のない部分は入力が不要です",
   register:"サインアップ", // more common to you "sign up" in japanese
   createdby:"作成者", //translates roughly to "creaters" rather than "created by"
   extendedby:"によって拡張",
   Createacc:"アカウントを作成する",
   Resetacc:"アカウントをリセット",
+  print:"プリント",
   registerfa:"もうアカウントをもっていますか？",
   forgetpassword:"パスワードを忘れましたか？",
   submit:"送信",
@@ -37,6 +38,7 @@ export default{
   add_edu:"教育を追加",
   add_projects:"プロジェクトを追加",
   add_skills:"腕前を追加",
+  url:"このページをシェアする",
   section:"モジュールを選択",
   gallery:"ギャラリー",
   add_photodesc:"写真の説明を追加",

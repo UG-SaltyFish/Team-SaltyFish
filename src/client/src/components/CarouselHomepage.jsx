@@ -8,7 +8,7 @@ import working from './images/carousel/working.jpg';
 const Styles = styled.div 
 `
 .carousel-img {
-  max-width: 1300px;
+  max-width: 800px;
   height: auto;
   display: block;
   margin-left: auto;
@@ -38,7 +38,7 @@ const Styles = styled.div
 
 export const CarouselHomepage = () => (
   
-    <React.Fragment className="carousel">
+    <React.Fragment>
       <Styles>
         <Carousel>
         <Carousel.Item>

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import { Modal} from 'react-bootstrap';
+import { Button,Row, Modal} from 'react-bootstrap';
 import styled from 'styled-components';
 import { Link } from 'react-scroll';
 import Footer from './Footer.js';
@@ -72,11 +72,23 @@ class PublicProfile extends Component {
       addprojectdescripition:'',
       addprojectlink:'',
       showphone:false,
-      lang:'en',
-      filename:''
+      showcontact:false,
+      lang:'en'
     };
   this.onChange =this.onChange.bind(this);
   
+}
+oncontact = () =>{
+  var Contact = {
+    mail: this.state.email,
+    info: this.state.addinfo,
+  }
+  if(Contact.info !== ""){
+    axios.post('/contact',Contact);
+  }else{
+    console.log("Please enter your message");
+  }
+  this.hidecontactModal();
 }
 switchtoen = () => {
   
@@ -103,7 +115,22 @@ onChange = (e) => {
   
   this.setState({[e.target.name]: e.target.value});
 }
+
+pdfprint(){  
+  window.document.body.innerHTML = window.document.getElementById('profileprint').innerHTML;  
+  window.print(); 
+  window.location.reload();
+}
    
+showcontactModal = () => {
+  this.setState({ showcontact: true });
+};
+hidecontactModal = () => {
+  this.setState({addinfo:''});
+  this.setState({ showcontact: false });
+};
+
+
   componentDidMount() {
     axios
         .get('/profile2/'+(this.props.match.params.user))
@@ -132,11 +159,6 @@ onChange = (e) => {
                          imgHash: Date.now()
                         });
           })
-    if (this.state.transcript !== "") {
-      this.state.filename=this.state.transcript;
-    }else{
-      this.state.filename='';
-    }
 }
   
  
@@ -193,34 +215,79 @@ onChange = (e) => {
       
       
     </Modal>
-    
+    <li><button onClick={this.pdfprint.bind(this)} style={{marginRight: '8px'}}><Translate content='print'></Translate></button></li>
    
 </ul>
 </nav>
-        
-        <div class="row banner">
-         <div class="banner-text">
+        <div className="row banner">
+         <div className="banner-text">
             
             <h1 className="responsive-headline"> <Translate content='Im'></Translate>  {this.state.name} </h1>
-            <div class="float-container">
+            <div className="float-container">
           
                 <h2 style={{color:'white', fontFamily:'Palatino Linotype'}}>  {this.state.intro}</h2>
                 
             </div>
-            
             <hr />
             
          </div>
       </div>
       </header>
+      <div className="profile-content" id={'profileprint'}>
       <section id="about" >
       <div className="row">
       <div className="three columns">
             <img className="profile-pic"  src={this.state.profilePicture} alt="Profile Pic" />
+
+            
+                    <div>
+                      <Button  onClick={this.showcontactModal}><Translate content='edit_contact'></Translate></Button>
+
+                      
+
+                      <Modal show={this.state.showcontact} centered>
+                        
+                        
+                        <Modal.Header closeButton onClick={this.hidecontactModal}></Modal.Header>
+                        <h2 style={{textAlign: 'center', paddingBlock:'10px',fontFamily:'Times New Roman'}}><Translate content='edit_con'></Translate> </h2>
+                        <form>
+                          <input onChange={this.onChange}
+                            value={this.state.addinfo}
+                            type="text"
+                            className={("form-control")}
+                            placeholder="Please remember to include your contact details in the message"
+                            name="addinfo"
+                            style={{height:'200px' }}
+                            maxLength="1000"
+                            required autoFocus 
+                          />
+                  
+                          <button onClick = {this.oncontact} type="submit" style={{alignContent: 'center', paddingBlock:'10px' }}> <Translate content='submit'></Translate></button>
+                        </form>
+                      </Modal>
+             
+                    </div>
+
+                    
+
+                     
+
+
+            
             
          </div>
+
+        
+
+
+         
+
+
+
+
        
          <div className="nine columns main-col">
+           <h1 style={{fontFamily:'Georgia, serif', color:'white'}}> {this.state.name} </h1>
             <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='about_me'></Translate> </h2>
             <div style={{display:'inline-block', width:'100%', wordWrap:'break-word', whitespace:'normal'}}>
             <p>{this.state.bio}</p>
@@ -228,19 +295,28 @@ onChange = (e) => {
             <div className="row">
                <div className="columns contact-details">
                   <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='contact_details'></Translate> </h2>
-                  <p className="address">
+                  <h6 className="address" style={{color:"gray"}}>
 						   <span>{this.state.phone}</span><br />
                <div>
                 
       </div>
                      <span>{this.state.email}</span>
-					   </p>
+					   </h6>
+             
+
+
                </div>
+              
+
+               
+
+
+
                <div className="columns download">
-                  <p>
+                  <div>
                   <h2 style={{fontFamily:'Georgia, serif'}}><Translate content='transcript_file'></Translate> </h2>
                   <p><a href = {this.state.transcript} target = "_blank"  download = "transcript" >{this.state.transcript}</a> </p>
-                  </p>
+                  </div>
                </div>
             </div>
          </div>
@@ -250,14 +326,13 @@ onChange = (e) => {
    <section id="education" style={{display:this.state.sectionE}}>
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='education'></Translate> </h2>
-      <div>         
-    <p   style= {{ fontSize: '20px'}}  >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.education.map( (item, index) =>
+      <div style= {{ fontSize: '20px'}}  >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.education.map( (item, index) =>
 <li key = {index} > 
         <p style={{color:'black', fontFamily:'bookman', fontSize:'25px',  letterSpacing:'1px'}}>{item.school} </p>    
         <p style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'20px',  letterSpacing:'1px'}}>{item.qual}</p>
         <hr />
       </li>
-  )}</ul>} </p>
+  )}</ul>}
   
       </div>
              
@@ -268,8 +343,7 @@ onChange = (e) => {
    <section id="work" style={{display:this.state.sectionW}}>
    <div style={{backgroundColor:'#fff'}}>
     <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='work1'></Translate> </h2>
-    <div>
-    <p     >{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.work).sort((a,b)=>b.from -a.from)).map( (item, index) =>
+    <div>{ <ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.work).sort((a,b)=>b.from -a.from)).map( (item, index) =>
 <li key = {index} > 
 <div className="row education">
          <div style={{width:"40%", float:"right"}}>
@@ -290,7 +364,7 @@ onChange = (e) => {
      </div>
         
       </li>
-  )}</ul>} </p>
+  )}</ul>}
     </div>
 </div>
    </section>
@@ -298,8 +372,7 @@ onChange = (e) => {
    <section id='projects' style={{display:this.state.sectionP}}>
    <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='projects'></Translate> </h2>
-      <div>         
-      <p > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.projects).map( (item, index) =>
+      <div>{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{(this.state.projects).map( (item, index) =>
    
   <li key = {index} >
     <div className="row education">
@@ -320,7 +393,7 @@ onChange = (e) => {
          </div>
       
          </div></li>
-    )}</ul> } </p>
+    )}</ul> }
     </div>
     </div>
 </section>
@@ -329,10 +402,9 @@ onChange = (e) => {
    <section id="skills" style={{display:this.state.sectionSk}}>
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='skills'></Translate> </h2>
-      <div>         
-      <p style= {{ fontSize: '25px'}} >{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.skills.map( (item, index) =>
+      <div style= {{ fontSize: '25px'}} >{<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{this.state.skills.map( (item, index) =>
     <li key = {index} style={{paddingBottom:"20px"}}><span style={{color:'black' ,fontFamily:'librebaskerville-italic', fontSize:'23px',borderBottom:'solid #11ABB0'}}>{item}</span> </li>
-  )}</ul> } </p>
+  )}</ul> }
       </div>
        </div>
    </section>
@@ -340,8 +412,7 @@ onChange = (e) => {
    <section id="subjects" style={{display:this.state.sectionSu}}>
       <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='subjects'></Translate> </h2>
-      <div>         
-      <p > {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.subjects).sort((a, b) => b.subjectyear - a.subjectyear)).map( (item, index) =>
+      <div>  {<ul style={{textAlign: 'center', paddingBlock:'20px' }}>{((this.state.subjects).sort((a, b) => b.subjectyear - a.subjectyear)).map( (item, index) =>
    
   <li key = {index} >
     <div className="row education">
@@ -362,21 +433,21 @@ onChange = (e) => {
          </div>
       
          </div></li>
-    )}</ul> } </p>
+    )}</ul> }
       
       </div>
             
       
       </div>
    </section>
-
+   </div>
    <section id = "gallery" style={{display:this.state.sectionG}}>
    <div style={{backgroundColor:'#fff'}}>
       <h2 style={{fontSize:'35px', textAlign: 'center', paddingBlock:'18px',fontFamily:'Georgia, serif'}}><Translate content='gallery'></Translate> </h2>
      
         <Carousel style={{backgroundColor:"grey"}}>
       {(this.state.gallery).map( (item, index) =>
-       <Carousel.Item>
+       <Carousel.Item key={index}>
        <img
        className="carousel-img"
        key={index} src={item.imagesource}
