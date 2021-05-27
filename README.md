@@ -1,4 +1,4 @@
-![GitHub Logo](/ui/logo.png)
+<img align="center" width="300" height="100" src="/ui/logo.png">
 # SaltyFish ePortfolio<br>
     Extend SwatKatz Eportfolio
 Documentation here:<br> 
@@ -30,6 +30,7 @@ S3_ACCESS_KEY=<your access key>
 S3_SECRET_ACCESS_KEY=<your secret key>
 ```
 * [Heroku](https://id.heroku.com/login) was the platform we used to deploy our ePortfolio app. More info see Deployment below.<br>
+<br>
 Below are the main plugins in our project: <br>
 * express
 * axios
@@ -38,8 +39,6 @@ Below are the main plugins in our project: <br>
 * mongoose
 * nodemailer
 * aws-sdk
-<br>
-
 
 ## Deployment:<br>
 ### Local:<br>
@@ -63,17 +62,11 @@ It loads the client in your browser at http://localhost:3000. <br>
 
 If you are unable to load the app due to some errors, please install the following scripts as well.<br>
 ```
-npm install openssl
-
-npm install bootstrap
-
 npm install react-google-login
 //or npm install react-google-login --legacy-peer-deps
-
 npm install react-facebook-login
 //or npm install react-facebook-login --legacy-peer-deps
 ```
-OpenSSL is a general-purpose cryptography library that stores some private information for HTTPS.<br>
 Packages of react-google-login and react-facebook-login are necessary for Google and Facebook login.<br>
 
 ### Heroku:<br>
