@@ -1,9 +1,10 @@
-# Team-SaltyFish<br>
+![GitHub Logo](/ui/logo.png)
+# SaltyFish ePortfolio<br>
     Extend SwatKatz Eportfolio
 Documentation here:<br> 
 https://confluence.cis.unimelb.edu.au:8443/display/COMP900822021SM1UG/Group%3A+SaltyFish <br>
 Heroku link:<br> 
-https://saltyfish2.herokuapp.com <br>
+https://saltyfishwillgraduate.herokuapp.com <br>
 
 ## Project Overview:
 This project is to test and further develop a web-based ePortfolio system built by students studying in COMP30022 capstone project in Semester 2, 2020. Our team selected the SwatKats ePortfolio as our development object. Since this project does not have clients, our supervisor will play the role of clients as well. In the following 3 months, we will try our best to expand some significant functions according to new project requirements, improve the user interface design and debug.<br>
@@ -17,20 +18,26 @@ Our team will run the project based on the Agile development model. This Conflue
 
 ## Tools:<br>
 * [Visual Studio Code](https://code.visualstudio.com) was used as the programming IDE for this project.<br> 
-* [MangoDB](https://www.mongodb.com/) was used as the database for this project.
-* [AWS](https://aws.amazon.com/cn/) was used to store the URLs and pictures in the website.
-* [Heroku](https://id.heroku.com/login) was the platform we use to run our eportfolio.
 * This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br>
 * The back-end was developed using [Node.js](https://nodejs.org/en/download/).<br>
+* [MangoDB](https://www.mongodb.com/) was one of the database for storing text and URLs of files.<br>
+```
+const mongoURI = "mongodb+srv://<username>:<password>@<clustername>.mongodb.net/test?retryWrites=true&w=majority"
+```
+* [AWS](https://aws.amazon.com/cn/) was used to store the files and pictures in the website.<br>
+```
+S3_ACCESS_KEY=<your access key>
+S3_SECRET_ACCESS_KEY=<your secret key>
+```
+* [Heroku](https://id.heroku.com/login) was the platform we used to deploy our ePortfolio app. More info see Deployment below.<br>
 Below are the main plugins in our project: <br>
-* React
-```
-npm install react
-``` 
-* Express
-```
-npm install express
-``` 
+* express
+* axios
+* copy-to-clipboard
+* dotenv
+* mongoose
+* nodemailer
+* aws-sdk
 <br>
 
 
@@ -70,10 +77,10 @@ OpenSSL is a general-purpose cryptography library that stores some private infor
 Packages of react-google-login and react-facebook-login are necessary for Google and Facebook login.<br>
 
 ### Heroku:<br>
-In the package.json, it needs to install the package and some parameters.<br>
+In the package.json, you need to define some information, scripts and dependencies. Please make sure your Node.js is v12/v14/v16, and all the listed dependencies are in single correct version.<br>
 ```
 {
-  "name": "it-project",
+  "name": "Team-SaltyFish",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -82,34 +89,45 @@ In the package.json, it needs to install the package and some parameters.<br>
     "client-install": "npm install --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build --prefix client",
     "dev": "concurrently \"npm start\" \"npm run client\""
   },
   "engines": {
-    "node": "15.14.0"
+    "node": "14.17.0"
   },
-  "homepage": "https://github.com/UG-SaltyFish/Team-SaltyFish#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UG-SaltyFish/Team-SaltyFish.git"
+  },
+  "homepage": ".",
   "dependencies": {
     //your dependencies
   }
 }
 ```
-After you get a Heroku account, you can run the following commands in a cmd terminal at src/ directory:<br>
+After you get a Heroku account, you can run the following commands in a cmd terminal at src/ directory.<br>
+Login Heroku with your API key.<br>
 ```
-heroku create saltyfish2 --buildpack mars/create-react-app
+heroku login
 ```
-Login Heroku with your API key. It sets the app to use this buildpack. A new app will be created in your account.<br>
-
+Create a new app with a defined name (eg. saltyfishwillgraduate) into your account.<br>
+```
+heroku create saltyfishwillgraduate
+```
+Deploy and push to the Heroku app from local repository.<br>
 ```
 git push heroku master
 //or git push heroku $BRANCH_NAME:master
 ```
-Deploy and push to the Heroku app from local repository.<br>
-
+Due to sensitive nature of AWS S3 credentials, you should set access key and secret key as config vars for the Heroku apps to deploy Amazon storage.<br>
+```
+heroku config:set S3_ACCESS_KEY=<your access key> S3_SECRET_ACCESS_KEY=<your secret key>
+```
+Open Heroku app.<br>
 ```
 heroku open
 ```
-The app loads in your browser at https://saltyfish2.herokuapp.com <br>
+The app loads in your browser at https://saltyfishwillgraduate.herokuapp.com <br>
 
 
 ## Changelog:<br>
@@ -130,3 +148,13 @@ The app loads in your browser at https://saltyfish2.herokuapp.com <br>
 * Update README.md.<br>
 * Add a release tag: COMP90082_2021_RLSE_<UG>_<1.0>.<br>
   COMP90082_2021_RLSE_<UG>_<1.0> contains codes and corresponding documents for our project in Sprint 1.<br>
+### 27th May 2021:<br>
+* User story 1: Get forgotten password by email.<br>
+* User story 5: Download/delete transcript file.<br>
+* User Story 6: Copy ePortfolio URL to clipboard.<br>
+* User Story 7: Send email to ePortfolio owner.<br>
+* User Story 8: Print ePortfolio as PDF.<br>    
+* Add functional test of Sprint 2 in tests/.<br>
+* Update documents in doc/, data sample in datasample/, and images in ui/.<br>
+* Add a release tag: COMP90082_2021_RLSE_<UG>_<2.0>.<br>
+  COMP90082_2021_RLSE_<UG>_<2.0> contains codes and corresponding documents for Sprint 2.<br> 
