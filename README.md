@@ -25,7 +25,7 @@ The team will run the project based on the Agile development model. The informat
 ```
 const mongoURI = "mongodb+srv://<username>:<password>@<clustername>.mongodb.net/test?retryWrites=true&w=majority"
 ```
-* [AWS](https://aws.amazon.com/cn/) is used to store the files and pictures in the website.<br>
+* [AWS](https://aws.amazon.com/cn/) is used to store the files and pictures in the website. The key provided by AWS should be saved in '.env' file.<br>
 ```
 S3_ACCESS_KEY=<your access key>
 S3_SECRET_ACCESS_KEY=<your secret key>
