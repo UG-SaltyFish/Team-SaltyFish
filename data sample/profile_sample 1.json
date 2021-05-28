@@ -1,0 +1,60 @@
+{
+    "skills": ["java, python, C#"],
+    "user": {
+        "$oid": "60af25c2a37eb9000486d496"
+    },
+    "name": "Xiaoyue",
+    "profile_picture": "https://saltyfish.s3.ap-southeast-2.amazonaws.com/1622097259322.jpg",
+    "transcript": "",
+    "website": "",
+    "gallery": [{
+        "_id": {
+            "$oid": "60af3c58a37eb9000486d49c"
+        },
+        "imagesource": "https://saltyfish.s3.ap-southeast-2.amazonaws.com/1622096982355.jpg",
+        "description": ""
+    }],
+    "education": [{
+        "_id": {
+            "$oid": "60af3ba2a37eb9000486d498"
+        },
+        "school": "University of Melbourne",
+        "qual": "MIT"
+    }],
+    "subjects": [{
+        "_id": {
+            "$oid": "60af3c4ba37eb9000486d49b"
+        },
+        "subjectname": "Software project 90082",
+        "subjectdescripition": "Software development project",
+        "subjectyear": 2021
+    }],
+    "projects": [{
+        "_id": {
+            "$oid": "60af3c07a37eb9000486d49a"
+        },
+        "projectname": "ePortfolio Project",
+        "projectdescription": "Implement a website of ePortfolio",
+        "projectlink": "https://saltyfishwillgraduate.herokuapp.com/"
+    }],
+    "work": [{
+        "_id": {
+            "$oid": "60af3bd9a37eb9000486d499"
+        },
+        "workplace": "Cultural Infusion",
+        "position": "Data Scientist",
+        "from": "2020.11.30",
+        "to": "2021.2.28"
+    }],
+    "intro": "",
+    "email": "584188026@qq.com",
+    "phone": "4209872356",
+    "bio": "Im a student ",
+    "sectionE": "block",
+    "sectionW": "block",
+    "sectionP": "block",
+    "sectionSk": "block",
+    "sectionSu": "block",
+    "sectionG": "block",
+    "__v": 0
+}
