@@ -21,11 +21,11 @@ The team will run the project based on the Agile development model. The informat
 * [Visual Studio Code](https://code.visualstudio.com) is used as the programming IDE for this project.<br> 
 * This project is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br>
 * The back-end is developed using [Node.js](https://nodejs.org/en/download/).<br>
-* [MangoDB](https://www.mongodb.com/) is one of the database for storing text and URLs of files.<br>
+* [MangoDB](https://www.mongodb.com/) is one of the database for storing text and URLs of files. The mongo URL used to connect to your own database is in `server.js`.<br>
 ```
 const mongoURI = "mongodb+srv://<username>:<password>@<clustername>.mongodb.net/test?retryWrites=true&w=majority"
 ```
-* [AWS](https://aws.amazon.com/cn/) is used to store the files and pictures in the website. The key provided by AWS should be saved in `.env` file.<br>
+* [AWS](https://aws.amazon.com/cn/) is used to store the files and pictures in the website. The keys provided by AWS should be saved in `.env` file.<br>
 ```
 S3_ACCESS_KEY=<your access key>
 S3_SECRET_ACCESS_KEY=<your secret key>
