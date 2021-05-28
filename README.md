@@ -8,7 +8,7 @@ https://saltyfishwillgraduate.herokuapp.com <br>
 ## Project Overview:
 This project is to test and extend a web-based ePortfolio system built by students studying in COMP30022 capstone project in Semester 2, 2020. The team selected the SwatKats ePortfolio as the development object. Since this project does not have clients, supervisor will play the role of client as well. In the three months, the team tries best to extend some significant functions according to new project requirements, improve the user interface design and debug.<br>
 
-The system consists of the front-end, back-end, and database. The front-end is bootstrapped with React and related plugins to design the interface. It calls the API from the back-end and the third-party service, such as Google and Facebook. The back-end is developed using NodeJS and mongoose to build scalable network with concurrent connections. Mongoose is a NodeJS driver library for operating MongoDB. There are two databases applied, AWS S3 and MongoDB. AWS S3 is for photos and files storage. The MongoDB database is used to store text and URLs of those photos and files. In addition, the system is deployed on Heroku. Testing is completed by Pingcode, Selenium and JMeter.<br>
+The system consists of the front-end, back-end, and database. The front-end uses React and related plugins to design the interface. It calls the API from the back-end and the third-party service, such as Google and Facebook. The back-end is developed using NodeJS and mongoose to build scalable network with concurrent connections. Mongoose is a NodeJS driver library for operating MongoDB. There are two databases applied, AWS S3 and MongoDB. AWS S3 is for photos and files storage. The MongoDB database is used to store text and URLs of those photos and files. In addition, the system is deployed on Heroku. Testing is completed by Pingcode, Selenium and JMeter.<br>
 
 The team will run the project based on the Agile development model. The information of project is well documented on Confluence. Trello is used as the kanban board to manage tasks. Team communication is in Microsoft Team and WeChat.<br>
   
@@ -19,8 +19,8 @@ The team will run the project based on the Agile development model. The informat
 
 ## Tools:<br>
 * [Visual Studio Code](https://code.visualstudio.com) is used as the programming IDE for this project.<br> 
-* This project is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br>
-* The back-end is developed using [Node.js](https://nodejs.org/en/download/).<br>
+* This project is bootstrapped with [Create React App](https://github.com/facebook/create-react-app), and the front-end uses [React](https://reactjs.org/). It is a JavaScript library for building user interfaces.<br>
+* The back-end is developed using [Node.js](https://nodejs.org/en/download/). It is a JavaScript runtime built on Chrome's V8 JavaScript engine.<br>
 * [MangoDB](https://www.mongodb.com/) is one of the database for storing text and URLs of files. The mongo URL used to connect to your own database is in `server.js`.<br>
 ```
 const mongoURI = "mongodb+srv://<username>:<password>@<clustername>.mongodb.net/test?retryWrites=true&w=majority"
