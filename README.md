@@ -1,5 +1,3 @@
-# Team-SaltyFish
-Extended SwatKatz Eportfolio
 # SaltyFish ePortfolio <img align="center" width="300" height="100" src="/ui/logo.png"> <br>
     Extend SwatKatz Eportfolio
 Documentation here:<br> 
@@ -8,9 +6,11 @@ Heroku link:<br>
 https://saltyfishwillgraduate.herokuapp.com <br>
 
 ## Project Overview:
-This project is to test and further develop a web-based ePortfolio system built by students studying in COMP30022 capstone project in Semester 2, 2020. Our team selected the SwatKats ePortfolio as our development object. Since this project does not have clients, our supervisor will play the role of clients as well. In the following 3 months, we will try our best to expand some significant functions according to new project requirements, improve the user interface design and debug.<br>
-  
-Our team will run the project based on the Agile development model. This Confluence space will document the information of project. Trello is used as the kanban board. Team communication is in Microsoft Team and WeChat. Source code is in our Github.<br>
+This project is to test and extend a web-based ePortfolio system built by students studying in COMP30022 capstone project in Semester 2, 2020. The team selected the SwatKats ePortfolio as the development object. Since this project does not have clients, supervisor will play the role of client as well. In the three months, the team tries best to extend some significant functions according to new project requirements, improve the user interface design and debug.<br>
+
+The system consists of the front-end, back-end, and database. The front-end is bootstrapped with React and related plugins to design the interface. It calls the API from the back-end and the third-party service, such as Google and Facebook. The back-end is developed using NodeJS and mongoose to build scalable network with concurrent connections. Mongoose is a NodeJS driver library for operating MongoDB. There are two databases applied, AWS S3 and MongoDB. AWS S3 is for photos and files storage. The MongoDB database is used to store text and URLs of those photos and files. In addition, the system is deployed on Heroku. Testing is completed by Pingcode, Selenium and JMeter.<br>
+
+The team will run the project based on the Agile development model. The information of project is well documented on Confluence. Trello is used as the kanban board to manage tasks. Team communication is in Microsoft Team and WeChat.<br>
   
 ## Goals:<br>
 * To test the basic functions of SwatKat e-portfolio website and fix the bugs.<br>
@@ -18,28 +18,28 @@ Our team will run the project based on the Agile development model. This Conflue
 * To improve the UI design of SwatKat for easily using and visually appealing.<br>
 
 ## Tools:<br>
-* [Visual Studio Code](https://code.visualstudio.com) was used as the programming IDE for this project.<br> 
-* This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br>
-* The back-end was developed using [Node.js](https://nodejs.org/en/download/).<br>
-* [MangoDB](https://www.mongodb.com/) was one of the database for storing text and URLs of files.<br>
+* [Visual Studio Code](https://code.visualstudio.com) is used as the programming IDE for this project.<br> 
+* This project is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br>
+* The back-end is developed using [Node.js](https://nodejs.org/en/download/).<br>
+* [MangoDB](https://www.mongodb.com/) is one of the database for storing text and URLs of files.<br>
 ```
 const mongoURI = "mongodb+srv://<username>:<password>@<clustername>.mongodb.net/test?retryWrites=true&w=majority"
 ```
-* [AWS](https://aws.amazon.com/cn/) was used to store the files and pictures in the website.<br>
+* [AWS](https://aws.amazon.com/cn/) is used to store the files and pictures in the website.<br>
 ```
 S3_ACCESS_KEY=<your access key>
 S3_SECRET_ACCESS_KEY=<your secret key>
 ```
-* [Heroku](https://id.heroku.com/login) was the platform we used to deploy our ePortfolio app. More info see Deployment below.<br>
-<br>
-Below are the main plugins in our project: <br>
-* express
-* axios
-* copy-to-clipboard
-* dotenv
-* mongoose
-* nodemailer
-* aws-sdk
+* [Heroku](https://id.heroku.com/login) is the platform we used to deploy our ePortfolio app. More info see Deployment below.<br>
+* Below are the main plugins and libraries in our project:
+    - express
+    - mongoose
+    - axios
+    - copy-to-clipboard
+    - dotenv
+    - mongoose
+    - nodemailer
+    - aws-sdk
 
 ## Deployment:<br>
 ### Local:<br>
@@ -61,12 +61,12 @@ It loads the client in your browser at http://localhost:3000. <br>
 
 **Now, your app is deployed!**<br>
 
-If you are unable to load the app due to some errors, please install the following scripts as well.<br>
+If you are unable to load the app due to some errors, please install the following scripts by yourself in terminal.<br>
 ```
 npm install react-google-login
-//or npm install react-google-login --legacy-peer-deps
 npm install react-facebook-login
-//or npm install react-facebook-login --legacy-peer-deps
+npm install nodemailer
+npm install --save copy-to-clipboard
 ```
 Packages of react-google-login and react-facebook-login are necessary for Google and Facebook login.<br>
 
@@ -141,9 +141,6 @@ The app loads in your browser at https://saltyfishwillgraduate.herokuapp.com <br
 * Add documents in doc/, data sample in datasample/, and images in ui/.<br>
 * Update README.md.<br>
 * Add a release tag: COMP90082_2021_RLSE_<UG>_<1.0>.<br>
-<<<<<<< HEAD:README 下午5.27.56.md
-  COMP90082_2021_RLSE_<UG>_<1.0> contains codes and corresponding documents for our project in Sprint 1.<br>
-=======
   COMP90082_2021_RLSE_<UG>_<1.0> contains codes and corresponding documents for our project in Sprint 1.<br>
 ### 27th May 2021:<br>
 * User story 1: Get forgotten password by email.<br>
